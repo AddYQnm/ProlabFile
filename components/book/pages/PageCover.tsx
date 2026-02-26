@@ -10,16 +10,21 @@ export default function PageCover() {
         {/* TOP HEADER */}
         <header className="flex items-start justify-between">
           <div>
-            <div className="text-[13px] font-semibold tracking-wide">DIGITAL</div>
-            <div className="text-[36px] font-bold leading-none md:text-[44px]">E-BOOK</div>
-            <div className="mt-2 text-[11px] tracking-[0.25em] text-black/60">
+            <div className="text-[12px] font-semibold tracking-[0.3em] text-black/70">
+              DIGITAL
+            </div>
+
+            <div className="mt-1 text-[40px] font-extrabold leading-[0.95] md:text-[48px]">
+              E-BOOK
+            </div>
+
+            <div className="mt-3 text-[10px] tracking-[0.35em] uppercase text-black/50">
               DOSSIER DE PRÉSENTATION B2B
             </div>
           </div>
 
-          {/* ✅ LOGO PROLABAFRIK (remplace le texte) */}
+          {/* LOGO */}
           <div className="flex items-start justify-end">
-            {/* 1) Mets ton SVG dans /public sous un nom simple, ex: /public/prolabafrik-logo.svg */}
             <Image
               src="/prolabafrik-logo.svg"
               alt="ProlabAfrik"
@@ -33,24 +38,25 @@ export default function PageCover() {
 
         {/* MAIN TEXT */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mt-6 max-w-xl"
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 max-w-xl"
         >
-          <h1 className="text-[26px] font-semibold leading-tight md:text-[32px]">
+          <h1 className="text-[28px] font-medium leading-[1.15] md:text-[34px]">
             Solutions logicielles
             <br />
-            sur mesure pour l’Afrique
+            <span className="font-semibold">sur mesure pour l’Afrique</span>
           </h1>
 
-          <p className="mt-3 text-[14px] leading-relaxed text-black/70">
-            ProlabAfrik accompagne les entreprises et organisations dans la conception de solutions
-            digitales innovantes, adaptées aux enjeux métiers et aux réalités locales.
+          <p className="mt-4 max-w-[520px] text-[14px] leading-[1.75] text-black/65">
+            ProlabAfrik accompagne les entreprises et organisations dans la
+            conception de solutions digitales innovantes, adaptées aux enjeux
+            métiers et aux réalités locales.
           </p>
         </motion.div>
 
-        {/* IMAGE BLOCK — prend le reste de l’écran */}
+        {/* IMAGE BLOCK */}
         <div className="relative mt-auto overflow-hidden rounded-2xl border border-black/10">
           <div className="relative h-[48vh] w-full md:h-[52vh]">
             <Image
@@ -64,11 +70,16 @@ export default function PageCover() {
 
           {/* IMAGE CAPTION */}
           <div className="flex flex-col gap-2 bg-white px-4 py-3 md:flex-row md:items-center md:justify-between">
-            <div className="text-[11px] tracking-[0.2em] text-black/60">
+            <div className="text-[10px] tracking-[0.35em] uppercase text-black/50">
               INTERACTIVE · DIGITAL DOSSIER
             </div>
-            <div className="text-[12px] text-black/65">
-              contact@prolabafrik.com<br/> · +33 6 81 68 09 13<br/>· +229 52 62 29 10
+
+            <div className="text-[12px] leading-[1.6] text-black/60">
+              contact@prolabafrik.com
+              <br />
+              +33 6 81 68 09 13
+              <br />
+              +229 52 62 29 10
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ const services = [
 
 export default function PageServices() {
   return (
-    <section className="relative w-full bg-[#f5f5f3] text-[#111]">
+    <section className="relative h-screen w-full bg-[#f5f5f3] text-[#111]">
       <PaperNoise />
       <PaperVignette />
 

@@ -4,26 +4,23 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-/**
- * Accent couleur (rose du site).
- * Option 1 (recommandée) : définis --accent dans globals.css
- * :root { --accent: #E94E77; }
- *
- * Ici on fallback en dur via Tailwind arbitrary values.
- */
 const ACCENT = "#E94E77";
 
 export default function PageAbout() {
   return (
-    <section className="relative w-full bg-[#f5f5f3] text-[#111]">
+    <section className="relative h-screen w-full bg-[#f5f5f3] text-[#111]">
       <PaperNoise />
       <PaperVignette />
 
-      <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 md:px-12 md:py-14">
+      <div className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-6 md:px-12 md:py-14">
         {/* Running header */}
         <div className="flex items-center justify-between gap-4 text-[10px] tracking-[0.26em] text-black/45 md:text-[11px]">
           <div className="min-w-0 truncate">
-            PROLABAFRIK <span className="font-semibold" style={{ color: ACCENT }}>—</span> DOSSIER
+            PROLABAFRIK{" "}
+            <span className="font-semibold" style={{ color: ACCENT }}>
+              —
+            </span>{" "}
+            DOSSIER
           </div>
           <div className="hidden sm:block">2026</div>
           <div className="shrink-0">PAGE 02</div>
@@ -32,7 +29,7 @@ export default function PageAbout() {
         <div className="mt-4 h-px bg-black/10" />
 
         {/* Title block */}
-        <div className="mt-10 md:mt-14">
+        <div className="mt-8 md:mt-14">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +41,6 @@ export default function PageAbout() {
             A PROPOS
           </motion.h1>
 
-          {/* Accent underline (éditorial) */}
           <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
           <motion.p
@@ -52,69 +48,64 @@ export default function PageAbout() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ delay: 0.08, duration: 0.6, ease: "easeOut" }}
-            className="mt-4 max-w text-[12px] leading-relaxed text-black/60 md:text-[13px]"
+            className="mt-4 max-w-xl text-[12px] leading-relaxed text-black/60 md:text-[13px]"
           >
             À propos de ProlabAfrik et de ce dossier de présentation — un support B2B pensé
             pour être lu vite, compris immédiatement, et partagé sans friction.
           </motion.p>
         </div>
 
-        {/* Content: mobile stack + desktop magazine grid */}
-        <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:items-start">
-          {/* IMAGE — mobile first, desktop right */}
+        {/* Content */}
+        <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-12 md:items-start md:gap-10">
+          {/* NOTES — mobile first for readability */}
           <motion.aside
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-1 md:order-3 md:col-span-3"
+            className="order-1 md:order-1 md:col-span-3"
           >
-            <div className="relative overflow-hidden rounded border border-black/10 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
-              {/* Mobile: 16:10 feel (moins haut) | Desktop: portrait */}
-              <div className="relative aspect-[16/10] md:aspect-[3/4]">
-                <Image
-                  src="/pp.png"
-                  alt="Illustration"
-                  fill
-                  className="object-cover "
-                  priority
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
-              </div>
+            <div className="space-y-7 md:space-y-9">
+              <Note
+                title="THE EBOOK"
+                text="Dossier digital B2B basé sur le site ProlabAfrik, structuré pour être partagé facilement (email, WhatsApp, rendez-vous)."
+                accent={ACCENT}
+              />
+              <Note
+                title="OBJECTIF"
+                text="Présenter clairement l’offre, le positionnement et l’approche, dans un format lisible et professionnel."
+                accent={ACCENT}
+              />
 
-              {/* Caption overlay + accent */}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4">
-                <div className="text-[10px] tracking-[0.26em] text-white/85">
-                  PROLABAFRIK · <span style={{ color: ACCENT }}>INNOVATION</span>
+              <div>
+                <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
+                  MOTS-CLÉS
                 </div>
-              </div>
-            </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Chip accent={ACCENT}>Sur mesure</Chip>
+                  <Chip accent={ACCENT}>Afrique</Chip>
+                  <Chip accent={ACCENT}>Digitalisation</Chip>
+                  <Chip accent={ACCENT}>IA & données</Chip>
+                </div>
 
-            {/* Mini spec card */}
-            <div className="mt-4 rounded border border-black/10 bg-white/70 p-5">
-              <div className="flex items-center justify-between">
-                <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  FORMAT
+                <div className="mt-6 h-px bg-black/10" />
+                <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
+                  <span>ANGLE</span>
+                  <span className="text-black/60">Éditorial</span>
                 </div>
-                <span className="text-[10px] tracking-[0.26em] text-black/35">B2B</span>
-              </div>
-              <div className="mt-4 space-y-3 text-[12px] text-black/70">
-                <Row k="Lecture" v="Rapide" />
-                <Row k="Sections" v="Courtes" />
-                <Row k="Support" v="Partageable" />
               </div>
             </div>
           </motion.aside>
 
-          {/* MAIN — mobile second, desktop middle */}
+          {/* MAIN */}
           <motion.main
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-2 md:order-2 md:col-span-6"
+            className="order-3 md:order-2 md:col-span-6"
           >
-            <div className="rounded border border-black/10 bg-white/60 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:p-7">
+            <div className="rounded-2xl border border-black/10 bg-white/60 p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:p-7">
               <div className="flex items-center justify-between">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                   EDITORIAL
@@ -122,7 +113,7 @@ export default function PageAbout() {
                 <span className="text-[10px] tracking-[0.26em] text-black/35">SECTION</span>
               </div>
 
-              <div className="mt-6 space-y-5 text-[12px] leading-relaxed text-black/70 md:text-[13px]">
+              <div className="mt-5 space-y-4 text-[12px] leading-[1.8] text-black/70 md:mt-6 md:text-[13px]">
                 <p>
                   ProlabAfrik accompagne les entreprises et organisations dans la conception
                   de solutions digitales innovantes, adaptées aux réalités locales et aux objectifs métiers.
@@ -137,15 +128,13 @@ export default function PageAbout() {
                 </p>
               </div>
 
-              {/* Accent separator (1 sur 3, comme en rapport) */}
               <div
-                className="mt-8 h-px"
+                className="mt-7 h-px md:mt-8"
                 style={{
                   backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}55, transparent)`,
                 }}
               />
 
-              {/* Pull quote */}
               <div className="mt-6 grid gap-4 md:grid-cols-12 md:items-start">
                 <div className="md:col-span-4">
                   <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
@@ -162,7 +151,7 @@ export default function PageAbout() {
                 </div>
               </div>
 
-              <div className="mt-8 h-px bg-black/10" />
+              <div className="mt-7 h-px bg-black/10 md:mt-8" />
 
               <div className="mt-6">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
@@ -173,7 +162,7 @@ export default function PageAbout() {
                   de la performance des organisations en Afrique.
                 </p>
 
-                <div className="mt-7 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
+                <div className="mt-6 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
                   <span>PROLABAFRIK</span>
                   <span style={{ color: ACCENT }}>→</span>
                 </div>
@@ -181,49 +170,51 @@ export default function PageAbout() {
             </div>
           </motion.main>
 
-          {/* NOTES — mobile third, desktop left */}
+          {/* IMAGE + MINI SPEC */}
           <motion.aside
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-3 md:order-1 md:col-span-3"
+            className="order-2 md:order-3 md:col-span-3"
           >
-            <div className="space-y-9">
-              <Note
-                title="THE EBOOK"
-                text="Dossier digital B2B basé sur le site ProlabAfrik, structuré pour être partagé facilement (email, WhatsApp, rendez-vous)."
-                accent={ACCENT}
-              />
-              <Note
-                title="OBJECTIF"
-                text="Présenter clairement l’offre, le positionnement et l’approche, dans un format lisible et professionnel."
-                accent={ACCENT}
-              />
+            <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
+              {/* Mobile: moins haut, plus “hero” */}
+              <div className="relative aspect-[16/9] md:aspect-[3/4]">
+                <Image
+                  src="/pp.png"
+                  alt="Illustration"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 320px"
+                />
+              </div>
 
-              <div>
-                <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  MOTS-CLÉS
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4">
+                <div className="text-[10px] tracking-[0.26em] text-white/85">
+                  PROLABAFRIK · <span style={{ color: ACCENT }}>INNOVATION</span>
                 </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <Chip accent={ACCENT}>Sur mesure</Chip>
-                  <Chip accent={ACCENT}>Afrique</Chip>
-                  <Chip accent={ACCENT}>Digitalisation</Chip>
-                  <Chip accent={ACCENT}>IA & données</Chip>
-                </div>
+              </div>
+            </div>
 
-                <div className="mt-7 h-px bg-black/10" />
-                <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-                  <span>ANGLE</span>
-                  <span className="text-black/60">Éditorial</span>
+            <div className="mt-4 rounded-2xl border border-black/10 bg-white/70 p-5">
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
+                  FORMAT
                 </div>
+                <span className="text-[10px] tracking-[0.26em] text-black/35">B2B</span>
+              </div>
+              <div className="mt-4 space-y-3 text-[12px] text-black/70">
+                <Row k="Lecture" v="Rapide" />
+                <Row k="Sections" v="Courtes" />
+                <Row k="Support" v="Partageable" />
               </div>
             </div>
           </motion.aside>
         </div>
 
         {/* Footer */}
-        <div className="mt-12 h-px bg-black/10" />
+        <div className="mt-10 h-px bg-black/10 md:mt-12" />
         <footer className="mt-4 flex items-center justify-between text-[11px] tracking-[0.24em] text-black/50">
           <span className="min-w-0 truncate">SECTION SUIVANTE : SERVICES</span>
           <span style={{ color: ACCENT }}>→</span>
@@ -260,10 +251,10 @@ function Row({ k, v }: { k: string; v: string }) {
 function Chip({ children, accent }: { children: React.ReactNode; accent: string }) {
   return (
     <span
-      className="rounded-full border bg-white px-3 py-1 text-[11px] tracking-[0.18em]"
+      className="rounded-full border px-3 py-1 text-[11px] tracking-[0.18em]"
       style={{
-        borderColor: `${accent}4D`, // ~30%
-        backgroundColor: `${accent}0D`, // ~5%
+        borderColor: `${accent}4D`,
+        backgroundColor: `${accent}0D`,
         color: accent,
       }}
     >

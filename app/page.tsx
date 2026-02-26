@@ -9,6 +9,7 @@ import PageMethod from "@/components/book/pages/PageMethod";
 import PageWhy from "@/components/book/pages/PageWhy";
 import PageDownload from "@/components/book/pages/PageDownload";
 import PageProject from "@/components/book/pages/PageProject";
+import PageReferences from "@/components/book/pages/PageReferences";
 
 export default function Page() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -72,6 +73,9 @@ export default function Page() {
           <PageMethod />
         </section>
 
+        <section className="h-screen w-screen flex-shrink-0">
+          <PageReferences />
+        </section>
 z
 
         <section className="h-screen w-screen flex-shrink-0">

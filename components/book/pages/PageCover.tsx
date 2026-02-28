@@ -21,18 +21,18 @@ export default function PageCover() {
       <PaperNoise />
       <PaperVignette />
 
-      <div className="mx-auto flex h-full max-w-7xl flex-col px-6 py-6 md:px-12 md:py-8">
+      <div className="mx-auto flex h-full max-w-7xl flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-8">
         {/* HEADER */}
-        <header className="flex items-start justify-between gap-6">
+        <header className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-6">
           <div className="min-w-0">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: EASE }}
-              className="inline-flex items-center gap-3 rounded-full border border-black/10 bg-white/60 px-4 py-2 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]"
+              className="inline-flex flex-wrap items-center gap-2 rounded-full border border-black/10 bg-white/60 px-3 py-2 sm:px-4 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]"
             >
-              <span className="text-[10px] tracking-[0.35em] uppercase text-black/55">
+              <span className="text-[10px] tracking-[0.30em] uppercase text-black/55 sm:text-[10px]">
                 PAGE 01 — COUVERTURE
               </span>
               <span
@@ -40,7 +40,7 @@ export default function PageCover() {
                 style={{ backgroundColor: `${ACCENT}CC` }}
               />
               <span
-                className="text-[10px] tracking-[0.35em] uppercase"
+                className="text-[10px] tracking-[0.30em] uppercase"
                 style={{ color: ACCENT }}
               >
                 2026
@@ -52,11 +52,11 @@ export default function PageCover() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="mt-8"
+              className="mt-7 sm:mt-8"
             >
               <h1
-                className="font-semibold leading-[0.9] tracking-[-0.03em]"
-                style={{ fontSize: "clamp(48px, 5.5vw, 76px)" }}
+                className="font-semibold leading-[0.92] tracking-[-0.03em]"
+                style={{ fontSize: "clamp(40px, 9vw, 76px)" }}
               >
                 PROLAB<span style={{ color: ACCENT }}>AFRIK</span>
               </h1>
@@ -65,11 +65,11 @@ export default function PageCover() {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
-                className="mt-4 h-[2px] w-24"
+                className="mt-4 h-[2px] w-20 sm:w-24"
                 style={{ transformOrigin: "0% 50%", backgroundColor: ACCENT }}
               />
 
-              <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-black/65">
+              <p className="mt-5 max-w-xl text-[13px] leading-relaxed text-black/65 sm:mt-6 sm:text-[14px]">
                 Holding de transformation digitale{" "}
                 <span className="text-black/35">·</span>{" "}
                 <span className="font-medium text-black/75">
@@ -78,61 +78,55 @@ export default function PageCover() {
               </p>
             </motion.div>
 
-            {/* OPTION A — Pills tagline */}
+            {/* Pills tagline */}
             <motion.div
               initial="hidden"
               animate="show"
               variants={{
                 hidden: {},
                 show: {
-                  transition: {
-                    staggerChildren: 0.08,
-                    delayChildren: 0.35,
-                  },
+                  transition: { staggerChildren: 0.08, delayChildren: 0.35 },
                 },
               }}
-              className="mt-10 flex flex-wrap items-center gap-3"
+              className="mt-7 flex flex-wrap items-center gap-2 sm:mt-10 sm:gap-3"
             >
-              {[
-                "Concevoir",
-                "Structurer",
-                "Digitaliser",
-                "Sécuriser",
-              ].map((word, i) => (
-                <motion.span
-                  key={word}
-                  variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    show: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.6, ease: EASE },
-                    },
-                  }}
-                  className="inline-flex items-center rounded-full border bg-white/70 px-5 py-2 text-[11px] tracking-[0.26em] text-black/70 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]"
-                  style={{
-                    borderColor:
-                      i % 2 === 1
-                        ? `${ACCENT}40`
-                        : "rgba(0,0,0,0.10)",
-                  }}
-                >
-                  {word}
-                  <span
-                    className="ml-3 h-1 w-1 rounded-full"
-                    style={{ backgroundColor: `${ACCENT}CC` }}
-                  />
-                </motion.span>
-              ))}
+              {["Concevoir", "Structurer", "Digitaliser", "Sécuriser"].map(
+                (word, i) => (
+                  <motion.span
+                    key={word}
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      show: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.6, ease: EASE },
+                      },
+                    }}
+                    className="inline-flex items-center rounded-full border bg-white/70 px-4 py-2 text-[10px] tracking-[0.18em] text-black/70 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:px-5 sm:text-[11px] sm:tracking-[0.26em]"
+                    style={{
+                      borderColor:
+                        i % 2 === 1
+                          ? `${ACCENT}40`
+                          : "rgba(0,0,0,0.10)",
+                    }}
+                  >
+                    {word}
+                    <span
+                      className="ml-2 h-1 w-1 rounded-full sm:ml-3"
+                      style={{ backgroundColor: `${ACCENT}CC` }}
+                    />
+                  </motion.span>
+                )
+              )}
             </motion.div>
           </div>
 
-          {/* LOGO */}
+          {/* LOGO (mobile: en dessous / à gauche; desktop: à droite) */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="flex shrink-0 items-start justify-end"
+            className="flex shrink-0 items-start justify-start md:justify-end"
           >
             <Image
               src="/prolabafrik-logo.svg"
@@ -151,9 +145,9 @@ export default function PageCover() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
-          className="relative mt-auto overflow-hidden rounded-2xl border border-black/10 bg-white/40 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]"
+          className="relative mt-8 overflow-hidden rounded-2xl border border-black/10 bg-white/40 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:mt-auto"
         >
-          <div className="relative h-[48vh] w-full md:h-[52vh]">
+          <div className="relative h-[46vh] w-full sm:h-[48vh] md:h-[52vh]">
             <motion.div style={{ y: yImg }} className="absolute inset-0">
               <Image
                 src="/afrik.png"
@@ -167,23 +161,25 @@ export default function PageCover() {
             {/* subtle overlay */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0" />
 
-            {/* stamp */}
-            <div className="absolute left-4 top-4 rounded-full border border-white/25 bg-black/35 px-4 py-2 backdrop-blur-sm">
-              <div className="text-[10px] tracking-[0.35em] text-white/85">
-                DOSSIER · B2B{" "}
-                <span style={{ color: ACCENT }}>•</span> EDITION 2026
+            {/* stamp (mobile: plus petit) */}
+            <div className="absolute left-3 top-3 rounded-full border border-white/25 bg-black/35 px-3 py-2 backdrop-blur-sm sm:left-4 sm:top-4 sm:px-4">
+              <div className="text-[9px] tracking-[0.28em] text-white/85 sm:text-[10px] sm:tracking-[0.35em]">
+                DOSSIER · B2B <span style={{ color: ACCENT }}>•</span> EDITION
+                2026
               </div>
             </div>
           </div>
 
-          {/* Caption */}
+          {/* Caption (mobile: stack) */}
           <div className="flex flex-col gap-2 bg-white/85 px-4 py-3 backdrop-blur-[2px] md:flex-row md:items-center md:justify-between">
-            <div className="text-[10px] tracking-[0.35em] uppercase text-black/50">
+            <div className="text-[10px] tracking-[0.28em] uppercase text-black/50 sm:tracking-[0.35em]">
               PROLABAFRIK · EUROPE – AFRIQUE
             </div>
 
             <div className="text-[12px] leading-[1.6] text-black/60">
-              contact@prolabafrik.com
+              <span className="break-all sm:break-normal">
+                contact@prolabafrik.com
+              </span>
               <span className="text-black/35"> · </span>
               +33 6 81 68 09 13
               <span className="text-black/35"> · </span>
@@ -226,8 +222,12 @@ function PaperVignette() {
 function PaperCorners() {
   return (
     <>
-      <div className="pointer-events-none absolute left-6 top-6 text-black/20">*</div>
-      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">—</div>
+      <div className="pointer-events-none absolute left-6 top-6 text-black/20">
+        *
+      </div>
+      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">
+        —
+      </div>
     </>
   );
 }

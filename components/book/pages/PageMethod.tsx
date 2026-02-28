@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -16,27 +17,27 @@ const ACCENT = "#E94E77";
 const steps = [
   {
     n: "01",
-    title: "Analyse & cadrage",
-    text: "Clarifier les objectifs, le besoin et les priorités.",
-    deliverable: "Brief + objectifs",
+    title: "Systèmes d’information robustes",
+    text: "Des fondations fiables : architecture, sécurité, maintenabilité, et continuité de service.",
+    deliverable: "Architecture + socle technique",
   },
   {
     n: "02",
-    title: "Conception",
-    text: "Structurer la solution et définir les fonctionnalités.",
-    deliverable: "Spécifications + maquettes",
+    title: "Processus métiers digitalisés",
+    text: "On transforme le “terrain” en flux clairs : règles, validations, traçabilité, performance.",
+    deliverable: "Workflows + automatisations",
   },
   {
     n: "03",
-    title: "Développement",
-    text: "Construire de façon itérative, avec des bases solides.",
-    deliverable: "Sprints + QA",
+    title: "Plateformes à impact",
+    text: "Des produits utiles, adoptés et mesurables : expérience, pilotage, montée en charge.",
+    deliverable: "Produit + dashboard KPI",
   },
   {
     n: "04",
-    title: "Déploiement & suivi",
-    text: "Mettre en production et accompagner l’évolution.",
-    deliverable: "Release + monitoring",
+    title: "Solutions adaptées aux contextes africains",
+    text: "Conçues pour les réalités locales : contraintes budgétaires, réseau, usages, souveraineté.",
+    deliverable: "Déploiement contextualisé",
   },
 ];
 
@@ -53,17 +54,17 @@ export default function PageMethod() {
 
       {/* ✅ MOBILE: stack vertical (CSS only) */}
       <div className="md:hidden">
-        <MobileMethod />
+        <MobilePositioning />
       </div>
 
       {/* ✅ DESKTOP: panels horizontaux (CSS only) */}
       <div className="hidden md:block">
-        <DesktopMethod />
+        <DesktopPositioning />
       </div>
 
       {/* Footer global partagé */}
       <div className="mx-auto w-full max-w-7xl px-5 pb-10 sm:px-6 md:px-12 md:pb-14">
-        <BookFooter left="PROLABAFRIK · DÉMARCHE" right="(05) POURQUOI →" />
+        <BookFooter left="PROLABAFRIK · POSITIONNEMENT" right="(05) POURQUOI →" />
       </div>
 
       <PaperCorners />
@@ -73,7 +74,7 @@ export default function PageMethod() {
 
 /* ----------------- MOBILE (vertical) ----------------- */
 
-function MobileMethod() {
+function MobilePositioning() {
   const [active, setActive] = useState(0);
   const s = steps[active];
 
@@ -91,17 +92,17 @@ function MobileMethod() {
           className="font-semibold tracking-[-0.01em]"
           style={{ fontSize: "clamp(28px, 7vw, 44px)", lineHeight: 1.05 }}
         >
-          Une méthode simple.
+          NOTRE POSITIONNEMENT
           <br />
-          <span className="italic text-black/60">Une exécution précise</span>.
+          <span className="italic text-black/60">pas “des sites web”</span>.
         </h2>
 
         {/* Accent underline */}
         <div className="mt-4 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
         <p className="mt-4 max-w-2xl text-[12px] leading-relaxed text-black/60">
-          Une démarche structurée pour réduire les risques, accélérer la livraison
-          et garder un niveau de qualité constant.
+          Nous ne faisons pas “des sites web”. Nous structurons des solutions utiles,
+          robustes et adaptées — pensées pour la réalité du terrain.
         </p>
       </motion.div>
 
@@ -135,7 +136,7 @@ function MobileMethod() {
           <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
             DÉTAIL
           </div>
-          <span className="text-[10px] tracking-[0.26em] text-black/35">STEP</span>
+          <span className="text-[10px] tracking-[0.26em] text-black/35">PILIER</span>
         </div>
 
         <AnimatePresence mode="popLayout">
@@ -161,9 +162,11 @@ function MobileMethod() {
 
             <div className="mt-4">
               <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                LIVRABLE
+                RÉSULTAT
               </div>
-              <div className="mt-2 text-[13px] font-semibold text-black/80">{s.deliverable}</div>
+              <div className="mt-2 text-[13px] font-semibold text-black/80">
+                {s.deliverable}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -171,9 +174,9 @@ function MobileMethod() {
 
       {/* Principles */}
       <div className="mt-8 grid gap-3">
-        <MetaRow k="Cadence" v="itérations courtes" />
-        <MetaRow k="Trace" v="décisions documentées" />
-        <MetaRow k="Qualité" v="tests + revue" />
+        <MetaRow k="Approche" v="structurer avant de construire" />
+        <MetaRow k="Exigence" v="robustesse & maintenabilité" />
+        <MetaRow k="Contexte" v="réalités africaines" />
       </div>
     </div>
   );
@@ -181,12 +184,12 @@ function MobileMethod() {
 
 /* ----------------- DESKTOP (horizontal panels) ----------------- */
 
-function DesktopMethod() {
+function DesktopPositioning() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   /** ✅ Deux états séparés :
-   * - panelIndex : page/panel horizontal (Intro / Rail / Details / Next)
-   * - stepIndex : étape 01..04 sélectionnée
+   * - panelIndex : page/panel horizontal
+   * - stepIndex : pilier sélectionné
    */
   const [panelIndex, setPanelIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
@@ -200,19 +203,17 @@ function DesktopMethod() {
   const panels = useMemo(
     () => [
       <Intro key="intro" />,
-      <MethodRail key="rail" active={stepIndex} onChange={setStepIndex} progress={pSpring} />,
+      <PositionRail key="rail" active={stepIndex} onChange={setStepIndex} progress={pSpring} />,
       <Details key="details" active={stepIndex} />,
       <Next key="next" />,
     ],
     [stepIndex, pSpring]
   );
 
-  // ✅ scroll sync (desktop only; safe with md hidden elsewhere)
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const el = scrollerRef.current;
     if (!el) return;
-
     if (!mq.matches) return;
 
     const onScroll = () => {
@@ -242,7 +243,7 @@ function DesktopMethod() {
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 md:px-12">
         <div className="mt-6 flex items-center justify-between gap-6">
           <div className="flex items-center gap-3 text-[10px] tracking-[0.26em] text-black/50">
-            <span style={{ color: ACCENT }}>PROCESS</span>
+            <span style={{ color: ACCENT }}>POSITIONNEMENT</span>
             <span className="text-black/30">—</span>
             <span className="text-black/70">Lecture gauche → droite</span>
           </div>
@@ -265,11 +266,7 @@ function DesktopMethod() {
       {/* horizontal panels */}
       <div
         ref={scrollerRef}
-        className="
-          mt-8 flex h-[70vh] w-full
-          overflow-x-hidden overflow-y-hidden
-          snap-x snap-mandatory
-        "
+        className="mt-8 flex h-[70vh] w-full overflow-x-hidden overflow-y-hidden snap-x snap-mandatory"
       >
         {panels.map((node, i) => (
           <section key={i} className="relative h-full w-screen flex-none snap-start">
@@ -291,15 +288,14 @@ function DesktopMethod() {
               className="h-2.5 w-2.5 rounded-full transition"
               style={{
                 backgroundColor: i === panelIndex ? ACCENT : "rgba(0,0,0,0.20)",
-                boxShadow:
-                  i === panelIndex ? `0 0 0 6px ${ACCENT}1A` : "none",
+                boxShadow: i === panelIndex ? `0 0 0 6px ${ACCENT}1A` : "none",
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* cursor indicator (editorial) */}
+      {/* cursor indicator */}
       <div className="pointer-events-none mx-auto w-full max-w-7xl px-12">
         <div className="relative mt-6 h-8">
           <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-black/10" />
@@ -330,9 +326,9 @@ function Intro() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-[44px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[88px]"
         >
-          Une démarche
+          Nous ne faisons pas
           <br className="hidden md:block" />
-          <span className="italic text-[#CF2B5B] ">éditoriale</span>, pas un “process”.
+          <span className="italic text-[#CF2B5B]"> “des sites web”</span>.
         </motion.h2>
 
         <motion.p
@@ -341,14 +337,15 @@ function Intro() {
           transition={{ delay: 0.12, duration: 0.65, ease: "easeOut" }}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-black/60"
         >
-          On avance comme un magazine : titre, angle, structure, puis exécution.
-          Chaque étape a une intention claire et un livrable concret.
+          Nous structurons des systèmes et des plateformes : robustes, utiles, et conçus
+          pour les contextes africains. Le fond avant la vitrine.
         </motion.p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Tag>Clarté</Tag>
-          <Tag>Cadre</Tag>
-          <Tag>Qualité</Tag>
+          <Tag>Robustesse</Tag>
+          <Tag>Process</Tag>
+          <Tag>Impact</Tag>
+          <Tag>Contexte</Tag>
           <span className="text-[10px] tracking-[0.26em] text-black/40">
             — <span style={{ color: ACCENT }}>EDITION 2026</span>
           </span>
@@ -359,12 +356,12 @@ function Intro() {
         <Card>
           <div className="flex items-center justify-between">
             <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-              PROMESSE
+              POSITIONNEMENT
             </div>
-            <span className="text-[10px] tracking-[0.26em] text-black/35">Simple</span>
+            <span className="text-[10px] tracking-[0.26em] text-black/35">Clair</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-black/65">
-            Réduire le flou. Rendre visible l’avancement. Livrer sans dette.
+            Structurer avant de développer : architecture, gouvernance, adoption.
           </p>
           <Divider />
           <div className="flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
@@ -377,7 +374,7 @@ function Intro() {
   );
 }
 
-function MethodRail({
+function PositionRail({
   active,
   onChange,
   progress,
@@ -390,21 +387,20 @@ function MethodRail({
 
   return (
     <div className="grid h-full items-center gap-10 md:grid-cols-12">
-      {/* LEFT — Editorial copy */}
+      {/* LEFT */}
       <div className="md:col-span-4">
         <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-          MÉTHODE
+          CE QUE NOUS STRUCTURONS
         </div>
 
         <h3 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
-          Une ligne.
+          Quatre piliers.
           <br />
-          <span className="italic text-black/60">Quatre actes</span>.
+          <span className="italic text-black/60">Un même niveau d’exigence</span>.
         </h3>
 
         <p className="mt-6 text-sm leading-relaxed text-black/55">
-          Le rail central guide la lecture. Les étapes s’ouvrent comme des encadrés
-          de magazine — sans grille rigide.
+          Choisissez un pilier : vous voyez l’intention et le résultat attendu.
         </p>
 
         {/* ACTIVE CARD */}
@@ -421,7 +417,7 @@ function MethodRail({
               <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
                 ACTIF
               </div>
-              <div className="text-[10px] tracking-[0.26em] text-black/35">STEP</div>
+              <div className="text-[10px] tracking-[0.26em] text-black/35">PILIER</div>
             </div>
 
             {steps[active] && (
@@ -459,17 +455,15 @@ function MethodRail({
         </motion.div>
       </div>
 
-      {/* RIGHT — Rail & nodes */}
+      {/* RIGHT — Rail */}
       <div className="md:col-span-8">
         <div className="relative rounded-3xl border border-black/10 bg-white/55 p-7 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:p-9">
-          {/* Rail */}
           <div className="pointer-events-none absolute left-8 right-8 top-1/2 h-px -translate-y-1/2 bg-black/10" />
           <motion.div
             style={{ opacity: glow, backgroundColor: `${ACCENT}55` }}
             className="pointer-events-none absolute left-8 right-8 top-1/2 h-px -translate-y-1/2"
           />
 
-          {/* Nodes */}
           <div className="relative grid grid-cols-4 gap-6">
             {steps.map((s, i) => (
               <button
@@ -484,9 +478,8 @@ function MethodRail({
             ))}
           </div>
 
-          {/* Footer */}
           <div className="mt-10 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-            <span>RAIL ÉDITORIAL</span>
+            <span>RAIL — POSITIONNEMENT</span>
             <span style={{ color: ACCENT }}>→</span>
           </div>
         </div>
@@ -524,14 +517,14 @@ function Details({ active }: { active: number }) {
           transition={{ delay: 0.08, duration: 0.55, ease: "easeOut" }}
           className="mt-7 max-w-xl text-sm leading-relaxed text-black/55"
         >
-          {s.text} Ici, on priorise la lisibilité : ce qui est décidé, ce qui est livré,
-          et ce qui change à la prochaine itération.
+          {s.text} L’objectif : produire du solide, du maintenable, et du mesurable —
+          sans surcouche inutile.
         </motion.p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Tag>Objectif</Tag>
-          <Tag>Livrable</Tag>
-          <Tag>Validation</Tag>
+          <Tag>Architecture</Tag>
+          <Tag>Adoption</Tag>
+          <Tag>Gouvernance</Tag>
         </div>
       </div>
 
@@ -539,7 +532,7 @@ function Details({ active }: { active: number }) {
         <Card>
           <div className="flex items-center justify-between">
             <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-              LIVRABLE
+              RÉSULTAT
             </div>
             <span className="text-[10px] tracking-[0.26em] text-black/35">Output</span>
           </div>
@@ -557,7 +550,7 @@ function Details({ active }: { active: number }) {
                 {s.deliverable}
               </div>
               <p className="mt-3 text-sm leading-relaxed text-black/60">
-                Un livrable concret + un point de validation. Pas de “gros tunnel”.
+                Un résultat exploitable. Un socle qui tient dans le temps.
               </p>
             </motion.div>
           </AnimatePresence>
@@ -565,9 +558,9 @@ function Details({ active }: { active: number }) {
           <Divider />
 
           <div className="grid gap-3">
-            <MetaRow k="Cadence" v="itérations courtes" />
-            <MetaRow k="Trace" v="décisions documentées" />
-            <MetaRow k="Qualité" v="tests + revue" />
+            <MetaRow k="Focus" v="robustesse" />
+            <MetaRow k="But" v="process & impact" />
+            <MetaRow k="Terrain" v="contexte africain" />
           </div>
         </Card>
       </div>
@@ -588,8 +581,8 @@ function Next() {
           <span className="italic text-black/60">ProlabAfrik</span>.
         </h3>
         <p className="mt-7 max-w-xl text-sm leading-relaxed text-black/55">
-          Maintenant que la méthode est claire, on passe à la différence : sur-mesure,
-          fiabilité et accompagnement.
+          Après le positionnement, on explique la différence : méthode, fiabilité,
+          et accompagnement — dans la durée.
         </p>
 
         <div className="mt-10 flex items-center gap-3">
@@ -685,7 +678,7 @@ function Node({
             animate={{ opacity: active ? 1 : 0.5 }}
             className="text-[10px] tracking-[0.26em] text-black/45"
           >
-            STEP
+            PILIER
           </motion.div>
         </div>
 

@@ -11,25 +11,38 @@ import { BookFooter, BookHeader } from "@/components/book/BookChrome";
  */
 const ACCENT = "#E94E77";
 
-const services = [
+const blocks = [
   {
     k: "01",
-    title: "Solutions logicielles innovantes",
+    title: "Une expertise construite sur 30 ans de projets critiques",
     text:
-      "Nous développons des solutions logicielles personnalisées qui répondent aux défis uniques de votre secteur.",
+      "Notre fondateur a piloté des programmes IT stratégiques sur des environnements exigeants, où la fiabilité et la sécurité sont non négociables.",
   },
   {
     k: "02",
-    title: "Révolution de l’IA",
+    title: "Programmes IT stratégiques",
     text:
-      "Exploitez vos données pour analyser, prévoir et décider en temps réel. Optimisez vos processus et boostez vos performances.",
+      "Des missions au cœur des systèmes : modernisation, sécurisation des flux, intégrations internationales et migration d’infrastructures multi-clients.",
   },
   {
     k: "03",
-    title: "Digitalisation de vos services",
+    title: "Références",
     text:
-      "Nous digitalisons vos processus pour optimiser vos opérations et accélérer votre croissance avec des solutions numériques innovantes.",
+      "Groupe BPCE · Banque de France · SOCOTEC · Capgemini — expériences structurantes sur des chantiers à fort enjeu.",
   },
+  {
+    k: "04",
+    title: "Ce que cela garantit",
+    text:
+      "👉 Maîtrise des environnements critiques.\n👉 Compréhension des enjeux de gouvernance et de risque.",
+  },
+];
+
+const references = [
+  { org: "Groupe BPCE", detail: "Modernisation monétique" },
+  { org: "Banque de France", detail: "Sécurisation des flux nationaux" },
+  { org: "SOCOTEC", detail: "Intégrations IT internationales" },
+  { org: "Capgemini", detail: "Migration de datacenters multi-clients" },
 ];
 
 export default function PageServices() {
@@ -53,32 +66,26 @@ export default function PageServices() {
             className="font-semibold tracking-[-0.01em]"
             style={{ fontSize: "clamp(28px, 3.2vw, 46px)", lineHeight: 1.05 }}
           >
-            SERVICES
+            QUI NOUS SOMMES
           </h1>
 
           {/* Accent underline */}
           <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
           <p className="mt-4 max-w-2xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
-            Une offre structurée pour vos besoins technologiques — pensée pour le contexte
-            et orientée résultats.
+            Une expertise construite sur 30 ans de projets critiques.
           </p>
         </motion.div>
 
         {/* Content */}
         <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:items-start">
-          {/* TOC Blocks */}
+          {/* Left blocks */}
           <div className="md:col-span-8">
             <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
-              <TOCBlock n="01" title={services[0].title} text={services[0].text} delay={0.00} />
-              <TOCBlock n="02" title={services[1].title} text={services[1].text} delay={0.05} />
-              <TOCBlock n="03" title={services[2].title} text={services[2].text} delay={0.10} />
-              <TOCBlock
-                n="04"
-                title="Contact / cadrage"
-                text="Discutons de votre besoin et cadrons une solution adaptée à votre contexte."
-                delay={0.15}
-              />
+              <TOCBlock n="01" title={blocks[0].title} text={blocks[0].text} delay={0.0} />
+              <TOCBlock n="02" title={blocks[1].title} text={blocks[1].text} delay={0.05} />
+              <TOCBlock n="03" title={blocks[2].title} text={blocks[2].text} delay={0.1} />
+              <TOCBlock n="04" title={blocks[3].title} text={blocks[3].text} delay={0.15} />
             </div>
           </div>
 
@@ -86,44 +93,45 @@ export default function PageServices() {
           <aside className="md:col-span-4">
             <div className="space-y-10">
               <div className="rounded-2xl border border-black/10 bg-white/65 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
-                <div
-                  className="text-[11px] tracking-[0.26em]"
-                  style={{ color: ACCENT }}
-                >
-                  LIVRABLES TYPIQUES
+                <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
+                  PROGRAMMES PILOTÉS
                 </div>
+
                 <ul className="mt-4 space-y-2 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
-                  <li>— Applications web & plateformes métiers</li>
-                  <li>— Automatisation & digitalisation des processus</li>
-                  <li>— Tableaux de bord, analyse & pilotage</li>
+                  {references.map((r) => (
+                    <li key={r.org}>
+                      — <span className="font-semibold text-black/75">{r.org}</span>{" "}
+                      <span className="text-black/60">– {r.detail}</span>
+                    </li>
+                  ))}
                 </ul>
 
                 <div className="mt-6 h-px bg-black/10" />
                 <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-                  <span>CADRE</span>
+                  <span>EXPERTISE</span>
                   <span style={{ color: ACCENT }}>→</span>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-black/10 bg-white/65 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
-                <div
-                  className="text-[11px] tracking-[0.26em]"
-                  style={{ color: ACCENT }}
-                >
+                <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                   CONTACT
                 </div>
+
                 <p className="mt-4 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
-                  Discutons <span style={{ color: ACCENT }}>→</span> cadrage, objectifs, solution.
+                  Discutons <span style={{ color: ACCENT }}>→</span> contexte, enjeux, cadrage.
                 </p>
 
                 <div className="mt-4 space-y-2 text-[12px] text-black/70 md:text-[13px]">
                   <div className="flex flex-wrap gap-x-2">
                     <span className="font-semibold">Email :</span>
-                    <span className="break-all">contact.tiegoquenum@gmail.com</span>
+                    <span className="break-all">contact@prolabafrik.com</span>
                   </div>
                   <div className="flex flex-wrap gap-x-2">
                     <span className="font-semibold">Téléphone :</span>
-                    <span>07 55 84 73 19</span>
+                    <span>+33 6 81 68 09 13 <br />
+                       +229 52 62 29 10
+                    </span>
                   </div>
                 </div>
 
@@ -148,7 +156,7 @@ export default function PageServices() {
           </aside>
         </div>
 
-        <BookFooter left="PROLABAFRIK · SERVICES" right="(04) PROJET →" />
+        <BookFooter left="PROLABAFRIK · QUI NOUS SOMMES" right="(04) PROJET →" />
       </div>
     </section>
   );
@@ -165,6 +173,8 @@ function TOCBlock({
   text: string;
   delay: number;
 }) {
+  const lines = text.split("\n");
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 10 }}
@@ -185,8 +195,13 @@ function TOCBlock({
           <div className="text-[13px] font-semibold text-black/85 md:text-[14px]">
             {title}
           </div>
-          <div className="mt-2 max-w-sm text-[12px] leading-relaxed text-black/60 md:text-[13px]">
-            {text}
+
+          <div className="mt-2 max-w-sm space-y-2 text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+            {lines.map((l, i) => (
+              <p key={i} className="whitespace-pre-line">
+                {l}
+              </p>
+            ))}
           </div>
 
           {/* Accent underline */}

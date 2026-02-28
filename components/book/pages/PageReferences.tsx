@@ -19,92 +19,83 @@ type RefItem = {
   tag?: string;
 };
 
-/** ✅ Données (issues du PDF client / adaptées en version “dossier”) */
+/** ✅ PAGE 05 — NOTRE DOUBLE ADN */
 const EUROPE: RefItem[] = [
   {
-    id: "bpce",
-    name: "Groupe BPCE",
-    detail:
-      "Direction IT Monétique : modernisation des flux bancaires et infrastructures de paiement.",
-    tag: "Banque",
+    id: "e-standards",
+    name: "Standards élevés",
+    detail: "Exigence de qualité, documentation, tests et livrables maîtrisés.",
+    tag: "Europe",
   },
   {
-    id: "socotec",
-    name: "SOCOTEC",
-    detail:
-      "Intégration IT post-acquisition internationale (M&A) et coordination des intégrations.",
-    tag: "Industrie",
+    id: "e-gouvernance",
+    name: "Gouvernance IT mature",
+    detail: "Pilotage, rôles, processus de décision et gestion des risques structurés.",
+    tag: "Europe",
   },
   {
-    id: "bdf",
-    name: "Banque de France",
-    detail:
-      "Projets structurants : interconnexion bancaire nationale & sécurisation des flux.",
-    tag: "Institution",
-  },
-  {
-    id: "engie",
-    name: "ENGIE",
-    detail: "Digitalisation & infrastructures critiques.",
-    tag: "Énergie",
+    id: "e-securite",
+    name: "Sécurité & conformité",
+    detail: "Approche sécurité-by-design, conformité et traçabilité des opérations.",
+    tag: "Europe",
   },
 ];
 
 const AFRIQUE: RefItem[] = [
   {
-    id: "hp-gabon",
-    name: "HP Services (Gabon)",
-    detail:
-      "Digitalisation des processus de contrôle conformité des transporteurs de produits pétroliers.",
-    tag: "Transport",
+    id: "a-adaptabilite",
+    name: "Adaptabilité",
+    detail: "Solutions conçues pour des contraintes terrain et des contextes hétérogènes.",
+    tag: "Afrique",
   },
   {
-    id: "as-logistics",
-    name: "AS-LOGISTICS (Niger)",
-    detail:
-      "Digitalisation des activités de transport de marchandises à l’international.",
-    tag: "Logistique",
+    id: "a-budget",
+    name: "Optimisation budgétaire",
+    detail: "Priorisation, périmètre utile, ROI, et trajectoires réalistes.",
+    tag: "Afrique",
   },
   {
-    id: "consulaire",
-    name: "Service consulaire (Gabon–Bénin)",
-    detail:
-      "Digitalisation de la gestion des accès aux ressources consulaires.",
-    tag: "Public",
+    id: "a-progressif",
+    name: "Solutions progressives",
+    detail: "Déploiement par étapes : MVP, itérations, montée en charge contrôlée.",
+    tag: "Afrique",
   },
   {
-    id: "municipaux",
-    name: "Services municipaux (Bénin)",
-    detail:
-      "Digitalisation des activités de contrôle des marchandises.",
-    tag: "Collectivités",
+    id: "a-terrain",
+    name: "Approche terrain",
+    detail: "Comprendre les usages réels, accompagner l’adoption et ajuster au besoin.",
+    tag: "Afrique",
   },
 ];
 
 const PARTENAIRES: RefItem[] = [
   {
-    id: "p1",
-    name: "Transport & logistique",
-    detail: "AS Logistics (Niger), HP Services (Gabon).",
-    tag: "Secteur",
+    id: "f-synthese",
+    name: "Rigueur européenne. Réalité africaine.",
+    detail:
+      "C’est cette combinaison qui fait notre force : des standards élevés et une exécution adaptée au terrain.",
+    tag: "Force",
   },
   {
-    id: "p2",
-    name: "Institutions consulaires",
-    detail: "Projets Gabon–Bénin.",
-    tag: "Institution",
+    id: "f-methode",
+    name: "Une exécution qui tient",
+    detail:
+      "On structure : cadrage, gouvernance, sécurité, puis livraison progressive et mesurable.",
+    tag: "Force",
   },
   {
-    id: "p3",
-    name: "Collectivités & services publics",
-    detail: "Services municipaux (Bénin).",
-    tag: "Public",
+    id: "f-impact",
+    name: "Des solutions adoptées",
+    detail:
+      "Le succès n’est pas la mise en ligne : c’est l’usage, la fiabilité et la valeur produite.",
+    tag: "Force",
   },
   {
-    id: "p4",
-    name: "Ingénierie & BTP",
-    detail: "Partenariats sectoriels (selon projets).",
-    tag: "Industrie",
+    id: "f-durable",
+    name: "Durabilité & maîtrise",
+    detail:
+      "Des systèmes maintenables, avec une trajectoire claire (évolutions, support, montée en charge).",
+    tag: "Force",
   },
 ];
 
@@ -155,7 +146,7 @@ export default function PageReferences() {
               <span className="text-black/35">EDITION</span>{" "}
               <span style={{ color: ACCENT }}>2026</span>
             </div>
-            <div>PAGE 06</div>
+            <div>PAGE 05</div>
           </div>
 
           <div className="mt-3 h-px bg-black/10" />
@@ -163,7 +154,7 @@ export default function PageReferences() {
           {/* Title */}
           <header className="mt-6">
             <div className="text-[11px] tracking-[0.28em] text-black/55">
-              RÉFÉRENCES & PARTENAIRES
+              NOTRE DOUBLE ADN
             </div>
 
             <div className="mt-2 grid gap-6 md:grid-cols-12 md:items-end">
@@ -174,24 +165,24 @@ export default function PageReferences() {
                   transition={{ duration: 0.55, ease: "easeOut" }}
                   className="text-[28px] font-semibold leading-tight tracking-tight md:text-[40px]"
                 >
-                  Des preuves concrètes,{" "}
+                  Rigueur européenne.{" "}
                   <span className="italic" style={{ color: ACCENT }}>
-                    des références
-                  </span>{" "}
-                  solides.
+                    Réalité africaine
+                  </span>
+                  .
                 </motion.h1>
 
                 <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-black/65">
-                  Un parcours construit entre Europe et Afrique : conseil, gestion
-                  de projets IT et transformation digitale. Une approche orientée
-                  impact, qualité et exécution.
+                  Deux cultures complémentaires : standards élevés et gouvernance d’un côté,
+                  adaptabilité et approche terrain de l’autre. C’est cette combinaison
+                  qui fait notre force.
                 </p>
 
                 <div className="mt-6 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
               </div>
 
               <div className="md:col-span-4">
-                <ExperienceCounter />
+                <DNACounter />
               </div>
             </div>
           </header>
@@ -205,16 +196,16 @@ export default function PageReferences() {
 
               <div className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-2 py-2">
                 <TabButton active={tab === "europe"} onClick={() => setTab("europe")}>
-                  Europe
+                  En Europe
                 </TabButton>
                 <TabButton active={tab === "afrique"} onClick={() => setTab("afrique")}>
-                  Afrique
+                  En Afrique
                 </TabButton>
                 <TabButton
                   active={tab === "partenaires"}
                   onClick={() => setTab("partenaires")}
                 >
-                  Partenaires
+                  Notre force
                 </TabButton>
               </div>
             </div>
@@ -229,8 +220,8 @@ export default function PageReferences() {
                   LECTURE RAPIDE
                 </div>
                 <p className="mt-4 text-[12px] leading-relaxed text-black/65">
-                  Cliquez sur une référence pour afficher plus de détails. Naviguez
-                  par zone (Europe/Afrique) ou par type de partenaires.
+                  Parcourez les deux “ADN” puis la synthèse. Cliquez sur une carte
+                  pour afficher le détail.
                 </p>
 
                 <div
@@ -243,24 +234,24 @@ export default function PageReferences() {
 
               <div className="mt-8 border-t border-black/10 pt-6">
                 <div className="text-[11px] tracking-[0.24em] text-black/55">
-                  POSITIONNEMENT
+                  SYNTHÈSE
                 </div>
                 <p className="mt-4 text-[12px] leading-relaxed text-black/65">
-                  Une exécution rigoureuse et des solutions adaptées aux réalités
-                  terrain.
+                  Rigueur, gouvernance et conformité — avec pragmatisme terrain,
+                  budgets réalistes et déploiement progressif.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Chip>Europe</Chip>
-                  <Chip>Afrique</Chip>
-                  <Chip>IT</Chip>
-                  <Chip>Transformation</Chip>
+                  <Chip>Standards</Chip>
+                  <Chip>Gouvernance</Chip>
+                  <Chip>Sécurité</Chip>
+                  <Chip>Terrain</Chip>
                 </div>
               </div>
 
               <div className="mt-10 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/45">
                 <span>SECTION</span>
-                <span style={{ color: ACCENT }}>06</span>
+                <span style={{ color: ACCENT }}>05</span>
               </div>
             </aside>
 
@@ -287,7 +278,7 @@ export default function PageReferences() {
               </AnimatePresence>
 
               <div className="mt-10 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/55">
-                <span className="truncate">SECTION SUIVANTE : TÉLÉCHARGEMENT</span>
+                <span className="truncate">SECTION SUIVANTE : RÉFÉRENCES</span>
                 <span style={{ color: ACCENT }}>→</span>
               </div>
             </div>
@@ -296,9 +287,9 @@ export default function PageReferences() {
           {/* Footer */}
           <div className="mt-6 h-px bg-black/10" />
           <footer className="mt-3 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/55">
-            <span className="truncate">PROLABAFRIK · RÉFÉRENCES</span>
+            <span className="truncate">PROLABAFRIK · DOUBLE ADN</span>
             <span>
-              (07) DOWNLOAD <span style={{ color: ACCENT }}>→</span>
+              (06) RÉFÉRENCES <span style={{ color: ACCENT }}>→</span>
             </span>
           </footer>
         </div>
@@ -390,13 +381,11 @@ function RefCard({
       className="group text-left border-t border-black/10 pt-5"
     >
       <div className="flex items-start gap-4">
-        {/* big index */}
         <div className="min-w-[52px] text-[44px] font-semibold leading-none tracking-tight text-black/15">
           {String(index + 1).padStart(2, "0")}
         </div>
 
         <div className="pt-1">
-          {/* accent dot */}
           <div
             className="mb-3 h-2.5 w-2.5 rounded-full"
             style={{
@@ -416,10 +405,7 @@ function RefCard({
             {item.detail}
           </div>
 
-          <div
-            className="mt-4 h-px w-12"
-            style={{ backgroundColor: `${ACCENT}55` }}
-          />
+          <div className="mt-4 h-px w-12" style={{ backgroundColor: `${ACCENT}55` }} />
 
           <div className="mt-4 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/45">
             <span>DÉTAIL</span>
@@ -511,7 +497,7 @@ function Modal({
   );
 }
 
-function ExperienceCounter() {
+function DNACounter() {
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-25% 0px" });
 
@@ -523,7 +509,7 @@ function ExperienceCounter() {
 
       <div className="mt-3 flex items-baseline justify-between gap-4">
         <div className="text-[12px] leading-relaxed text-black/65">
-          Expériences cumulées (Europe + Afrique)
+          Deux cultures, une seule exécution
         </div>
 
         <div className="text-right">
@@ -533,10 +519,10 @@ function ExperienceCounter() {
             transition={{ duration: 0.45, ease: "easeOut" }}
             className="text-[40px] font-semibold leading-none tracking-tight text-black/25"
           >
-            30
+            2
           </motion.div>
           <div className="mt-1 text-[11px] tracking-[0.22em] text-black/55">
-            ANS
+            ADN
           </div>
         </div>
       </div>

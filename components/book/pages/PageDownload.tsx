@@ -2,13 +2,20 @@
 
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BookFooter, BookHeader } from "@/components/book/BookChrome";
+
+const ACCENT = "#CF2B5B";
 
 export default function PageDownload() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [form, setForm] = useState({ name: "", company: "", email: "" });
 
-  const emailOk = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()), [form.email]);
-  const canSubmit = form.name.trim() && form.company.trim() && emailOk && status !== "loading";
+  const emailOk = useMemo(
+    () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
+    [form.email]
+  );
+  const canSubmit =
+    form.name.trim() && form.company.trim() && emailOk && status !== "loading";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,50 +31,48 @@ export default function PageDownload() {
   }
 
   return (
-    // ✅ Responsive wrapper:
-    // - mobile: scroll vertical normal (pas de h-screen / overflow-hidden)
-    // - desktop: plein écran + overflow hidden (look magazine)
-    // ✅ Thème clair cohérent
-    <div className="relative w-full bg-[#f5f5f3] text-[#111] md:h-screen md:w-screen md:overflow-hidden">
-      <Noise />
-      <Vignette />
-      <TopBar title="DOSSIER" index="(06)" />
+    <section className="relative w-full bg-[#f5f5f3] text-[#111] md:h-screen md:w-screen md:overflow-hidden">
+      <PaperNoise />
+      <PaperVignette />
 
-      {/* rail top magazine */}
-      <div className="absolute left-8 right-8 top-[84px] z-20 flex items-center justify-between gap-6">
-        <div className="hidden md:flex items-center gap-3 text-xs text-black/55">
-          <span className="tracking-[0.35em]">B2B PDF</span>
-          <span className="text-black/25">—</span>
-          <span className="text-black/70">Edition courte & claire</span>
-        </div>
+      <div className="mx-auto w-full max-w-7xl px-5 pt-10 sm:px-6 md:px-12 md:pt-14">
+        <BookHeader page="PAGE 08" />
+      </div>
 
-        <div className="flex flex-1 items-center justify-end gap-4">
-          <div className="hidden md:block text-xs tracking-[0.35em] text-black/45">
-            <span className="text-black/70">→</span> Livraison immédiate
+      {/* rail top (plus sobre + accent) */}
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 md:px-12">
+        <div className="mt-6 flex items-center justify-between gap-6">
+          <div className="hidden md:flex items-center gap-3 text-[10px] tracking-[0.26em] text-black/50">
+            <span style={{ color: ACCENT }}>B2B PDF</span>
+            <span className="text-black/25">—</span>
+            <span className="text-black/70">Livraison immédiate</span>
           </div>
-          <div className="h-[2px] w-[160px] overflow-hidden rounded-full bg-black/10">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="h-full w-full bg-black/45"
-              style={{ transformOrigin: "0% 50%" }}
-            />
+
+          <div className="flex flex-1 items-center justify-end gap-4">
+            <div className="h-[2px] flex-1 overflow-hidden rounded-full bg-black/10 md:max-w-[420px]">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.1, ease: "easeOut" }}
+                className="h-full w-full"
+                style={{ transformOrigin: "0% 50%", backgroundColor: `${ACCENT}B3` }}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ✅ Desktop: center vertically (magazine cover feel) */}
-      {/* ✅ Mobile: normal flow, no forced height */}
-      <div className="mx-auto flex w-full max-w-6xl flex-col justify-center px-6 pt-28 pb-24 md:h-full md:px-16 md:pt-28 md:pb-0">
-        {/* Headline + sub */}
+      {/* content */}
+      <div className="mx-auto flex w-full max-w-6xl flex-col justify-center px-6 pt-12 pb-24 md:h-[calc(100vh-240px)] md:px-16 md:pt-10 md:pb-0">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
+          {/* Left */}
           <div className="md:col-span-7">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, ease: "easeOut" }}
-              className="text-[42px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[86px]"
+              className="font-semibold leading-[0.92] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(40px, 4.8vw, 86px)" }}
             >
               Recevez le dossier
               <br className="hidden md:block" />
@@ -78,9 +83,10 @@ export default function PageDownload() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
-              className="mt-8 max-w-2xl text-lg leading-relaxed text-black/65"
+              className="mt-8 max-w-2xl text-[16px] leading-relaxed text-black/65"
             >
-              Un PDF clair et synthétique, basé sur les informations du site, conçu pour vos échanges B2B — prêt à partager.
+              Un PDF clair et synthétique — conçu pour vos échanges B2B, prêt à partager
+              (email, meeting, WhatsApp).
             </motion.p>
 
             <motion.div
@@ -89,39 +95,51 @@ export default function PageDownload() {
               transition={{ delay: 0.22, duration: 0.65, ease: "easeOut" }}
               className="mt-10 grid gap-3 md:grid-cols-2"
             >
-              <MiniCard label="Contenu" value="Présentation, services, méthode" />
+              <MiniCard label="Contenu" value="Présentation, offres, méthode" />
               <MiniCard label="Format" value="PDF — 4 à 8 pages" />
               <MiniCard label="Usage" value="Email, meeting, pitch" />
               <MiniCard label="Délai" value="Instantané" />
             </motion.div>
 
             <div className="mt-10 hidden md:block">
-              <div className="h-px w-full bg-gradient-to-r from-black/0 via-black/15 to-black/0" />
-              <div className="mt-6 text-xs text-black/55">
-                <span className="text-black/80">(07)</span> Contact direct :{" "}
+              <div
+                className="h-px w-full"
+                style={{
+                  backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+                }}
+              />
+              <div className="mt-6 text-[11px] tracking-[0.22em] text-black/55">
+                CONTACT DIRECT —{" "}
                 <span className="text-black/75">contact.tiegoquenum@gmail.com</span>
               </div>
             </div>
           </div>
 
-          {/* Form */}
+          {/* Right form */}
           <div className="md:col-span-5">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.12, duration: 0.7, ease: "easeOut" }}
-              className="relative overflow-hidden rounded-3xl border border-black/10 bg-black/[0.03] p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:p-7"
+              className="relative overflow-hidden rounded-3xl border border-black/10 bg-white/70 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:p-7"
             >
-              {/* subtle glow */}
-              <div className="pointer-events-none absolute inset-0 opacity-[0.7]">
-                <div className="absolute -left-24 -top-24 h-60 w-60 rounded-full bg-black/10 blur-3xl" />
-                <div className="absolute -bottom-24 -right-24 h-60 w-60 rounded-full bg-black/5 blur-3xl" />
+              {/* glow accent très léger */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
+                <div
+                  className="absolute -left-24 -top-24 h-64 w-64 rounded-full blur-3xl"
+                  style={{ backgroundColor: `${ACCENT}14` }}
+                />
+                <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-black/5 blur-3xl" />
               </div>
 
               <div className="relative">
                 <div className="flex items-center justify-between">
-                  <div className="text-xs tracking-[0.35em] text-black/55">FORMULAIRE</div>
-                  <span className="text-xs text-black/35">Secure</span>
+                  <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
+                    TÉLÉCHARGEMENT
+                  </div>
+                  <span className="text-[10px] tracking-[0.26em] text-black/35">
+                    Formulaire
+                  </span>
                 </div>
 
                 <form onSubmit={onSubmit} className="mt-6 grid gap-3">
@@ -129,40 +147,50 @@ export default function PageDownload() {
                     placeholder="Nom"
                     value={form.name}
                     onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
+                    accent={ACCENT}
                   />
                   <Input
                     placeholder="Société"
                     value={form.company}
                     onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
+                    accent={ACCENT}
                   />
                   <Input
                     placeholder="Email professionnel"
                     type="email"
                     value={form.email}
                     onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
-                    className={
-                      form.email.length === 0
-                        ? ""
-                        : emailOk
-                        ? "border-black/20 focus:border-black/35"
-                        : "border-black/10 focus:border-black/25"
-                    }
+                    accent={ACCENT}
+                    state={form.email.length === 0 ? "idle" : emailOk ? "ok" : "bad"}
                   />
 
                   <motion.button
                     type="submit"
                     whileTap={{ scale: 0.99 }}
-                    whileHover={{ y: -1 }}
+                    whileHover={canSubmit ? { y: -1 } : undefined}
                     disabled={!canSubmit}
                     className={[
-                      "mt-2 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-xs tracking-[0.35em] transition",
+                      "mt-2 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-[11px] tracking-[0.26em] transition",
                       canSubmit
-                        ? "border-black/15 bg-black text-white hover:border-black/25"
-                        : "border-black/10 bg-black/20 text-black/60 cursor-not-allowed",
+                        ? "text-white"
+                        : "cursor-not-allowed text-black/55",
                     ].join(" ")}
+                    style={{
+                      borderColor: canSubmit ? `${ACCENT}55` : "rgba(0,0,0,0.10)",
+                      backgroundColor: canSubmit ? ACCENT : "rgba(0,0,0,0.06)",
+                      boxShadow: canSubmit ? `0 10px 30px ${ACCENT}26` : "none",
+                    }}
                   >
-                    <span>{status === "loading" ? "ENVOI..." : status === "success" ? "ENVOYÉ" : "RECEVOIR LE DOSSIER"}</span>
-                    <span className="text-white/80">{status === "loading" ? "…" : "→"}</span>
+                    <span>
+                      {status === "loading"
+                        ? "ENVOI..."
+                        : status === "success"
+                        ? "ENVOYÉ"
+                        : "RECEVOIR LE DOSSIER"}
+                    </span>
+                    <span className={canSubmit ? "text-white/90" : "text-black/40"}>
+                      {status === "loading" ? "…" : "→"}
+                    </span>
                   </motion.button>
 
                   <AnimatePresence mode="popLayout">
@@ -171,7 +199,11 @@ export default function PageDownload() {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
-                        className="rounded-2xl border border-black/10 bg-black/[0.04] p-4 text-xs text-black/70"
+                        className="rounded-2xl border p-4 text-[12px] text-black/70"
+                        style={{
+                          borderColor: `${ACCENT}33`,
+                          backgroundColor: `${ACCENT}0D`,
+                        }}
                       >
                         Dossier envoyé. Vérifiez votre boîte mail (et les spams).
                       </motion.div>
@@ -181,7 +213,7 @@ export default function PageDownload() {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
-                        className="rounded-2xl border border-black/10 bg-black/[0.04] p-4 text-xs text-black/70"
+                        className="rounded-2xl border border-black/10 bg-black/[0.03] p-4 text-[12px] text-black/70"
                       >
                         Oups — réessayez ou contactez-nous directement par email.
                       </motion.div>
@@ -194,92 +226,128 @@ export default function PageDownload() {
                   </div>
                 </form>
 
-                {/* Contact block “magazine” */}
-                <div className="mt-7 grid gap-3 rounded-3xl border border-black/10 bg-black/[0.04] p-5">
+                {/* Contact block */}
+                <div className="mt-7 rounded-3xl border border-black/10 bg-white/60 p-5">
                   <div className="flex items-center justify-between">
-                    <div className="text-xs tracking-[0.35em] text-black/55">CONTACT</div>
-                    <span className="text-xs text-black/35">Direct</span>
+                    <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
+                      CONTACT
+                    </div>
+                    <span className="text-[10px] tracking-[0.26em] text-black/35">
+                      Direct
+                    </span>
                   </div>
-                  <div className="text-sm text-black/75">Email : contact.tiegoquenum@gmail.com</div>
-                  <div className="text-sm text-black/75">Tél : 07 55 84 73 19</div>
 
-                  <div className="mt-2 h-px w-full bg-gradient-to-r from-black/0 via-black/12 to-black/0" />
-                  <div className="flex items-center justify-between text-xs text-black/50">
-                    <span className="tracking-[0.35em]">DISPONIBILITÉ</span>
-                    <span className="text-black/70">Réponse rapide</span>
+                  <div className="mt-4 space-y-2 text-[13px] text-black/75">
+                    <div className="flex flex-wrap gap-x-2">
+                      <span className="font-semibold">Email :</span>
+                      <span className="break-all">contact.tiegoquenum@gmail.com</span>
+                    </div>
+                    <div className="flex flex-wrap gap-x-2">
+                      <span className="font-semibold">Téléphone :</span>
+                      <span>+33 6 81 68 09 13 <br />
+                       +229 52 62 29 10
+                    </span>
+                    </div>
+                  </div>
+
+                  <div
+                    className="mt-5 h-px w-full"
+                    style={{
+                      backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+                    }}
+                  />
+                  <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
+                    <span>RÉPONSE</span>
+                    <span className="text-black/65">Rapide</span>
                   </div>
                 </div>
               </div>
             </motion.div>
 
             {/* mobile contact */}
-            <div className="mt-6 md:hidden text-xs text-black/55">
-              <span className="text-black/80">(07)</span> Contact direct :{" "}
-              <span className="text-black/75">contact.tiegoquenum@gmail.com</span>
+            <div className="mt-6 md:hidden text-[11px] tracking-[0.22em] text-black/55">
+              CONTACT — <span className="text-black/75">contact@prolabafrik.com</span>
             </div>
           </div>
         </div>
       </div>
 
-      <CornerMarks />
-    </div>
+      <div className="mx-auto w-full max-w-7xl px-5 pb-10 sm:px-6 md:px-12 md:pb-14">
+        <BookFooter left="PROLABAFRIK · DOSSIER" right="FIN →" />
+      </div>
+
+      <PaperCorners />
+    </section>
   );
 }
 
-/* ----------------- UI atoms ----------------- */
+/* ----------------- atoms ----------------- */
 
 function MiniCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-4">
-      <div className="text-[11px] tracking-[0.35em] text-black/55">{label}</div>
-      <div className="mt-2 text-sm text-black/75">{value}</div>
+    <div className="rounded-2xl border border-black/10 bg-white/55 p-4 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
+      <div className="text-[11px] tracking-[0.26em] text-black/55">{label}</div>
+      <div className="mt-2 text-[13px] text-black/75">{value}</div>
     </div>
   );
 }
 
 function Input({
+  accent,
+  state = "idle",
   className = "",
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { className?: string }) {
-  return (
-    <input
-      {...props}
-      className={[
-        "w-full rounded-2xl border border-black/15 bg-white/70 px-4 py-3 text-black placeholder:text-black/40 outline-none transition",
-        "focus:border-black/30 focus:ring-0",
-        className,
-      ].join(" ")}
-    />
-  );
-}
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  accent: string;
+  state?: "idle" | "ok" | "bad";
+  className?: string;
+}) {
+  const border =
+    state === "ok"
+      ? `${accent}55`
+      : state === "bad"
+      ? "rgba(0,0,0,0.18)"
+      : "rgba(0,0,0,0.14)";
 
-/** shared bits */
-function TopBar({ title, index }: { title: string; index: string }) {
+  const ring =
+    state === "ok"
+      ? `${accent}1A`
+      : state === "bad"
+      ? "rgba(0,0,0,0.10)"
+      : `${accent}14`;
+
   return (
-    <div className="absolute left-8 right-8 top-8 z-20 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <Mark />
-        <div className="text-xs tracking-[0.35em] text-black/60">
-          {index} {title}
-        </div>
-      </div>
-      <Plus />
+    <div className="relative">
+      <input
+        {...props}
+        className={[
+          "w-full rounded-2xl border bg-white/70 px-4 py-3 text-black placeholder:text-black/40 outline-none transition",
+          className,
+        ].join(" ")}
+        style={{
+          borderColor: border,
+          boxShadow: `0 0 0 6px ${ring}`,
+        }}
+        onFocus={(e) => {
+          // let browser handle focus; we keep the ring
+          props.onFocus?.(e);
+        }}
+      />
+
+      {/* tiny status dot (subtil) */}
+      {state !== "idle" && (
+        <span
+          className="pointer-events-none absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
+          style={{ backgroundColor: state === "ok" ? `${accent}CC` : "rgba(0,0,0,0.35)" }}
+        />
+      )}
     </div>
   );
 }
 
-function Vignette() {
-  // ✅ vignette adaptée au thème clair
-  return (
-    <div className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_20%,rgba(0,0,0,0.06),rgba(0,0,0,0)_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_100%,rgba(0,0,0,0.05),rgba(0,0,0,0)_55%)]" />
-    </div>
-  );
-}
+/* ----------------- paper treatment ----------------- */
 
-function Noise() {
-  // ✅ grain discret sur fond clair
+function PaperNoise() {
   return (
     <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply">
       <div
@@ -293,31 +361,22 @@ function Noise() {
   );
 }
 
-function Mark() {
+function PaperVignette() {
   return (
-    <div className="grid h-9 w-9 place-items-center rounded-xl border border-black/15 bg-black/[0.02] shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
-      <div className="h-3 w-3 rounded-sm bg-black/60" />
+    <div className="pointer-events-none absolute inset-0">
+      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_20%,rgba(0,0,0,0.06),rgba(0,0,0,0)_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_100%,rgba(0,0,0,0.05),rgba(0,0,0,0)_55%)]" />
     </div>
   );
 }
 
-function Plus() {
-  return (
-    <motion.div
-      whileHover={{ rotate: 90 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="grid h-10 w-10 place-items-center rounded-full border border-black/15 bg-black/[0.02]"
-    >
-      <span className="text-lg leading-none text-black/80">+</span>
-    </motion.div>
-  );
-}
-
-function CornerMarks() {
+function PaperCorners() {
   return (
     <>
-      <div className="absolute left-8 top-8 text-black/35">*</div>
-      <div className="absolute right-8 bottom-8 text-black/20">—</div>
+      <div className="pointer-events-none absolute left-6 top-6 text-black/20">*</div>
+      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">
+        —
+      </div>
     </>
   );
 }

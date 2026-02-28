@@ -10,6 +10,12 @@ import PageWhy from "@/components/book/pages/PageWhy";
 import PageDownload from "@/components/book/pages/PageDownload";
 import PageProject from "@/components/book/pages/PageProject";
 import PageReferences from "@/components/book/pages/PageReferences";
+import PageOffers from "@/components/book/pages/PageFinal";
+
+function isCoarsePointer() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
 
 export default function Page() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
@@ -19,27 +25,30 @@ export default function Page() {
     const el = scrollerRef.current;
     if (!el) return;
 
+    // Mobile/tablette tactile: ne pas intercepter (scroll vertical dans les pages + swipe horizontal natif)
+    if (isCoarsePointer()) return;
+
     const onWheel = (e: WheelEvent) => {
-      // Transforme le scroll vertical en scroll horizontal (naturel)
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
+      // Desktop: roulette/trackpad => horizontal (TOUJOURS)
+      e.preventDefault();
 
-        const speed = 1.0; // ajuste si besoin (0.8 - 1.4)
-        el.scrollLeft += e.deltaY * speed;
+      const speed = 1.0;
+      el.scrollLeft += (e.deltaY + e.deltaX) * speed;
 
-        // Snap "doux" : on attend que l'utilisateur arrête de scroller
-        if (snapTimerRef.current) window.clearTimeout(snapTimerRef.current);
-        snapTimerRef.current = window.setTimeout(() => {
-          const pageW = el.clientWidth;
-          const index = Math.round(el.scrollLeft / pageW);
-          el.scrollTo({ left: index * pageW, behavior: "smooth" });
-        }, 120);
-      }
+      // Snap "doux"
+      if (snapTimerRef.current) window.clearTimeout(snapTimerRef.current);
+      snapTimerRef.current = window.setTimeout(() => {
+        const pageW = el.clientWidth;
+        const index = Math.round(el.scrollLeft / pageW);
+        el.scrollTo({ left: index * pageW, behavior: "smooth" });
+      }, 120);
     };
 
-    el.addEventListener("wheel", onWheel, { passive: false });
+    // capture: plus fiable si le curseur est au-dessus d’un scrollable interne
+    el.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
     return () => {
-      el.removeEventListener("wheel", onWheel as any);
+      el.removeEventListener("wheel", onWheel as any, { capture: true } as any);
       if (snapTimerRef.current) window.clearTimeout(snapTimerRef.current);
     };
   }, []);
@@ -47,7 +56,7 @@ export default function Page() {
   return (
     <main
       ref={scrollerRef}
-      className="h-screen w-screen overflow-x-auto overflow-y-hidden bg-black text-white"
+      className="h-screen w-screen overflow-x-auto overflow-y-hidden bg-white/95"
       style={{
         WebkitOverflowScrolling: "touch",
         overscrollBehavior: "none",
@@ -57,35 +66,58 @@ export default function Page() {
       <style>{`main::-webkit-scrollbar{display:none;}`}</style>
 
       <div className="flex h-full w-max">
-        <section className="h-screen w-screen flex-shrink-0">
+        <PageShell>
           <PageCover />
-        </section>
+        </PageShell>
 
-        <section className="h-screen w-screen flex-shrink-0">
+        <PageShell>
           <PageAbout />
-        </section>
+        </PageShell>
 
-        <section id="services" className="h-screen w-screen flex-shrink-0">
+        <PageShell id="services">
           <PageServices />
-        </section>
+        </PageShell>
 
-        <section className="h-screen w-screen flex-shrink-0">
+        <PageShell>
           <PageMethod />
-        </section>
+        </PageShell>
 
-        <section className="h-screen w-screen flex-shrink-0">
+        <PageShell>
           <PageReferences />
-        </section>
-z
+        </PageShell>
 
-        <section className="h-screen w-screen flex-shrink-0">
+        <PageShell>
           <PageWhy />
-        </section>
+        </PageShell>
 
-        <section id="download" className="h-screen w-screen flex-shrink-0">
+        <PageShell>
+          <PageOffers />
+        </PageShell>
+
+        <PageShell id="download">
           <PageDownload />
-        </section>
+        </PageShell>
       </div>
     </main>
+  );
+}
+
+function PageShell({
+  children,
+  id,
+}: {
+  children: React.ReactNode;
+  id?: string;
+}) {
+  return (
+    <section
+      id={id}
+      className="h-screen w-screen flex-shrink-0 overflow-hidden"
+    >
+      {/* Scroll vertical par page (mobile) */}
+      <div className="h-full min-h-0 w-full overflow-y-auto overflow-x-hidden">
+        {children}
+      </div>
+    </section>
   );
 }

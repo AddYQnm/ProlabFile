@@ -6,17 +6,67 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const ACCENT = "#CF2B5B";
 
+/** PAGE 06 — ENJEUX */
 const points = [
-  { k: "(01)", t: "Sur mesure", d: "Une solution alignée sur vos besoins, sans template générique." },
-  { k: "(02)", t: "Qualité & fiabilité", d: "Des bases solides, maintenables et évolutives." },
-  { k: "(03)", t: "Accompagnement", d: "Un suivi clair, des échanges simples, des décisions rapides." },
+  {
+    k: "(01)",
+    t: "Manque d’urbanisation SI",
+    d: "Systèmes d’information hétérogènes, parfois inexistants, rarement structurés à l’échelle de l’organisation.",
+  },
+  {
+    k: "(02)",
+    t: "Processus manuels & dépendance papier",
+    d: "Des opérations critiques encore sur papier : lenteur, erreurs, perte d’information et difficulté de traçabilité.",
+  },
+  {
+    k: "(03)",
+    t: "Fragmentation des données",
+    d: "Données dispersées (fichiers, outils, services). Difficile d’avoir un “single source of truth” fiable.",
+  },
+  {
+    k: "(04)",
+    t: "Faible interopérabilité",
+    d: "Outils qui ne communiquent pas : doublons, ruptures de parcours, intégrations coûteuses et fragiles.",
+  },
+  {
+    k: "(05)",
+    t: "Risque de dépendance technologique étrangère",
+    d: "Perte de souveraineté : données, infrastructures, licences et décisions techniques externalisées.",
+  },
 ];
 
+/** On recycle la timeline pour raconter le chemin “du problème à la réponse” */
 const timeline = [
-  { k: "(A)", t: "Cadrage", d: "Objectifs, contraintes, priorités. Un cadre net, une direction claire.", meta: "Étape 01" },
-  { k: "(B)", t: "Prototype", d: "Parcours, maquettes, validation rapide. On converge sans friction.", meta: "Étape 02" },
-  { k: "(C)", t: "Production", d: "Dev propre, tests, performance. Livraison progressive.", meta: "Étape 03" },
-  { k: "(D)", t: "Lancement", d: "Déploiement, monitoring, itérations. Le produit vit, on suit.", meta: "Étape 04" },
+  {
+    k: "(1)",
+    t: "Structurer le SI",
+    d: "Cartographier, définir une cible, clarifier l’architecture et les responsabilités.",
+    meta: "Enjeu 01",
+  },
+  {
+    k: "(2)",
+    t: "Digitaliser les flux",
+    d: "Transformer les processus papier en workflows traçables, simples et efficaces.",
+    meta: "Enjeu 02",
+  },
+  {
+    k: "(3)",
+    t: "Unifier les données",
+    d: "Réconcilier, normaliser, gouverner : éviter la fragmentation et fiabiliser la décision.",
+    meta: "Enjeu 03",
+  },
+  {
+    k: "(4)",
+    t: "Connecter & intégrer",
+    d: "Interopérabilité : API, standards, échanges. Réduire les frictions et les coûts.",
+    meta: "Enjeu 04",
+  },
+  {
+    k: "(5)",
+    t: "Renforcer la souveraineté",
+    d: "Choix technos maîtrisés, trajectoire durable, données protégées et ownership clair.",
+    meta: "Enjeu 05",
+  },
 ];
 
 export default function PageWhyHorizontal() {
@@ -29,7 +79,6 @@ export default function PageWhyHorizontal() {
 
   const [index, setIndex] = useState(0);
 
-  // ✅ Desktop-only wheel->horizontal + progress tracking (responsive safe)
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const el = scrollerRef.current;
@@ -107,7 +156,7 @@ export default function PageWhyHorizontal() {
       <Noise />
       <Vignette />
 
-      <TopBar title="POURQUOI NOUS" index="(05)" />
+      <TopBar title="LES ENJEUX" index="(06)" />
 
       {/* progress + navigation — desktop only */}
       <div className="absolute left-8 right-8 top-[84px] z-20 hidden md:flex items-center justify-between gap-6">
@@ -169,7 +218,6 @@ export default function PageWhyHorizontal() {
               <div className="h-full pt-28 md:pt-32">{node}</div>
             </div>
 
-            {/* petite marge “magazine” */}
             <div className="pointer-events-none absolute bottom-8 left-8 text-xs tracking-[0.35em] text-black/30">
               {String(i + 1).padStart(2, "0")} / {String(pages.length).padStart(2, "0")}
             </div>
@@ -177,7 +225,7 @@ export default function PageWhyHorizontal() {
         ))}
       </div>
 
-      {/* mobile stack — mobile only */}
+      {/* mobile stack */}
       <div className="mx-auto max-w-6xl space-y-24 px-6 pb-24 pt-28 md:hidden">
         <SpreadHero />
         <SpreadPoints />
@@ -185,7 +233,6 @@ export default function PageWhyHorizontal() {
         <SpreadCta />
       </div>
 
-      {/* hint — desktop only */}
       <div className="pointer-events-none absolute bottom-8 right-8 z-20 hidden md:flex items-center gap-3 text-xs text-black/45">
         <span className="tracking-[0.35em]">SCROLL</span>
         <span style={{ color: ACCENT }}>→</span>
@@ -196,7 +243,7 @@ export default function PageWhyHorizontal() {
   );
 }
 
-/* ----------------- Spreads (pages) ----------------- */
+/* ----------------- Spreads ----------------- */
 
 function SpreadHero() {
   return (
@@ -208,9 +255,11 @@ function SpreadHero() {
           transition={{ duration: 0.75, ease: "easeOut" }}
           className="text-[46px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[92px]"
         >
-          Un partenaire tech
+          Digitaliser l’Afrique,
           <br className="hidden md:block" />
-          <span className="italic text-[#CF2B5B] ">orienté résultat</span>.
+          c’est{" "}
+          <span className="italic text-[#CF2B5B] ">structurer</span>{" "}
+          avant de développer.
         </motion.h2>
 
         <motion.div
@@ -219,9 +268,11 @@ function SpreadHero() {
           transition={{ delay: 0.12, duration: 0.7, ease: "easeOut" }}
           className="mt-8 flex flex-wrap items-center gap-3"
         >
-          <Badge>Studio</Badge>
-          <Badge>Build</Badge>
-          <Badge>Ship</Badge>
+          <Badge>SI</Badge>
+          <Badge>Process</Badge>
+          <Badge>Données</Badge>
+          <Badge>Interop</Badge>
+          <Badge>Souveraineté</Badge>
           <span className="text-xs tracking-[0.35em] text-black/40">
             — <span style={{ color: ACCENT }}>EDITION 2026</span>
           </span>
@@ -233,8 +284,9 @@ function SpreadHero() {
           transition={{ delay: 0.22, duration: 0.65, ease: "easeOut" }}
           className="mt-10 max-w-2xl text-lg leading-relaxed text-black/65"
         >
-          ProlabAfrik s’appuie sur une approche structurée et un niveau d’exigence élevé pour livrer des solutions fiables
-          — pensées comme un produit, conçues comme un système.
+          Les enjeux ne sont pas “techniques” seulement : ils touchent la gouvernance,
+          la fiabilité, l’adoption et l’indépendance. Voici les points clés qui freinent
+          (ou accélèrent) une transformation digitale durable.
         </motion.p>
 
         <div className="mt-8 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
@@ -249,20 +301,29 @@ function SpreadHero() {
         >
           <div className="flex items-center justify-between">
             <div className="text-xs tracking-[0.35em]" style={{ color: ACCENT }}>
-              PROMESSE
+              MESSAGE
             </div>
-            <span className="text-xs text-black/35">Version 01</span>
+            <span className="text-xs text-black/35">Synthèse</span>
           </div>
 
           <div className="mt-6 space-y-4">
-            <p className="text-sm leading-relaxed text-black/65">Une expérience claire : cadrage, exécution, livraison, suivi.</p>
+            <p className="text-sm leading-relaxed text-black/65">
+              Les outils seuls ne suffisent pas : sans structure (SI, processus, données),
+              la digitalisation crée du bruit.
+            </p>
 
             <div
               className="h-px w-full"
-              style={{ backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}55, transparent)` }}
+              style={{
+                backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}55, transparent)`,
+              }}
             />
 
-            <p className="text-sm leading-relaxed text-black/55">Décisions rapides, jalons visibles, base solide — sans bruit inutile.</p>
+            <p className="text-sm leading-relaxed text-black/55">
+              Notre approche :{" "}
+              <span style={{ color: ACCENT }}>structurer</span>{" "}
+              avant de développer.
+            </p>
           </div>
 
           <div className="mt-7 flex items-center justify-between text-xs text-black/45">
@@ -280,35 +341,38 @@ function SpreadPoints() {
     <div className="grid h-full items-center gap-8 md:grid-cols-12">
       <div className="md:col-span-4">
         <div className="text-xs tracking-[0.35em]" style={{ color: ACCENT }}>
-          POINTS CLÉS
+          ENJEUX CLÉS
         </div>
         <h3 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
-          Une exécution
+          Les freins
           <br />
-          <span className="italic text-black/65">précise</span>.
+          <span className="italic text-black/65">les plus fréquents</span>.
         </h3>
         <p className="mt-6 text-sm leading-relaxed text-black/60">
-          Chaque choix vise la clarté, la fiabilité, et l’impact. Le style est sobre, la livraison est nette.
+          La transformation digitale échoue rarement “par manque d’outils”.
+          Elle échoue par manque de structure : gouvernance, données, interop et adoption.
         </p>
 
         <div className="mt-8 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
         <div className="mt-10 rounded-3xl border border-black/10 bg-black/[0.02] p-6">
           <div className="text-xs tracking-[0.35em]" style={{ color: ACCENT }}>
-            ANGLE
+            NOTRE APPROCHE
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-black/65">Magazine “class chic” : hiérarchie, respiration, détails fins.</p>
+          <p className="mt-3 text-sm leading-relaxed text-black/65">
+            Structurer avant de développer : cadrage, architecture, données, puis livraison progressive.
+          </p>
         </div>
       </div>
 
       <div className="md:col-span-8">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           {points.map((p, i) => (
             <motion.div
               key={p.k}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 * i, duration: 0.6, ease: "easeOut" }}
+              transition={{ delay: 0.06 * i, duration: 0.6, ease: "easeOut" }}
               className="group rounded-3xl border border-black/10 bg-black/[0.03] p-7 transition hover:border-black/20"
             >
               <div className="text-xs tracking-[0.35em] text-black/55">
@@ -319,11 +383,13 @@ function SpreadPoints() {
 
               <div
                 className="mt-8 h-px w-full"
-                style={{ backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)` }}
+                style={{
+                  backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+                }}
               />
 
               <div className="mt-5 flex items-center justify-between text-xs text-black/45">
-                <span className="tracking-[0.35em]">DÉTAIL</span>
+                <span className="tracking-[0.35em]">ENJEU</span>
                 <span style={{ color: ACCENT }} className="transition group-hover:translate-x-1">
                   →
                 </span>
@@ -364,15 +430,16 @@ function SpreadTimeline() {
     <div className="grid h-full items-center gap-8 md:grid-cols-12">
       <div className="md:col-span-4">
         <div className="text-xs tracking-[0.35em]" style={{ color: ACCENT }}>
-          TIMELINE
+          TRAJECTOIRE
         </div>
         <h3 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
-          Notre process
+          Du constat
           <br />
-          <span className="italic text-black/65">de A à D</span>.
+          <span className="italic text-black/65">à la réponse</span>.
         </h3>
         <p className="mt-6 text-sm leading-relaxed text-black/60">
-          Timeline horizontale : glisse la ligne (drag) pour parcourir les étapes. Chaque carte s’anime à l’entrée.
+          Une digitalisation durable suit une trajectoire simple : structurer (SI, processus, données, interop)
+          et sécuriser la souveraineté.
         </p>
 
         <div className="mt-10">
@@ -382,7 +449,11 @@ function SpreadTimeline() {
           </div>
           <div className="h-[2px] w-full overflow-hidden rounded-full bg-black/10">
             <motion.div
-              style={{ scaleX: lineScale, transformOrigin: "0% 50%", backgroundColor: `${ACCENT}B3` }}
+              style={{
+                scaleX: lineScale,
+                transformOrigin: "0% 50%",
+                backgroundColor: `${ACCENT}B3`,
+              }}
               className="h-full w-full"
             />
           </div>
@@ -416,7 +487,10 @@ function SpreadTimeline() {
                   <div className="relative rounded-3xl border border-black/10 bg-black/[0.03] p-6 transition hover:border-black/20">
                     <div
                       className="absolute -top-[10px] left-7 h-5 w-5 rounded-full"
-                      style={{ backgroundColor: `${ACCENT}CC`, boxShadow: `0 0 0 7px ${ACCENT}14` }}
+                      style={{
+                        backgroundColor: `${ACCENT}CC`,
+                        boxShadow: `0 0 0 7px ${ACCENT}14`,
+                      }}
                     />
                     <div className="text-xs tracking-[0.35em] text-black/55">
                       {s.k} <span className="text-black/35">— {s.meta}</span>
@@ -426,12 +500,14 @@ function SpreadTimeline() {
 
                     <div
                       className="mt-7 h-px w-full"
-                      style={{ backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)` }}
+                      style={{
+                        backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+                      }}
                     />
 
                     <div className="mt-4 flex items-center justify-between text-xs text-black/45">
-                      <span className="tracking-[0.35em]">LIVRABLE</span>
-                      <span className="text-black/65">Spec / Prototype / Build / Launch</span>
+                      <span className="tracking-[0.35em]">PRINCIPE</span>
+                      <span className="text-black/65">Structurer → Déployer</span>
                     </div>
                   </div>
                 </motion.div>
@@ -461,15 +537,15 @@ function SpreadCta() {
           CONCLUSION
         </div>
         <h3 className="mt-5 text-5xl font-semibold leading-[0.95] tracking-[-0.02em] md:text-6xl">
-          Un rendu
+          Notre approche :
           <br />
-          <span className="italic text-black/65">propre</span>, une base
+          <span className="italic text-black/65">structurer</span> avant
           <br />
-          <span className="italic text-black/65">solide</span>.
+          de <span className="italic text-black/65">développer</span>.
         </h3>
         <p className="mt-7 max-w-xl text-sm leading-relaxed text-black/60">
-          Si tu veux, je peux aussi te faire une version “sommaire” (mini-menu horizontal en haut) + un mode “auto-advance”
-          (lecture automatique type story).
+          On clarifie d’abord le cadre (SI, processus, données, interop), puis on construit
+          des solutions progressives, adoptées et maintenables.
         </p>
 
         <div className="mt-8 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
@@ -483,15 +559,17 @@ function SpreadCta() {
           className="rounded-3xl border border-black/10 bg-black/[0.03] p-7"
         >
           <div className="text-xs tracking-[0.35em]" style={{ color: ACCENT }}>
-            DOSSIER
+            SUITE
           </div>
           <p className="mt-4 text-sm leading-relaxed text-black/65">
-            Téléchargement du dossier (PDF). Version courte + version complète.
+            Prochaine section : références & projets (preuves concrètes).
           </p>
 
           <div
             className="mt-8 h-px w-full"
-            style={{ backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)` }}
+            style={{
+              backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+            }}
           />
 
           <a
@@ -503,14 +581,14 @@ function SpreadCta() {
               color: "rgba(0,0,0,0.70)",
             }}
           >
-            Télécharger le dossier
+            Aller aux références
             <span style={{ color: ACCENT }}>→</span>
           </a>
 
           <div className="mt-6 flex items-center justify-between text-xs text-black/45">
             <span className="tracking-[0.35em]">(07)</span>
             <span className="text-black/65">
-              Contact <span style={{ color: ACCENT }}>→</span>
+              Continuer <span style={{ color: ACCENT }}>→</span>
             </span>
           </div>
         </motion.div>

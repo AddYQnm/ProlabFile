@@ -38,7 +38,7 @@ export default function PageAbout() {
             className="font-semibold tracking-[-0.01em]"
             style={{ fontSize: "clamp(28px, 3.2vw, 46px)", lineHeight: 1.05 }}
           >
-            A PROPOS
+            MANIFESTE
           </motion.h1>
 
           <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
@@ -50,48 +50,48 @@ export default function PageAbout() {
             transition={{ delay: 0.08, duration: 0.6, ease: "easeOut" }}
             className="mt-4 max-w-xl text-[12px] leading-relaxed text-black/60 md:text-[13px]"
           >
-            À propos de ProlabAfrik et de ce dossier de présentation — un support B2B pensé
-            pour être lu vite, compris immédiatement, et partagé sans friction.
+            Digitaliser l’Afrique avec méthode, exigence et impact.
           </motion.p>
         </div>
 
         {/* Content */}
         <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-12 md:items-start md:gap-10">
-          {/* NOTES — mobile first for readability */}
+          {/* NOTES */}
           <motion.aside
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-1 md:order-1 md:col-span-3"
+            className="md:col-span-3"
           >
             <div className="space-y-7 md:space-y-9">
               <Note
-                title="THE EBOOK"
-                text="Dossier digital B2B basé sur le site ProlabAfrik, structuré pour être partagé facilement (email, WhatsApp, rendez-vous)."
+                title="PRINCIPE"
+                text="La transformation digitale en Afrique ne peut pas être une copie des modèles européens."
                 accent={ACCENT}
               />
+
               <Note
-                title="OBJECTIF"
-                text="Présenter clairement l’offre, le positionnement et l’approche, dans un format lisible et professionnel."
+                title="RÉALITÉS"
+                text="Infrastructures hétérogènes, contraintes budgétaires, gouvernance publique, enjeux de souveraineté."
                 accent={ACCENT}
               />
 
               <div>
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  MOTS-CLÉS
+                  PILIERS
                 </div>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Chip accent={ACCENT}>Sur mesure</Chip>
-                  <Chip accent={ACCENT}>Afrique</Chip>
-                  <Chip accent={ACCENT}>Digitalisation</Chip>
-                  <Chip accent={ACCENT}>IA & données</Chip>
+                  <Chip accent={ACCENT}>Méthode</Chip>
+                  <Chip accent={ACCENT}>Exigence</Chip>
+                  <Chip accent={ACCENT}>Impact</Chip>
+                  <Chip accent={ACCENT}>Adaptation locale</Chip>
                 </div>
 
                 <div className="mt-6 h-px bg-black/10" />
                 <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
                   <span>ANGLE</span>
-                  <span className="text-black/60">Éditorial</span>
+                  <span className="text-black/60">Vision</span>
                 </div>
               </div>
             </div>
@@ -103,28 +103,26 @@ export default function PageAbout() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-3 md:order-2 md:col-span-6"
+            className="md:col-span-6"
           >
             <div className="rounded-2xl border border-black/10 bg-white/60 p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:p-7">
               <div className="flex items-center justify-between">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  EDITORIAL
+                  MANIFESTE
                 </div>
                 <span className="text-[10px] tracking-[0.26em] text-black/35">SECTION</span>
               </div>
 
               <div className="mt-5 space-y-4 text-[12px] leading-[1.8] text-black/70 md:mt-6 md:text-[13px]">
                 <p>
-                  ProlabAfrik accompagne les entreprises et organisations dans la conception
-                  de solutions digitales innovantes, adaptées aux réalités locales et aux objectifs métiers.
+                  La transformation digitale en Afrique ne peut pas être une copie des modèles européens.
                 </p>
                 <p>
-                  Notre approche privilégie un cadrage clair, une conception structurée et un développement itératif.
-                  L’objectif est de livrer un produit fiable, maintenable et évolutif.
+                  Elle doit être adaptée aux réalités locales : infrastructures hétérogènes, contraintes
+                  budgétaires, gouvernance publique, enjeux de souveraineté.
                 </p>
                 <p>
-                  Ce dossier reprend les informations essentielles du site afin de fournir un support simple,
-                  partageable et immédiatement compréhensible lors des échanges commerciaux.
+                  Prolab Afrik est née de cette conviction.
                 </p>
               </div>
 
@@ -146,7 +144,7 @@ export default function PageAbout() {
                     className="pl-4 text-[14px] leading-relaxed text-black/75 md:text-[15px]"
                     style={{ borderLeft: `2px solid ${ACCENT}` }}
                   >
-                    “Un dossier pensé pour être lu vite, compris tout de suite, et partagé sans friction.”
+                    “Digitaliser l’Afrique avec méthode, exigence et impact.”
                   </p>
                 </div>
               </div>
@@ -155,11 +153,11 @@ export default function PageAbout() {
 
               <div className="mt-6">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  POSITIONNEMENT
+                  CONVICTION
                 </div>
                 <p className="mt-3 text-[12px] leading-relaxed text-black/70 md:text-[13px]">
-                  Solutions logicielles sur mesure · Digitalisation · IA & exploitation des données — au service
-                  de la performance des organisations en Afrique.
+                  Construire des solutions utiles, robustes et adaptées — en tenant compte des contraintes
+                  terrain et des exigences de performance, de gouvernance et de souveraineté.
                 </p>
 
                 <div className="mt-6 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
@@ -170,29 +168,22 @@ export default function PageAbout() {
             </div>
           </motion.main>
 
-          {/* IMAGE + MINI SPEC */}
+          {/* IMAGE */}
           <motion.aside
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.65, ease: "easeOut" }}
-            className="order-2 md:order-3 md:col-span-3"
+            className="md:col-span-3"
           >
             <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
-              {/* Mobile: moins haut, plus “hero” */}
               <div className="relative aspect-[16/9] md:aspect-[3/4]">
-                <Image
-                  src="/pp.png"
-                  alt="Illustration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
+                <Image src="/pp.png" alt="Illustration ProlabAfrik" fill className="object-cover" />
               </div>
 
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4">
                 <div className="text-[10px] tracking-[0.26em] text-white/85">
-                  PROLABAFRIK · <span style={{ color: ACCENT }}>INNOVATION</span>
+                  PROLABAFRIK · <span style={{ color: ACCENT }}>MANIFESTE</span>
                 </div>
               </div>
             </div>
@@ -200,14 +191,14 @@ export default function PageAbout() {
             <div className="mt-4 rounded-2xl border border-black/10 bg-white/70 p-5">
               <div className="flex items-center justify-between">
                 <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  FORMAT
+                  CAP
                 </div>
                 <span className="text-[10px] tracking-[0.26em] text-black/35">B2B</span>
               </div>
               <div className="mt-4 space-y-3 text-[12px] text-black/70">
-                <Row k="Lecture" v="Rapide" />
-                <Row k="Sections" v="Courtes" />
-                <Row k="Support" v="Partageable" />
+                <Row k="Approche" v="Terrain" />
+                <Row k="Exécution" v="Méthodique" />
+                <Row k="Résultat" v="Mesurable" />
               </div>
             </div>
           </motion.aside>

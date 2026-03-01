@@ -90,7 +90,7 @@ export default function PageCover() {
               }}
               className="mt-7 flex flex-wrap items-center gap-2 sm:mt-10 sm:gap-3"
             >
-              {["Concevoir", "Structurer", "Digitaliser", "Sécuriser"].map(
+              {["ENERGIE", "TRANSPORT", " SECURITE", "INDUSTRIE"].map(
                 (word, i) => (
                   <motion.span
                     key={word}

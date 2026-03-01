@@ -56,7 +56,7 @@ export default function Page() {
   return (
     <main
       ref={scrollerRef}
-      className="h-screen w-screen overflow-x-auto overflow-y-hidden bg-white/95"
+      className="h-screen w-screen overflow-x-auto overflow-y-hidden bg-[#f5f5f3]"
       style={{
         WebkitOverflowScrolling: "touch",
         overscrollBehavior: "none",

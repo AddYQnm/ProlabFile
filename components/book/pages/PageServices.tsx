@@ -14,45 +14,44 @@ const ACCENT = "#E94E77";
 const blocks = [
   {
     k: "01",
-    title: "Une expertise construite sur 30 ans de projets critiques",
+    title: "Moderniser sans déséquilibrer les finances publiques",
     text:
-      "Notre fondateur a piloté des programmes IT stratégiques sur des environnements exigeants, où la fiabilité et la sécurité sont non négociables.",
+      "Amélioration des recettes, optimisation des dépenses, réduction des fraudes, accélération des procédures.",
   },
   {
     k: "02",
-    title: "Programmes IT stratégiques",
+    title: "Garantir la souveraineté et la sécurité des données stratégiques",
     text:
-      "Des missions au cœur des systèmes : modernisation, sécurisation des flux, intégrations internationales et migration d’infrastructures multi-clients.",
+      "Architectures robustes, sécurisées et maîtrisées localement, afin de limiter la dépendance technologique extérieure.",
   },
   {
     k: "03",
-    title: "Références",
+    title: "Structurer des systèmes d’information souvent fragmentés",
     text:
-      "Groupe BPCE · Banque de France · SOCOTEC · Capgemini — expériences structurantes sur des chantiers à fort enjeu.",
+      "La digitalisation impose une urbanisation progressive et cohérente du système d’information.",
   },
   {
     k: "04",
-    title: "Ce que cela garantit",
+    title: "Renforcer la transparence et la traçabilité",
     text:
-      "👉 Maîtrise des environnements critiques.\n👉 Compréhension des enjeux de gouvernance et de risque.",
+      "Suivi des flux, traçabilité des opérations, contrôle des processus, pilotage par la donnée.",
   },
 ];
 
-const references = [
-  { org: "Groupe BPCE", detail: "Modernisation monétique" },
-  { org: "Banque de France", detail: "Sécurisation des flux nationaux" },
-  { org: "SOCOTEC", detail: "Intégrations IT internationales" },
-  { org: "Capgemini", detail: "Migration de datacenters multi-clients" },
+const focus = [
+  {
+    org: "Accompagner le changement humain",
+    detail: "Former, transférer, structurer : fondements d’une transformation durable.",
+  },
 ];
 
 export default function PageServices() {
   return (
-    <section className="relative h-screen w-full bg-[#f5f5f3] text-[#111]">
+    <section className="relative  h-dvh w-full overflow-hidden bg-[#f5f5f3] text-[#111]">
       <PaperNoise />
       <PaperVignette />
 
-      <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-6 md:px-12 md:py-14">
-        <BookHeader page="PAGE 03" />
+      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl grid-rows-[auto_1fr_auto] px-5 py-6 sm:px-6 md:px-12 md:py-8">
 
         {/* Title */}
         <motion.div
@@ -64,16 +63,22 @@ export default function PageServices() {
         >
           <h1
             className="font-semibold tracking-[-0.01em]"
-            style={{ fontSize: "clamp(28px, 3.2vw, 46px)", lineHeight: 1.05 }}
+            style={{ fontSize: "clamp(26px, 3.2vw, 46px)", lineHeight: 1.05 }}
           >
-            QUI NOUS SOMMES
+            LES DÉFIS DE LA TRANSFORMATION PUBLIQUE EN AFRIQUE
           </h1>
 
           {/* Accent underline */}
           <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
-          <p className="mt-4 max-w-2xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
-            Une expertise construite sur 30 ans de projets critiques.
+          <p className="mt-4 max-w-3xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+            La transformation digitale des administrations publiques africaines ne constitue pas un simple
+            projet technologique. Elle représente une réforme structurelle engageant la performance de l’État,
+            la qualité du service au citoyen et la souveraineté numérique nationale.
+          </p>
+
+          <p className="mt-4 max-w-3xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+            Aujourd’hui, les États africains font face à une équation complexe :
           </p>
         </motion.div>
 
@@ -94,11 +99,11 @@ export default function PageServices() {
             <div className="space-y-10">
               <div className="rounded-2xl border border-black/10 bg-white/65 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  PROGRAMMES PILOTÉS
+                  POINT CRITIQUE
                 </div>
 
                 <ul className="mt-4 space-y-2 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
-                  {references.map((r) => (
+                  {focus.map((r) => (
                     <li key={r.org}>
                       — <span className="font-semibold text-black/75">{r.org}</span>{" "}
                       <span className="text-black/60">– {r.detail}</span>
@@ -108,55 +113,34 @@ export default function PageServices() {
 
                 <div className="mt-6 h-px bg-black/10" />
                 <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-                  <span>EXPERTISE</span>
+                  <span>TRANSFORMATION</span>
                   <span style={{ color: ACCENT }}>→</span>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-black/10 bg-white/65 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
                 <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                  CONTACT
+                  MESSAGE CLÉ
                 </div>
 
                 <p className="mt-4 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
-                  Discutons <span style={{ color: ACCENT }}>→</span> contexte, enjeux, cadrage.
+                  La digitalisation publique n’est durable que si elle est pensée comme une{" "}
+                  <span className="font-semibold text-black/80">réforme structurante</span> :
+                  gouvernance, sécurité, architecture cible et montée en compétences —{" "}
+                  <span style={{ color: ACCENT }}>avant</span> l’outillage.
                 </p>
 
-                <div className="mt-4 space-y-2 text-[12px] text-black/70 md:text-[13px]">
-                  <div className="flex flex-wrap gap-x-2">
-                    <span className="font-semibold">Email :</span>
-                    <span className="break-all">contact@prolabafrik.com</span>
-                  </div>
-                  <div className="flex flex-wrap gap-x-2">
-                    <span className="font-semibold">Téléphone :</span>
-                    <span>+33 6 81 68 09 13 <br />
-                       +229 52 62 29 10
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <a
-                    href="#download"
-                    className="inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-[11px] tracking-[0.18em] text-white"
-                    style={{ backgroundColor: ACCENT }}
-                  >
-                    Télécharger le dossier
-                  </a>
-                  <a
-                    href="#download"
-                    className="inline-flex w-full items-center justify-center rounded-xl border px-5 py-3 text-[11px] tracking-[0.18em]"
-                    style={{ borderColor: ACCENT, color: ACCENT }}
-                  >
-                    Lancer une discussion
-                  </a>
+                <div className="mt-6 h-px bg-black/10" />
+                <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
+                  <span>CAP</span>
+                  <span style={{ color: ACCENT }}>→</span>
                 </div>
               </div>
             </div>
           </aside>
         </div>
 
-        <BookFooter left="PROLABAFRIK · QUI NOUS SOMMES" right="(04) PROJET →" />
+        <BookFooter left="PROLABAFRIK · DÉFIS PUBLICS" right="(04) PROJET →" />
       </div>
     </section>
   );
@@ -192,9 +176,7 @@ function TOCBlock({
         </div>
 
         <div className="pt-2">
-          <div className="text-[13px] font-semibold text-black/85 md:text-[14px]">
-            {title}
-          </div>
+          <div className="text-[13px] font-semibold text-black/85 md:text-[14px]">{title}</div>
 
           <div className="mt-2 max-w-sm space-y-2 text-[12px] leading-relaxed text-black/60 md:text-[13px]">
             {lines.map((l, i) => (
@@ -215,7 +197,7 @@ function TOCBlock({
 /* paper treatment */
 function PaperNoise() {
   return (
-    <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply">
+    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.06] mix-blend-multiply">
       <div
         className="h-full w-full"
         style={{
@@ -229,7 +211,7 @@ function PaperNoise() {
 
 function PaperVignette() {
   return (
-    <div className="pointer-events-none absolute inset-0">
+    <div className="pointer-events-none absolute inset-0 z-0">
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_10%,rgba(0,0,0,0.05),rgba(0,0,0,0)_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_100%,rgba(0,0,0,0.07),rgba(0,0,0,0)_55%)]" />
     </div>

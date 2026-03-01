@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -14,30 +14,59 @@ import { BookHeader, BookFooter } from "@/components/book/BookChrome";
 /** ✅ Accent (rose ProlabAfrik) */
 const ACCENT = "#E94E77";
 
+/** ✅ Piliers du positionnement (PAGE 04) */
 const steps = [
   {
     n: "01",
-    title: "Systèmes d’information robustes",
-    text: "Des fondations fiables : architecture, sécurité, maintenabilité, et continuité de service.",
-    deliverable: "Architecture + socle technique",
+    title: "Structure avant l’outil",
+    text:
+      "Nous accompagnons une transformation organisée, progressive et maîtrisée. La technologie n’intervient qu’une fois les fondations consolidées.",
+    bullets: [
+      "Analyse des processus existants",
+      "Cartographie des flux et des données",
+      "Définition claire des priorités stratégiques",
+      "Gouvernance projet adaptée",
+    ],
+    deliverable: "Cadrage + gouvernance + priorisation",
   },
   {
     n: "02",
-    title: "Processus métiers digitalisés",
-    text: "On transforme le “terrain” en flux clairs : règles, validations, traçabilité, performance.",
-    deliverable: "Workflows + automatisations",
+    title: "Exigence d’environnements régulés",
+    text:
+      "Notre expérience (finance, infrastructures critiques, institutions publiques) intègre les standards de sécurité, conformité, risques et continuité — adaptés aux contextes africains.",
+    bullets: [
+      "Impératifs de sécurité",
+      "Exigences de conformité",
+      "Gestion des risques",
+      "Continuité de service",
+    ],
+    deliverable: "Standards sécurité & conformité intégrés",
   },
   {
     n: "03",
-    title: "Plateformes à impact",
-    text: "Des produits utiles, adoptés et mesurables : expérience, pilotage, montée en charge.",
-    deliverable: "Produit + dashboard KPI",
+    title: "Investissement responsable",
+    text:
+      "Nous aidons les décideurs à prioriser les projets selon leur impact réel et leur soutenabilité. Chaque transformation doit produire un bénéfice tangible.",
+    bullets: [
+      "Impact économique",
+      "Performance administrative",
+      "Souveraineté numérique",
+      "Soutenabilité budgétaire",
+    ],
+    deliverable: "Portefeuille priorisé & trajectoire budgétaire",
   },
   {
     n: "04",
-    title: "Solutions adaptées aux contextes africains",
-    text: "Conçues pour les réalités locales : contraintes budgétaires, réseau, usages, souveraineté.",
-    deliverable: "Déploiement contextualisé",
+    title: "Autonomie locale & long terme",
+    text:
+      "Une digitalisation durable est une digitalisation maîtrisée localement. Nous agissons comme partenaire de structuration durable, pas comme prestataire ponctuel.",
+    bullets: [
+      "Transfert de compétences",
+      "Documentation structurée",
+      "Formation des équipes",
+      "Accompagnement progressif",
+    ],
+    deliverable: "Montée en autonomie + runbook & formation",
   },
 ];
 
@@ -52,12 +81,12 @@ export default function PageMethod() {
         <BookHeader page="PAGE 04" />
       </div>
 
-      {/* ✅ MOBILE: stack vertical (CSS only) */}
+      {/* ✅ MOBILE: stack vertical */}
       <div className="md:hidden">
         <MobilePositioning />
       </div>
 
-      {/* ✅ DESKTOP: panels horizontaux (CSS only) */}
+      {/* ✅ DESKTOP: panels horizontaux */}
       <div className="hidden md:block">
         <DesktopPositioning />
       </div>
@@ -94,19 +123,20 @@ function MobilePositioning() {
         >
           NOTRE POSITIONNEMENT
           <br />
-          <span className="italic text-black/60">pas “des sites web”</span>.
+          <span className="italic text-black/60">FACE À CES ENJEUX</span>.
         </h2>
 
-        {/* Accent underline */}
         <div className="mt-4 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
         <p className="mt-4 max-w-2xl text-[12px] leading-relaxed text-black/60">
-          Nous ne faisons pas “des sites web”. Nous structurons des solutions utiles,
-          robustes et adaptées — pensées pour la réalité du terrain.
+          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme
+          partenaire de structuration stratégique et de sécurisation des projets digitaux.
+          Nous ne proposons pas une digitalisation opportuniste : nous accompagnons une transformation
+          organisée, progressive et maîtrisée.
         </p>
       </motion.div>
 
-      {/* Step selector (tap) */}
+      {/* Step selector */}
       <div className="mt-8 grid grid-cols-2 gap-3">
         {steps.map((st, i) => (
           <button
@@ -136,7 +166,7 @@ function MobilePositioning() {
           <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
             DÉTAIL
           </div>
-          <span className="text-[10px] tracking-[0.26em] text-black/35">PILIER</span>
+          <span className="text-[10px] tracking-[0.26em] text-black/35">APPROCHE</span>
         </div>
 
         <AnimatePresence mode="popLayout">
@@ -151,7 +181,18 @@ function MobilePositioning() {
             <div className="text-[18px] font-semibold tracking-[-0.01em] text-black/85">
               (<span style={{ color: ACCENT }}>{s.n}</span>) {s.title}
             </div>
+
             <p className="mt-3 text-[12px] leading-relaxed text-black/65">{s.text}</p>
+
+            {s.bullets?.length ? (
+              <ul className="mt-4 space-y-2 pl-5 text-[12px] leading-relaxed text-black/65">
+                {s.bullets.map((b) => (
+                  <li key={b} className="list-disc">
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
 
             <div
               className="mt-5 h-px"
@@ -172,11 +213,11 @@ function MobilePositioning() {
         </AnimatePresence>
       </div>
 
-      {/* Principles */}
+      {/* Meta */}
       <div className="mt-8 grid gap-3">
-        <MetaRow k="Approche" v="structurer avant de construire" />
-        <MetaRow k="Exigence" v="robustesse & maintenabilité" />
-        <MetaRow k="Contexte" v="réalités africaines" />
+        <MetaRow k="Rôle" v="partenaire de structuration" />
+        <MetaRow k="Cadence" v="progressive & maîtrisée" />
+        <MetaRow k="Finalité" v="bénéfice tangible & souveraineté" />
       </div>
     </div>
   );
@@ -324,11 +365,13 @@ function Intro() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-[44px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[88px]"
+          className="text-[44px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[76px]"
         >
-          Nous ne faisons pas
+          NOTRE POSITIONNEMENT
           <br className="hidden md:block" />
-          <span className="italic text-[#CF2B5B]"> “des sites web”</span>.
+          <span className="italic" style={{ color: ACCENT }}>
+  face à ces enjeux
+</span>.
         </motion.h2>
 
         <motion.p
@@ -337,15 +380,17 @@ function Intro() {
           transition={{ delay: 0.12, duration: 0.65, ease: "easeOut" }}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-black/60"
         >
-          Nous structurons des systèmes et des plateformes : robustes, utiles, et conçus
-          pour les contextes africains. Le fond avant la vitrine.
+          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme
+          partenaire de structuration stratégique et de sécurisation des projets digitaux.
+          Nous ne proposons pas une digitalisation opportuniste. Nous accompagnons une transformation
+          organisée, progressive et maîtrisée.
         </motion.p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Tag>Robustesse</Tag>
-          <Tag>Process</Tag>
-          <Tag>Impact</Tag>
-          <Tag>Contexte</Tag>
+          <Tag>Structure</Tag>
+          <Tag>Sécurité</Tag>
+          <Tag>Investissement</Tag>
+          <Tag>Autonomie</Tag>
           <span className="text-[10px] tracking-[0.26em] text-black/40">
             — <span style={{ color: ACCENT }}>EDITION 2026</span>
           </span>
@@ -356,12 +401,13 @@ function Intro() {
         <Card>
           <div className="flex items-center justify-between">
             <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-              POSITIONNEMENT
+              PROMESSE
             </div>
-            <span className="text-[10px] tracking-[0.26em] text-black/35">Clair</span>
+            <span className="text-[10px] tracking-[0.26em] text-black/35">Public</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-black/65">
-            Structurer avant de développer : architecture, gouvernance, adoption.
+            Structurer, sécuriser, prioriser — pour produire une transformation publique durable
+            et maîtrisée localement.
           </p>
           <Divider />
           <div className="flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
@@ -390,17 +436,17 @@ function PositionRail({
       {/* LEFT */}
       <div className="md:col-span-4">
         <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-          CE QUE NOUS STRUCTURONS
+          NOTRE APPROCHE
         </div>
 
         <h3 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
-          Quatre piliers.
+          Une transformation
           <br />
-          <span className="italic text-black/60">Un même niveau d’exigence</span>.
+          <span className="italic text-black/60">organisée & maîtrisée</span>.
         </h3>
 
         <p className="mt-6 text-sm leading-relaxed text-black/55">
-          Choisissez un pilier : vous voyez l’intention et le résultat attendu.
+          Choisissez un axe : vous voyez ce que nous cadrons, et le résultat attendu.
         </p>
 
         {/* ACTIVE CARD */}
@@ -415,9 +461,9 @@ function PositionRail({
           <Card>
             <div className="flex items-center justify-between">
               <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                ACTIF
+                AXE ACTIF
               </div>
-              <div className="text-[10px] tracking-[0.26em] text-black/35">PILIER</div>
+              <div className="text-[10px] tracking-[0.26em] text-black/35">POSITIONNEMENT</div>
             </div>
 
             {steps[active] && (
@@ -426,6 +472,7 @@ function PositionRail({
                   (<span style={{ color: ACCENT }}>{steps[active].n}</span>){" "}
                   {steps[active].title}
                 </div>
+
                 <p className="mt-3 text-sm leading-relaxed text-black/60">
                   {steps[active].text}
                 </p>
@@ -517,14 +564,23 @@ function Details({ active }: { active: number }) {
           transition={{ delay: 0.08, duration: 0.55, ease: "easeOut" }}
           className="mt-7 max-w-xl text-sm leading-relaxed text-black/55"
         >
-          {s.text} L’objectif : produire du solide, du maintenable, et du mesurable —
-          sans surcouche inutile.
+          {s.text}
         </motion.p>
 
+        {s.bullets?.length ? (
+          <ul className="mt-6 space-y-2 pl-5 text-sm leading-relaxed text-black/55">
+            {s.bullets.map((b) => (
+              <li key={b} className="list-disc">
+                {b}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
         <div className="mt-10 flex flex-wrap gap-3">
-          <Tag>Architecture</Tag>
-          <Tag>Adoption</Tag>
           <Tag>Gouvernance</Tag>
+          <Tag>Sécurité</Tag>
+          <Tag>Trajectoire</Tag>
         </div>
       </div>
 
@@ -550,7 +606,7 @@ function Details({ active }: { active: number }) {
                 {s.deliverable}
               </div>
               <p className="mt-3 text-sm leading-relaxed text-black/60">
-                Un résultat exploitable. Un socle qui tient dans le temps.
+                Un socle structuré, un projet maîtrisé, et une appropriation progressive par les équipes.
               </p>
             </motion.div>
           </AnimatePresence>
@@ -558,9 +614,9 @@ function Details({ active }: { active: number }) {
           <Divider />
 
           <div className="grid gap-3">
-            <MetaRow k="Focus" v="robustesse" />
-            <MetaRow k="But" v="process & impact" />
-            <MetaRow k="Terrain" v="contexte africain" />
+            <MetaRow k="Cadre" v="progressif" />
+            <MetaRow k="Focus" v="sécurisation & structuration" />
+            <MetaRow k="But" v="bénéfice tangible" />
           </div>
         </Card>
       </div>
@@ -573,49 +629,45 @@ function Next() {
     <div className="grid h-full items-center gap-10 md:grid-cols-12">
       <div className="md:col-span-8">
         <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-          SUIVANT
+          ENGAGEMENT
         </div>
+
         <h3 className="mt-5 text-6xl font-semibold leading-[0.92] tracking-[-0.02em] md:text-7xl">
-          Pourquoi
+          ProlabAfrik :
           <br />
-          <span className="italic text-black/60">ProlabAfrik</span>.
+          <span className="italic" style={{ color: ACCENT }}>
+            un partenaire de long terme
+          </span>.
         </h3>
-        <p className="mt-7 max-w-xl text-sm leading-relaxed text-black/55">
-          Après le positionnement, on explique la différence : méthode, fiabilité,
-          et accompagnement — dans la durée.
+
+        <p className="mt-8 max-w-xl text-sm leading-relaxed text-black/55">
+          Nous intervenons non comme un prestataire ponctuel,
+          mais comme un acteur engagé dans la structuration durable
+          des systèmes publics.
         </p>
 
-        <div className="mt-10 flex items-center gap-3">
-          <a
-            href="#"
-            className="inline-flex items-center justify-between rounded-2xl border px-6 py-4 text-[10px] tracking-[0.26em] transition"
-            style={{
-              borderColor: `${ACCENT}40`,
-              backgroundColor: "rgba(255,255,255,0.70)",
-              color: "rgba(0,0,0,0.80)",
-            }}
-          >
-            Aller à (05) Pourquoi <span style={{ color: ACCENT }}>→</span>
-          </a>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Tag>Structuration durable</Tag>
+          <Tag>Vision long terme</Tag>
+          <Tag>Souveraineté</Tag>
         </div>
       </div>
 
       <div className="md:col-span-4">
         <Card>
           <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-            RÉSUMÉ
+            POSITION
           </div>
-          <div className="mt-5 space-y-3 text-sm text-black/65">
-            {steps.map((s) => (
-              <div key={s.n} className="flex items-center justify-between">
-                <span className="text-black/70">{s.title}</span>
-                <span style={{ color: `${ACCENT}99` }}>{s.n}</span>
-              </div>
-            ))}
+
+          <div className="mt-5 text-sm leading-relaxed text-black/65">
+            Un partenaire stratégique engagé dans la performance,
+            la sécurisation et l’autonomie progressive des systèmes publics.
           </div>
+
           <Divider />
+
           <div className="flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-            <span>NEXT</span>
+            <span>LONG TERME</span>
             <span style={{ color: ACCENT }}>→</span>
           </div>
         </Card>
@@ -678,7 +730,7 @@ function Node({
             animate={{ opacity: active ? 1 : 0.5 }}
             className="text-[10px] tracking-[0.26em] text-black/45"
           >
-            PILIER
+            AXE
           </motion.div>
         </div>
 

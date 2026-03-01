@@ -14,58 +14,65 @@ import { BookHeader, BookFooter } from "@/components/book/BookChrome";
 /** ✅ Accent (rose ProlabAfrik) */
 const ACCENT = "#E94E77";
 
-/** ✅ Piliers du positionnement (PAGE 04) */
+/**
+ * ✅ CONTENU COMPLET (PAGE 04)
+ * NOTRE POSITIONNEMENT FACE À CES ENJEUX
+ */
 const steps = [
   {
     n: "01",
-    title: "Structure avant l’outil",
-    text:
-      "Nous accompagnons une transformation organisée, progressive et maîtrisée. La technologie n’intervient qu’une fois les fondations consolidées.",
+    title: "Une approche centrée sur la structure avant l’outil",
+    lead:
+      "Chaque projet débute par une structuration rigoureuse. La technologie n’intervient qu’une fois les fondations consolidées.",
     bullets: [
-      "Analyse des processus existants",
-      "Cartographie des flux et des données",
-      "Définition claire des priorités stratégiques",
-      "Gouvernance projet adaptée",
+      "Une analyse des processus existants",
+      "Une cartographie des flux et des données",
+      "Une définition claire des priorités stratégiques",
+      "La mise en place d’une gouvernance projet adaptée",
     ],
+    closing: "La technologie n’intervient qu’une fois les fondations consolidées.",
     deliverable: "Cadrage + gouvernance + priorisation",
   },
   {
     n: "02",
-    title: "Exigence d’environnements régulés",
-    text:
-      "Notre expérience (finance, infrastructures critiques, institutions publiques) intègre les standards de sécurité, conformité, risques et continuité — adaptés aux contextes africains.",
+    title: "Une expertise issue d’environnements régulés",
+    lead:
+      "Notre expérience dans des secteurs à forte exigence (finance, infrastructures critiques, institutions publiques) nous permet d’intégrer des standards élevés dès la conception.",
     bullets: [
-      "Impératifs de sécurité",
-      "Exigences de conformité",
-      "Gestion des risques",
-      "Continuité de service",
+      "Les impératifs de sécurité",
+      "Les exigences de conformité",
+      "La gestion des risques",
+      "La continuité de service",
     ],
+    closing: "Ces standards sont transposés et adaptés aux contextes africains.",
     deliverable: "Standards sécurité & conformité intégrés",
   },
   {
     n: "03",
-    title: "Investissement responsable",
-    text:
-      "Nous aidons les décideurs à prioriser les projets selon leur impact réel et leur soutenabilité. Chaque transformation doit produire un bénéfice tangible.",
+    title: "Une logique d’investissement responsable",
+    lead:
+      "Nous accompagnons les décideurs dans la priorisation des projets en recherchant l’impact réel et la soutenabilité budgétaire.",
     bullets: [
-      "Impact économique",
-      "Performance administrative",
-      "Souveraineté numérique",
-      "Soutenabilité budgétaire",
+      "Leur impact économique",
+      "Leur effet sur la performance administrative",
+      "Leur capacité à renforcer la souveraineté numérique",
+      "Leur soutenabilité budgétaire",
     ],
+    closing: "Chaque transformation doit produire un bénéfice tangible.",
     deliverable: "Portefeuille priorisé & trajectoire budgétaire",
   },
   {
     n: "04",
-    title: "Autonomie locale & long terme",
-    text:
-      "Une digitalisation durable est une digitalisation maîtrisée localement. Nous agissons comme partenaire de structuration durable, pas comme prestataire ponctuel.",
+    title: "Un engagement vers l’autonomie locale",
+    lead:
+      "La réussite d’un projet public repose sur la capacité des équipes à s’approprier les outils et les méthodes. Nous intégrons systématiquement la montée en autonomie.",
     bullets: [
       "Transfert de compétences",
       "Documentation structurée",
       "Formation des équipes",
       "Accompagnement progressif",
     ],
+    closing: "Une digitalisation durable est une digitalisation maîtrisée localement.",
     deliverable: "Montée en autonomie + runbook & formation",
   },
 ];
@@ -123,16 +130,21 @@ function MobilePositioning() {
         >
           NOTRE POSITIONNEMENT
           <br />
-          <span className="italic text-black/60">FACE À CES ENJEUX</span>.
+          <span className="italic" style={{ color: ACCENT }}>
+            FACE À CES ENJEUX
+          </span>
+          .
         </h2>
 
         <div className="mt-4 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
         <p className="mt-4 max-w-2xl text-[12px] leading-relaxed text-black/60">
-          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme
-          partenaire de structuration stratégique et de sécurisation des projets digitaux.
-          Nous ne proposons pas une digitalisation opportuniste : nous accompagnons une transformation
-          organisée, progressive et maîtrisée.
+          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme partenaire
+          de structuration stratégique et de sécurisation des projets digitaux.
+          <br />
+          Nous ne proposons pas une digitalisation opportuniste.
+          <br />
+          Nous accompagnons une transformation organisée, progressive et maîtrisée.
         </p>
       </motion.div>
 
@@ -153,9 +165,7 @@ function MobilePositioning() {
             <div className="text-[10px] tracking-[0.26em] text-black/50">
               (<span style={{ color: ACCENT }}>{st.n}</span>)
             </div>
-            <div className="mt-2 text-[13px] font-semibold text-black/80">
-              {st.title}
-            </div>
+            <div className="mt-2 text-[13px] font-semibold text-black/80">{st.title}</div>
           </button>
         ))}
       </div>
@@ -166,7 +176,7 @@ function MobilePositioning() {
           <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
             DÉTAIL
           </div>
-          <span className="text-[10px] tracking-[0.26em] text-black/35">APPROCHE</span>
+          <span className="text-[10px] tracking-[0.26em] text-black/35">AXE</span>
         </div>
 
         <AnimatePresence mode="popLayout">
@@ -178,21 +188,21 @@ function MobilePositioning() {
             transition={{ duration: 0.45, ease: "easeOut" }}
             className="mt-5"
           >
-            <div className="text-[18px] font-semibold tracking-[-0.01em] text-black/85">
+            <div className="text-[16px] font-semibold tracking-[-0.01em] text-black/85">
               (<span style={{ color: ACCENT }}>{s.n}</span>) {s.title}
             </div>
 
-            <p className="mt-3 text-[12px] leading-relaxed text-black/65">{s.text}</p>
+            <p className="mt-3 text-[12px] leading-relaxed text-black/65">{s.lead}</p>
 
-            {s.bullets?.length ? (
-              <ul className="mt-4 space-y-2 pl-5 text-[12px] leading-relaxed text-black/65">
-                {s.bullets.map((b) => (
-                  <li key={b} className="list-disc">
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            <ul className="mt-4 space-y-2 pl-5 text-[12px] leading-relaxed text-black/65">
+              {s.bullets.map((b) => (
+                <li key={b} className="list-disc">
+                  {b}
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-4 text-[12px] leading-relaxed text-black/65">{s.closing}</p>
 
             <div
               className="mt-5 h-px"
@@ -205,9 +215,7 @@ function MobilePositioning() {
               <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
                 RÉSULTAT
               </div>
-              <div className="mt-2 text-[13px] font-semibold text-black/80">
-                {s.deliverable}
-              </div>
+              <div className="mt-2 text-[13px] font-semibold text-black/80">{s.deliverable}</div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -215,7 +223,7 @@ function MobilePositioning() {
 
       {/* Meta */}
       <div className="mt-8 grid gap-3">
-        <MetaRow k="Rôle" v="partenaire de structuration" />
+        <MetaRow k="Rôle" v="partenaire de structuration stratégique" />
         <MetaRow k="Cadence" v="progressive & maîtrisée" />
         <MetaRow k="Finalité" v="bénéfice tangible & souveraineté" />
       </div>
@@ -228,10 +236,6 @@ function MobilePositioning() {
 function DesktopPositioning() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
-  /** ✅ Deux états séparés :
-   * - panelIndex : page/panel horizontal
-   * - stepIndex : pilier sélectionné
-   */
   const [panelIndex, setPanelIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
 
@@ -245,7 +249,7 @@ function DesktopPositioning() {
     () => [
       <Intro key="intro" />,
       <PositionRail key="rail" active={stepIndex} onChange={setStepIndex} progress={pSpring} />,
-      <Details key="details" active={stepIndex} />,
+      <Details key="details" active={stepIndex} onChange={setStepIndex} />,
       <Next key="next" />,
     ],
     [stepIndex, pSpring]
@@ -370,8 +374,9 @@ function Intro() {
           NOTRE POSITIONNEMENT
           <br className="hidden md:block" />
           <span className="italic" style={{ color: ACCENT }}>
-  face à ces enjeux
-</span>.
+            face à ces enjeux
+          </span>
+          .
         </motion.h2>
 
         <motion.p
@@ -380,10 +385,10 @@ function Intro() {
           transition={{ delay: 0.12, duration: 0.65, ease: "easeOut" }}
           className="mt-8 max-w-2xl text-lg leading-relaxed text-black/60"
         >
-          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme
-          partenaire de structuration stratégique et de sécurisation des projets digitaux.
-          Nous ne proposons pas une digitalisation opportuniste. Nous accompagnons une transformation
-          organisée, progressive et maîtrisée.
+          Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme partenaire
+          de structuration stratégique et de sécurisation des projets digitaux. Nous ne proposons pas une
+          digitalisation opportuniste. Nous accompagnons une transformation organisée, progressive et
+          maîtrisée.
         </motion.p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -401,13 +406,13 @@ function Intro() {
         <Card>
           <div className="flex items-center justify-between">
             <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-              PROMESSE
+              SYNTHÈSE
             </div>
             <span className="text-[10px] tracking-[0.26em] text-black/35">Public</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-black/65">
-            Structurer, sécuriser, prioriser — pour produire une transformation publique durable
-            et maîtrisée localement.
+            ProlabAfrik est partenaire de structuration stratégique et de sécurisation : une transformation
+            progressive, organisée et maîtrisée.
           </p>
           <Divider />
           <div className="flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
@@ -436,17 +441,17 @@ function PositionRail({
       {/* LEFT */}
       <div className="md:col-span-4">
         <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-          NOTRE APPROCHE
+          AXES
         </div>
 
         <h3 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
-          Une transformation
+          Quatre engagements.
           <br />
-          <span className="italic text-black/60">organisée & maîtrisée</span>.
+          <span className="italic text-black/60">Une méthode</span>.
         </h3>
 
         <p className="mt-6 text-sm leading-relaxed text-black/55">
-          Choisissez un axe : vous voyez ce que nous cadrons, et le résultat attendu.
+          Choisissez un axe : vous voyez l’intention, la liste d’actions, et le résultat attendu.
         </p>
 
         {/* ACTIVE CARD */}
@@ -469,13 +474,10 @@ function PositionRail({
             {steps[active] && (
               <>
                 <div className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-black/80">
-                  (<span style={{ color: ACCENT }}>{steps[active].n}</span>){" "}
-                  {steps[active].title}
+                  (<span style={{ color: ACCENT }}>{steps[active].n}</span>) {steps[active].title}
                 </div>
 
-                <p className="mt-3 text-sm leading-relaxed text-black/60">
-                  {steps[active].text}
-                </p>
+                <p className="mt-3 text-sm leading-relaxed text-black/60">{steps[active].lead}</p>
 
                 {/* Micro navigation */}
                 <div className="mt-6 flex items-center gap-3">
@@ -520,7 +522,7 @@ function PositionRail({
                 aria-current={i === active}
                 className="relative text-left focus:outline-none"
               >
-                <Node step={s} active={i === active} side={i % 2 === 0 ? "top" : "bottom"} />
+                <Node step={s as any} active={i === active} side={i % 2 === 0 ? "top" : "bottom"} />
               </button>
             ))}
           </div>
@@ -535,14 +537,21 @@ function PositionRail({
   );
 }
 
-function Details({ active }: { active: number }) {
-  const s = steps[active];
+/* ✅ DETAILS — avec accès direct aux autres axes */
+function Details({
+  active,
+  onChange,
+}: {
+  active: number;
+  onChange: (i: number) => void;
+}) {
+  const s = steps[active] as any;
 
   return (
     <div className="grid h-full items-center gap-10 md:grid-cols-12">
       <div className="md:col-span-7">
         <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-          DÉTAIL
+          NOTRE POSITIONNEMENT FACE À CES ENJEUX
         </div>
 
         <motion.h3
@@ -550,7 +559,7 @@ function Details({ active }: { active: number }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
-          className="mt-5 text-6xl font-semibold leading-[0.92] tracking-[-0.02em] md:text-7xl"
+          className="mt-5 text-5xl font-semibold leading-[0.95] tracking-[-0.02em] md:text-6xl"
         >
           <span style={{ color: ACCENT }}>{s.n}</span>.
           <br />
@@ -558,29 +567,73 @@ function Details({ active }: { active: number }) {
         </motion.h3>
 
         <motion.p
-          key={s.title + "p"}
+          key={s.title + "_lead"}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, duration: 0.55, ease: "easeOut" }}
           className="mt-7 max-w-xl text-sm leading-relaxed text-black/55"
         >
-          {s.text}
+          {s.lead}
         </motion.p>
 
-        {s.bullets?.length ? (
-          <ul className="mt-6 space-y-2 pl-5 text-sm leading-relaxed text-black/55">
-            {s.bullets.map((b) => (
-              <li key={b} className="list-disc">
-                {b}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {/* ✅ Accès direct aux axes */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {steps.map((ax, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={ax.n}
+                type="button"
+                onClick={() => onChange(i)}
+                className="rounded-full border px-3 py-1 text-[10px] tracking-[0.22em] transition"
+                style={{
+                  borderColor: isActive ? `${ACCENT}55` : "rgba(0,0,0,0.12)",
+                  backgroundColor: isActive ? `${ACCENT}0D` : "rgba(255,255,255,0.60)",
+                  color: isActive ? ACCENT : "rgba(0,0,0,0.70)",
+                  boxShadow: isActive ? `0 0 0 6px ${ACCENT}12` : "none",
+                }}
+                aria-current={isActive}
+              >
+                {ax.n} · {ax.title}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ✅ Prev / Next */}
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => onChange(Math.max(0, active - 1))}
+            disabled={active === 0}
+            className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-[10px] tracking-[0.26em] text-black/60 disabled:opacity-30"
+          >
+            ← PREV
+          </button>
+          <button
+            type="button"
+            onClick={() => onChange(Math.min(steps.length - 1, active + 1))}
+            disabled={active === steps.length - 1}
+            className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-[10px] tracking-[0.26em] text-black/60 disabled:opacity-30"
+          >
+            NEXT <span style={{ color: ACCENT }}>→</span>
+          </button>
+        </div>
+
+        <ul className="mt-6 space-y-2 pl-5 text-sm leading-relaxed text-black/55">
+          {s.bullets.map((b: string) => (
+            <li key={b} className="list-disc">
+              {b}
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-6 max-w-xl text-sm leading-relaxed text-black/55">{s.closing}</p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Tag>Gouvernance</Tag>
-          <Tag>Sécurité</Tag>
-          <Tag>Trajectoire</Tag>
+          <Tag>Structuration</Tag>
+          <Tag>Sécurisation</Tag>
+          <Tag>Maîtrise</Tag>
         </div>
       </div>
 
@@ -588,7 +641,27 @@ function Details({ active }: { active: number }) {
         <Card>
           <div className="flex items-center justify-between">
             <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
-              RÉSULTAT
+              CONTEXTE
+            </div>
+            <span className="text-[10px] tracking-[0.26em] text-black/35">Public</span>
+          </div>
+
+          <div className="mt-5 space-y-4 text-sm leading-relaxed text-black/65">
+            <p>
+              Face aux défis structurels de la transformation publique, ProlabAfrik intervient comme partenaire
+              de structuration stratégique et de sécurisation des projets digitaux.
+            </p>
+            <p>
+              Nous ne proposons pas une digitalisation opportuniste. Nous accompagnons une transformation organisée,
+              progressive et maîtrisée.
+            </p>
+          </div>
+
+          <Divider />
+
+          <div className="flex items-center justify-between">
+            <div className="text-[10px] tracking-[0.26em]" style={{ color: ACCENT }}>
+              RÉSULTAT ATTENDU
             </div>
             <span className="text-[10px] tracking-[0.26em] text-black/35">Output</span>
           </div>
@@ -606,7 +679,7 @@ function Details({ active }: { active: number }) {
                 {s.deliverable}
               </div>
               <p className="mt-3 text-sm leading-relaxed text-black/60">
-                Un socle structuré, un projet maîtrisé, et une appropriation progressive par les équipes.
+                Une trajectoire claire, un cadre maîtrisé, et une transformation durable.
               </p>
             </motion.div>
           </AnimatePresence>
@@ -614,9 +687,9 @@ function Details({ active }: { active: number }) {
           <Divider />
 
           <div className="grid gap-3">
-            <MetaRow k="Cadre" v="progressif" />
-            <MetaRow k="Focus" v="sécurisation & structuration" />
-            <MetaRow k="But" v="bénéfice tangible" />
+            <MetaRow k="Cadence" v="progressive" />
+            <MetaRow k="Exigence" v="sécurité & conformité" />
+            <MetaRow k="Finalité" v="bénéfice tangible & autonomie" />
           </div>
         </Card>
       </div>
@@ -637,12 +710,12 @@ function Next() {
           <br />
           <span className="italic" style={{ color: ACCENT }}>
             un partenaire de long terme
-          </span>.
+          </span>
+          .
         </h3>
 
         <p className="mt-8 max-w-xl text-sm leading-relaxed text-black/55">
-          Nous intervenons non comme un prestataire ponctuel,
-          mais comme un acteur engagé dans la structuration durable
+          Nous intervenons non comme un prestataire ponctuel, mais comme un acteur engagé dans la structuration durable
           des systèmes publics.
         </p>
 
@@ -660,8 +733,7 @@ function Next() {
           </div>
 
           <div className="mt-5 text-sm leading-relaxed text-black/65">
-            Un partenaire stratégique engagé dans la performance,
-            la sécurisation et l’autonomie progressive des systèmes publics.
+            Un partenaire stratégique engagé dans la performance, la sécurisation et l’autonomie progressive des systèmes publics.
           </div>
 
           <Divider />
@@ -683,7 +755,7 @@ function Node({
   active,
   side,
 }: {
-  step: (typeof steps)[number];
+  step: any;
   active: boolean;
   side: "top" | "bottom";
 }) {
@@ -726,21 +798,14 @@ function Node({
           <div className="text-[10px] tracking-[0.26em] text-black/50">
             (<span style={{ color: ACCENT }}>{step.n}</span>)
           </div>
-          <motion.div
-            animate={{ opacity: active ? 1 : 0.5 }}
-            className="text-[10px] tracking-[0.26em] text-black/45"
-          >
+          <motion.div animate={{ opacity: active ? 1 : 0.5 }} className="text-[10px] tracking-[0.26em] text-black/45">
             AXE
           </motion.div>
         </div>
 
-        <div className="mt-3 text-sm font-semibold tracking-[-0.01em] text-black/80">
-          {step.title}
-        </div>
+        <div className="mt-3 text-sm font-semibold tracking-[-0.01em] text-black/80">{step.title}</div>
 
-        <div className="mt-3 text-[12px] leading-relaxed text-black/55 line-clamp-3">
-          {step.text}
-        </div>
+        <div className="mt-3 text-[12px] leading-relaxed text-black/55 line-clamp-3">{step.lead}</div>
 
         <motion.div
           initial={false}
@@ -794,7 +859,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function PaperNoise() {
   return (
-    <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply">
+    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.06] mix-blend-multiply">
       <div
         className="h-full w-full"
         style={{
@@ -808,7 +873,7 @@ function PaperNoise() {
 
 function PaperVignette() {
   return (
-    <div className="pointer-events-none absolute inset-0">
+    <div className="pointer-events-none absolute inset-0 z-0">
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_15%,rgba(0,0,0,0.06),rgba(0,0,0,0)_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_100%,rgba(0,0,0,0.08),rgba(0,0,0,0)_55%)]" />
     </div>
@@ -818,8 +883,8 @@ function PaperVignette() {
 function PaperCorners() {
   return (
     <>
-      <div className="pointer-events-none absolute left-6 top-6 text-black/20">*</div>
-      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">—</div>
+      <div className="pointer-events-none absolute left-6 top-6 z-20 text-black/20">*</div>
+      <div className="pointer-events-none absolute right-6 bottom-6 z-20 text-black/20">—</div>
     </>
   );
 }

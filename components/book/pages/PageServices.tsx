@@ -65,7 +65,7 @@ export default function PageServices() {
             className="font-semibold tracking-[-0.01em]"
             style={{ fontSize: "clamp(26px, 3.2vw, 46px)", lineHeight: 1.05 }}
           >
-            LES DÉFIS DE LA TRANSFORMATION PUBLIQUE EN AFRIQUE
+            LES DÉFIS DE LA TRANSFORMATION PUBLIQUE
           </h1>
 
           {/* Accent underline */}

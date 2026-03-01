@@ -104,12 +104,7 @@ export default function PageAbout() {
                         <li className="list-disc">Risque de dépendance technologique externe</li>
                       </ul>
 
-                      <p className="mt-3">
-                        Dans ce contexte, la digitalisation ne peut être improvisée.
-                        <br />
-                        Elle doit être progressive, structurée et priorisée selon l’impact réel sur la
-                        performance, la gouvernance et la sécurité des flux.
-                      </p>
+                      
                     </Note>
 
                     <div>
@@ -215,13 +210,8 @@ export default function PageAbout() {
                     <div className="mt-7 h-px bg-black/10 md:mt-8" />
 
                     <div className="mt-6">
-                      <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
-                        CONVICTION
-                      </div>
-                      <p className="mt-3 text-[12px] leading-relaxed text-black/70 md:text-[13px]">
-                        Construire des solutions utiles, robustes et adaptées — en tenant compte des contraintes
-                        terrain et des exigences de performance, de gouvernance et de souveraineté.
-                      </p>
+                     
+                     
 
                       <div className="mt-6 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
                         <span>PROLABAFRIK</span>

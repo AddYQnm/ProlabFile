@@ -21,7 +21,7 @@ export default function PageCover() {
       <PaperNoise />
       <PaperVignette />
 
-      <div className="mx-auto flex h-full max-w-7xl flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-8">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-8">
         {/* HEADER */}
         <header className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-6">
           <div className="min-w-0">
@@ -35,14 +35,8 @@ export default function PageCover() {
               <span className="text-[10px] tracking-[0.30em] uppercase text-black/55 sm:text-[10px]">
                 PAGE 01 — COUVERTURE
               </span>
-              <span
-                className="h-1 w-1 rounded-full"
-                style={{ backgroundColor: `${ACCENT}CC` }}
-              />
-              <span
-                className="text-[10px] tracking-[0.30em] uppercase"
-                style={{ color: ACCENT }}
-              >
+              <span className="h-1 w-1 rounded-full" style={{ backgroundColor: `${ACCENT}CC` }} />
+              <span className="text-[10px] tracking-[0.30em] uppercase" style={{ color: ACCENT }}>
                 2026
               </span>
             </motion.div>
@@ -69,13 +63,24 @@ export default function PageCover() {
                 style={{ transformOrigin: "0% 50%", backgroundColor: ACCENT }}
               />
 
-              <p className="mt-5 max-w-xl text-[13px] leading-relaxed text-black/65 sm:mt-6 sm:text-[14px]">
-                Holding de transformation digitale{" "}
-                <span className="text-black/35">·</span>{" "}
-                <span className="font-medium text-black/75">
-                  Europe – Afrique
-                </span>
-              </p>
+             {/* ✅ Sous-titre (plus esthétique) */}
+<div className="mt-5 max-w-2xl">
+  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] tracking-[0.28em] text-black/55 sm:text-[12px]">
+    <span className="uppercase">Holding de transformation digitale</span>
+    <span className="text-black/25">—</span>
+    <span className="uppercase" style={{ color: ACCENT }}>
+      Europe – Afrique
+    </span>
+  </div>
+
+  <div className="mt-4 h-px w-16 bg-black/10" />
+
+  <p className="mt-4 text-[13px] leading-relaxed text-black/60 sm:text-[14px]">
+    <span className="italic">
+      Structurer aujourd’hui les systèmes qui porteront l’Afrique de demain.
+    </span>
+  </p>
+</div>
             </motion.div>
 
             {/* Pills tagline */}
@@ -84,44 +89,30 @@ export default function PageCover() {
               animate="show"
               variants={{
                 hidden: {},
-                show: {
-                  transition: { staggerChildren: 0.08, delayChildren: 0.35 },
-                },
+                show: { transition: { staggerChildren: 0.08, delayChildren: 0.35 } },
               }}
               className="mt-7 flex flex-wrap items-center gap-2 sm:mt-10 sm:gap-3"
             >
-              {["ENERGIE", "TRANSPORT", " SECURITE", "INDUSTRIE"].map(
-                (word, i) => (
-                  <motion.span
-                    key={word}
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      show: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { duration: 0.6, ease: EASE },
-                      },
-                    }}
-                    className="inline-flex items-center rounded-full border bg-white/70 px-4 py-2 text-[10px] tracking-[0.18em] text-black/70 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:px-5 sm:text-[11px] sm:tracking-[0.26em]"
-                    style={{
-                      borderColor:
-                        i % 2 === 1
-                          ? `${ACCENT}40`
-                          : "rgba(0,0,0,0.10)",
-                    }}
-                  >
-                    {word}
-                    <span
-                      className="ml-2 h-1 w-1 rounded-full sm:ml-3"
-                      style={{ backgroundColor: `${ACCENT}CC` }}
-                    />
-                  </motion.span>
-                )
-              )}
+              {["ENERGIE", "TRANSPORT", "SECURITE", "INDUSTRIE"].map((word, i) => (
+                <motion.span
+                  key={word}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+                  }}
+                  className="inline-flex items-center rounded-full border bg-white/70 px-4 py-2 text-[10px] tracking-[0.18em] text-black/70 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] sm:px-5 sm:text-[11px] sm:tracking-[0.26em]"
+                  style={{
+                    borderColor: i % 2 === 1 ? `${ACCENT}40` : "rgba(0,0,0,0.10)",
+                  }}
+                >
+                  {word}
+                  <span className="ml-2 h-1 w-1 rounded-full sm:ml-3" style={{ backgroundColor: `${ACCENT}CC` }} />
+                </motion.span>
+              ))}
             </motion.div>
           </div>
 
-          {/* LOGO (mobile: en dessous / à gauche; desktop: à droite) */}
+          {/* LOGO */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,37 +140,26 @@ export default function PageCover() {
         >
           <div className="relative h-[46vh] w-full sm:h-[48vh] md:h-[52vh]">
             <motion.div style={{ y: yImg }} className="absolute inset-0">
-              <Image
-                src="/afrik.png"
-                alt="Couverture ProlabAfrik"
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src="/afrik.png" alt="Couverture ProlabAfrik" fill className="object-cover" priority />
             </motion.div>
 
-            {/* subtle overlay */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0" />
 
-            {/* stamp (mobile: plus petit) */}
             <div className="absolute left-3 top-3 rounded-full border border-white/25 bg-black/35 px-3 py-2 backdrop-blur-sm sm:left-4 sm:top-4 sm:px-4">
               <div className="text-[9px] tracking-[0.28em] text-white/85 sm:text-[10px] sm:tracking-[0.35em]">
-                DOSSIER · B2B <span style={{ color: ACCENT }}>•</span> EDITION
-                2026
+                DOSSIER · B2B <span style={{ color: ACCENT }}>•</span> EDITION 2026
               </div>
             </div>
           </div>
 
-          {/* Caption (mobile: stack) */}
+          {/* Caption */}
           <div className="flex flex-col gap-2 bg-white/85 px-4 py-3 backdrop-blur-[2px] md:flex-row md:items-center md:justify-between">
             <div className="text-[10px] tracking-[0.28em] uppercase text-black/50 sm:tracking-[0.35em]">
               PROLABAFRIK · EUROPE – AFRIQUE
             </div>
 
             <div className="text-[12px] leading-[1.6] text-black/60">
-              <span className="break-all sm:break-normal">
-                contact@prolabafrik.com
-              </span>
+              <span className="break-all sm:break-normal">contact@prolabafrik.com</span>
               <span className="text-black/35"> · </span>
               +33 6 81 68 09 13
               <span className="text-black/35"> · </span>
@@ -198,7 +178,7 @@ export default function PageCover() {
 
 function PaperNoise() {
   return (
-    <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply">
+    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.06] mix-blend-multiply">
       <div
         className="h-full w-full"
         style={{
@@ -212,7 +192,7 @@ function PaperNoise() {
 
 function PaperVignette() {
   return (
-    <div className="pointer-events-none absolute inset-0">
+    <div className="pointer-events-none absolute inset-0 z-0">
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_10%,rgba(0,0,0,0.05),rgba(0,0,0,0)_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_100%,rgba(0,0,0,0.07),rgba(0,0,0,0)_55%)]" />
     </div>
@@ -222,12 +202,8 @@ function PaperVignette() {
 function PaperCorners() {
   return (
     <>
-      <div className="pointer-events-none absolute left-6 top-6 text-black/20">
-        *
-      </div>
-      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">
-        —
-      </div>
+      <div className="pointer-events-none absolute left-6 top-6 z-20 text-black/20">*</div>
+      <div className="pointer-events-none absolute right-6 bottom-6 z-20 text-black/20">—</div>
     </>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useMemo, useState } from "react";
@@ -5,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BookFooter, BookHeader } from "@/components/book/BookChrome";
 
 const ACCENT = "#CF2B5B";
+
+// ✅ Chemin public vers ton PDF
+const PDF_URL = "/prolabafrik-dossier-2026.pdf";
 
 export default function PageDownload() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -14,18 +18,47 @@ export default function PageDownload() {
     () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
     [form.email]
   );
+
   const canSubmit =
     form.name.trim() && form.company.trim() && emailOk && status !== "loading";
+
+  function downloadPdf() {
+    // ✅ Téléchargement forcé (plus fiable qu’un simple window.open)
+    const a = document.createElement("a");
+    a.href = PDF_URL;
+    a.download = "PROLABAFRIK_DOSSIER_2026.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
+
     try {
       setStatus("loading");
-      // TODO: brancher ici ton endpoint (ex: /api/dossier) pour envoyer le PDF / lien
-      await new Promise((r) => setTimeout(r, 900));
+
+      // ✅ Enregistre le lead côté serveur
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          company: form.company.trim(),
+          email: form.email.trim(),
+          source: "PAGE_08_DOWNLOAD",
+        }),
+      });
+
+      if (!res.ok) throw new Error("Lead API failed");
+
       setStatus("success");
-    } catch {
+
+      // ✅ Lance le téléchargement
+      downloadPdf();
+    } catch (err) {
+      console.error(err);
       setStatus("error");
     }
   }
@@ -39,7 +72,7 @@ export default function PageDownload() {
         <BookHeader page="PAGE 08" />
       </div>
 
-      {/* rail top (plus sobre + accent) */}
+      {/* rail top */}
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 md:px-12">
         <div className="mt-6 flex items-center justify-between gap-6">
           <div className="hidden md:flex items-center gap-3 text-[10px] tracking-[0.26em] text-black/50">
@@ -96,7 +129,7 @@ export default function PageDownload() {
               className="mt-10 grid gap-3 md:grid-cols-2"
             >
               <MiniCard label="Contenu" value="Présentation, offres, méthode" />
-              <MiniCard label="Format" value="PDF — 4 à 8 pages" />
+              <MiniCard label="Format" value="PDF — A4 paysage" />
               <MiniCard label="Usage" value="Email, meeting, pitch" />
               <MiniCard label="Délai" value="Instantané" />
             </motion.div>
@@ -110,7 +143,7 @@ export default function PageDownload() {
               />
               <div className="mt-6 text-[11px] tracking-[0.22em] text-black/55">
                 CONTACT DIRECT —{" "}
-                <span className="text-black/75">contact.tiegoquenum@gmail.com</span>
+                <span className="text-black/75">contact@prolabafrik.com</span>
               </div>
             </div>
           </div>
@@ -123,7 +156,7 @@ export default function PageDownload() {
               transition={{ delay: 0.12, duration: 0.7, ease: "easeOut" }}
               className="relative overflow-hidden rounded-3xl border border-black/10 bg-white/70 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:p-7"
             >
-              {/* glow accent très léger */}
+              {/* glow */}
               <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
                 <div
                   className="absolute -left-24 -top-24 h-64 w-64 rounded-full blur-3xl"
@@ -137,9 +170,7 @@ export default function PageDownload() {
                   <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                     TÉLÉCHARGEMENT
                   </div>
-                  <span className="text-[10px] tracking-[0.26em] text-black/35">
-                    Formulaire
-                  </span>
+                  <span className="text-[10px] tracking-[0.26em] text-black/35">Formulaire</span>
                 </div>
 
                 <form onSubmit={onSubmit} className="mt-6 grid gap-3">
@@ -171,9 +202,7 @@ export default function PageDownload() {
                     disabled={!canSubmit}
                     className={[
                       "mt-2 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-[11px] tracking-[0.26em] transition",
-                      canSubmit
-                        ? "text-white"
-                        : "cursor-not-allowed text-black/55",
+                      canSubmit ? "text-white" : "cursor-not-allowed text-black/55",
                     ].join(" ")}
                     style={{
                       borderColor: canSubmit ? `${ACCENT}55` : "rgba(0,0,0,0.10)",
@@ -185,7 +214,7 @@ export default function PageDownload() {
                       {status === "loading"
                         ? "ENVOI..."
                         : status === "success"
-                        ? "ENVOYÉ"
+                        ? "TÉLÉCHARGEMENT LANCÉ"
                         : "RECEVOIR LE DOSSIER"}
                     </span>
                     <span className={canSubmit ? "text-white/90" : "text-black/40"}>
@@ -205,7 +234,16 @@ export default function PageDownload() {
                           backgroundColor: `${ACCENT}0D`,
                         }}
                       >
-                        Dossier envoyé. Vérifiez votre boîte mail (et les spams).
+                        ✅ Téléchargement lancé. Si rien ne se passe,{" "}
+                        <button
+                          type="button"
+                          onClick={downloadPdf}
+                          className="underline underline-offset-4"
+                          style={{ color: ACCENT }}
+                        >
+                          cliquez ici
+                        </button>
+                        .
                       </motion.div>
                     )}
                     {status === "error" && (
@@ -232,21 +270,20 @@ export default function PageDownload() {
                     <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                       CONTACT
                     </div>
-                    <span className="text-[10px] tracking-[0.26em] text-black/35">
-                      Direct
-                    </span>
+                    <span className="text-[10px] tracking-[0.26em] text-black/35">Direct</span>
                   </div>
 
                   <div className="mt-4 space-y-2 text-[13px] text-black/75">
                     <div className="flex flex-wrap gap-x-2">
                       <span className="font-semibold">Email :</span>
-                      <span className="break-all">contact.tiegoquenum@gmail.com</span>
+                      <span className="break-all">contact@prolabafrik.com</span>
                     </div>
                     <div className="flex flex-wrap gap-x-2">
                       <span className="font-semibold">Téléphone :</span>
-                      <span>+33 6 81 68 09 13 <br />
-                       +229 52 62 29 10
-                    </span>
+                      <span>
+                        +33 6 81 68 09 13 <br />
+                        +229 52 62 29 10
+                      </span>
                     </div>
                   </div>
 
@@ -328,13 +365,8 @@ function Input({
           borderColor: border,
           boxShadow: `0 0 0 6px ${ring}`,
         }}
-        onFocus={(e) => {
-          // let browser handle focus; we keep the ring
-          props.onFocus?.(e);
-        }}
       />
 
-      {/* tiny status dot (subtil) */}
       {state !== "idle" && (
         <span
           className="pointer-events-none absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
@@ -374,9 +406,7 @@ function PaperCorners() {
   return (
     <>
       <div className="pointer-events-none absolute left-6 top-6 text-black/20">*</div>
-      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">
-        —
-      </div>
+      <div className="pointer-events-none absolute right-6 bottom-6 text-black/20">—</div>
     </>
   );
 }

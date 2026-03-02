@@ -165,7 +165,7 @@ export default function PageReferences() {
                   transition={{ duration: 0.55, ease: "easeOut" }}
                   className="text-[28px] font-semibold leading-tight tracking-tight md:text-[40px]"
                 >
-                  Notre expertise.{" "}
+                  Notre expertise{" "}
                   <span className="italic" style={{ color: ACCENT }}>
                      & références
                   </span>

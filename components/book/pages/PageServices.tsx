@@ -38,19 +38,20 @@ const focus = [
 
 export default function PageServices() {
   return (
-    <section className="pdf-page relative h-dvh w-full overflow-hidden bg-[#f5f5f3] text-[#111]">
+    // ✅ svh = stable sur mobile (barres navigateur). dvh en fallback ok.
+    <section className="pdf-page relative min-h-svh w-full overflow-hidden bg-[#f5f5f3] text-[#111]">
       <PaperNoise />
       <PaperVignette />
 
-      {/* ✅ Grille 3 lignes : header / contenu / footer */}
-      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl grid-rows-[auto_1fr_auto] gap-5 px-5 py-6 sm:px-6 md:px-12 md:py-8">
+      {/* ✅ Header/footer fixes dans la grille, contenu central scrollable */}
+      <div className="relative z-10 mx-auto grid min-h-svh w-full max-w-7xl grid-rows-[auto_minmax(0,1fr)_auto] gap-4 px-4 py-5 sm:px-6 md:px-12 md:py-8">
         {/* HEADER */}
         <div className="min-h-0">
           <BookHeader page="PAGE 03" />
         </div>
 
-        {/* CONTENT (doit rester dans l’écran) */}
-        <div className="min-h-0">
+        {/* CONTENT */}
+        <div className="min-h-0 overflow-auto pr-1 md:pr-2">
           {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -60,29 +61,31 @@ export default function PageServices() {
           >
             <h1
               className="font-semibold tracking-[-0.01em]"
-              style={{ fontSize: "clamp(22px, 2.6vw, 40px)", lineHeight: 1.05 }}
+              style={{ fontSize: "clamp(20px, 3.6vw, 40px)", lineHeight: 1.08 }}
             >
               LES DÉFIS DE LA TRANSFORMATION PUBLIQUE
             </h1>
 
             <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
 
-            <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+            <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-black/60 sm:text-[13px]">
               La transformation digitale des administrations publiques africaines ne constitue pas un simple
               projet technologique. Elle représente une réforme structurelle engageant la performance de l’État,
               la qualité du service au citoyen et la souveraineté numérique nationale.
             </p>
 
-            <p className="mt-2 max-w-3xl text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+            <p className="mt-2 max-w-3xl text-[12px] leading-relaxed text-black/60 sm:text-[13px]">
               Aujourd’hui, les États africains font face à une équation complexe :
             </p>
           </motion.div>
 
           {/* Body grid */}
-          <div className="mt-5 grid min-h-0 gap-6 md:grid-cols-12 md:items-start">
+          {/* ✅ Mobile: 1 colonne (blocks puis aside). Desktop: 12 colonnes */}
+          <div className="mt-5 grid gap-6 md:grid-cols-12 md:items-start">
             {/* Left blocks */}
-            <div className="min-h-0 md:col-span-8">
-              <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            <div className="md:col-span-8">
+              {/* ✅ Mobile: 1 colonne, sm: 2 colonnes */}
+              <div className="grid gap-x-6 gap-y-6 sm:grid-cols-2">
                 <TOCBlock n="01" title={blocks[0].title} text={blocks[0].text} delay={0.0} />
                 <TOCBlock n="02" title={blocks[1].title} text={blocks[1].text} delay={0.05} />
                 <TOCBlock n="03" title={blocks[2].title} text={blocks[2].text} delay={0.1} />
@@ -91,14 +94,14 @@ export default function PageServices() {
             </div>
 
             {/* Right column */}
-            <aside className="min-h-0 md:col-span-4">
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-black/10 bg-white/65 p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
+            <aside className="md:col-span-4">
+              <div className="space-y-5">
+                <div className="rounded-2xl border border-black/10 bg-white/65 p-4 sm:p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
                   <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                     POINT CRITIQUE
                   </div>
 
-                  <ul className="mt-3 space-y-2 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
+                  <ul className="mt-3 space-y-2 text-[12px] leading-relaxed text-black/65 sm:text-[13px]">
                     {focus.map((r) => (
                       <li key={r.org}>
                         — <span className="font-semibold text-black/75">{r.org}</span>{" "}
@@ -114,12 +117,12 @@ export default function PageServices() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-black/10 bg-white/65 p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
+                <div className="rounded-2xl border border-black/10 bg-white/65 p-4 sm:p-5 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset]">
                   <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                     MESSAGE CLÉ
                   </div>
 
-                  <p className="mt-3 text-[12px] leading-relaxed text-black/65 md:text-[13px]">
+                  <p className="mt-3 text-[12px] leading-relaxed text-black/65 sm:text-[13px]">
                     La digitalisation publique n’est durable que si elle est pensée comme une{" "}
                     <span className="font-semibold text-black/80">réforme structurante</span> : gouvernance,
                     sécurité, architecture cible et montée en compétences —{" "}
@@ -137,7 +140,7 @@ export default function PageServices() {
           </div>
         </div>
 
-        {/* FOOTER (toujours visible) */}
+        {/* FOOTER */}
         <div className="min-h-0">
           <BookFooter left="PROLABAFRIK · DÉFIS PUBLICS" right="(04) PROJET →" />
         </div>
@@ -165,18 +168,22 @@ function TOCBlock({
       transition={{ delay, duration: 0.55, ease: "easeOut" }}
       className="border-t border-black/10 pt-4"
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
+        {/* ✅ le chiffre ne doit pas “exploser” en mobile */}
         <div
-          className="select-none text-[46px] font-semibold leading-none tracking-tight md:text-[56px]"
-          style={{ color: `${ACCENT}55` }}
+          className="select-none font-semibold leading-none tracking-tight"
+          style={{
+            color: `${ACCENT}55`,
+            fontSize: "clamp(34px, 6vw, 56px)",
+          }}
         >
           {n}
         </div>
 
         <div className="pt-1">
-          <div className="text-[13px] font-semibold text-black/85 md:text-[14px]">{title}</div>
+          <div className="text-[13px] font-semibold text-black/85 sm:text-[14px]">{title}</div>
 
-          <div className="mt-2 max-w-sm text-[12px] leading-relaxed text-black/60 md:text-[13px]">
+          <div className="mt-2 max-w-sm text-[12px] leading-relaxed text-black/60 sm:text-[13px]">
             {text}
           </div>
 

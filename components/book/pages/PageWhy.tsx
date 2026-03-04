@@ -255,11 +255,12 @@ function SpreadHero() {
           transition={{ duration: 0.75, ease: "easeOut" }}
           className="text-[46px] font-semibold leading-[0.92] tracking-[-0.02em] md:text-[92px]"
         >
-          Digitaliser l’Afrique,
+          Digitaliser,
           <br className="hidden md:block" />
           c’est{" "}
           <span className="italic text-[#CF2B5B] ">structurer</span>{" "}
-          avant de développer.
+         les systèmes
+avant de développer les solutions
         </motion.h2>
 
         <motion.div
@@ -529,7 +530,18 @@ function SpreadTimeline() {
   );
 }
 
+const PDF_URL = "/prolabafrik-dossier-2026.pdf";
+
 function SpreadCta() {
+  const downloadPdf = () => {
+    const a = document.createElement("a");
+    a.href = PDF_URL;
+    a.download = "PROLABAFRIK_DOSSIER_2026.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
   return (
     <div className="grid h-full items-center gap-10 md:grid-cols-12">
       <div className="md:col-span-7">
@@ -562,7 +574,7 @@ function SpreadCta() {
             SUITE
           </div>
           <p className="mt-4 text-sm leading-relaxed text-black/65">
-            Prochaine section : références & projets (preuves concrètes).
+            Télécharger le dossier complet.
           </p>
 
           <div
@@ -572,8 +584,15 @@ function SpreadCta() {
             }}
           />
 
+          {/* ✅ CTA Download */}
           <a
-            href="#"
+            href={PDF_URL}
+            download="PROLABAFRIK_DOSSIER_2026.pdf"
+            onClick={(e) => {
+              // fallback si le navigateur ignore download
+              e.preventDefault();
+              downloadPdf();
+            }}
             className="mt-6 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-xs tracking-[0.35em] transition"
             style={{
               borderColor: `${ACCENT}40`,
@@ -581,8 +600,8 @@ function SpreadCta() {
               color: "rgba(0,0,0,0.70)",
             }}
           >
-            Aller aux références
-            <span style={{ color: ACCENT }}>→</span>
+            Télécharger le dossier
+            <span style={{ color: ACCENT }}>↓</span>
           </a>
 
           <div className="mt-6 flex items-center justify-between text-xs text-black/45">

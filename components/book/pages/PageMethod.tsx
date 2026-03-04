@@ -411,8 +411,9 @@ function Intro() {
             <span className="text-[10px] tracking-[0.26em] text-black/35">Public</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-black/65">
-            ProlabAfrik est partenaire de structuration stratégique et de sécurisation : une transformation
-            progressive, organisée et maîtrisée.
+            ProlabAfrik accompagne les organisations publiques dans la structuration et la sécurisation de leur transformation digitale.
+
+Notre approche privilégie une évolution progressive et maîtrisée des systèmes d’information, fondée sur la gouvernance, la robustesse des architectures et l’impact réel sur la performance des administrations.
           </p>
           <Divider />
           <div className="flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">

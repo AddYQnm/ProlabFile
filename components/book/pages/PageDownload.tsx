@@ -1,66 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { BookFooter, BookHeader } from "@/components/book/BookChrome";
 
 const ACCENT = "#CF2B5B";
-
-// ✅ Chemin public vers ton PDF
 const PDF_URL = "/prolabafrik-dossier-2026.pdf";
 
 export default function PageDownload() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", company: "", email: "" });
-
-  const emailOk = useMemo(
-    () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
-    [form.email]
-  );
-
-  const canSubmit =
-    form.name.trim() && form.company.trim() && emailOk && status !== "loading";
-
   function downloadPdf() {
-    // ✅ Téléchargement forcé (plus fiable qu’un simple window.open)
     const a = document.createElement("a");
     a.href = PDF_URL;
     a.download = "PROLABAFRIK_DOSSIER_2026.pdf";
     document.body.appendChild(a);
     a.click();
     a.remove();
-  }
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!canSubmit) return;
-
-    try {
-      setStatus("loading");
-
-      // ✅ Enregistre le lead côté serveur
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          company: form.company.trim(),
-          email: form.email.trim(),
-          source: "PAGE_08_DOWNLOAD",
-        }),
-      });
-
-      if (!res.ok) throw new Error("Lead API failed");
-
-      setStatus("success");
-
-      // ✅ Lance le téléchargement
-      downloadPdf();
-    } catch (err) {
-      console.error(err);
-      setStatus("error");
-    }
   }
 
   return (
@@ -72,33 +27,8 @@ export default function PageDownload() {
         <BookHeader page="PAGE 08" />
       </div>
 
-      {/* rail top */}
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 md:px-12">
-        <div className="mt-6 flex items-center justify-between gap-6">
-          <div className="hidden md:flex items-center gap-3 text-[10px] tracking-[0.26em] text-black/50">
-            <span style={{ color: ACCENT }}>B2B PDF</span>
-            <span className="text-black/25">—</span>
-            <span className="text-black/70">Livraison immédiate</span>
-          </div>
-
-          <div className="flex flex-1 items-center justify-end gap-4">
-            <div className="h-[2px] flex-1 overflow-hidden rounded-full bg-black/10 md:max-w-[420px]">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1.1, ease: "easeOut" }}
-                className="h-full w-full"
-                style={{ transformOrigin: "0% 50%", backgroundColor: `${ACCENT}B3` }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* content */}
       <div className="mx-auto flex w-full max-w-6xl flex-col justify-center px-6 pt-12 pb-24 md:h-[calc(100vh-240px)] md:px-16 md:pt-10 md:pb-0">
         <div className="grid gap-10 md:grid-cols-12 md:items-end">
-          {/* Left */}
           <div className="md:col-span-7">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -107,7 +37,7 @@ export default function PageDownload() {
               className="font-semibold leading-[0.92] tracking-[-0.02em]"
               style={{ fontSize: "clamp(40px, 4.8vw, 86px)" }}
             >
-              Recevez le dossier
+              Téléchargez le dossier
               <br className="hidden md:block" />
               de présentation.
             </motion.h2>
@@ -118,8 +48,7 @@ export default function PageDownload() {
               transition={{ delay: 0.15, duration: 0.7, ease: "easeOut" }}
               className="mt-8 max-w-2xl text-[16px] leading-relaxed text-black/65"
             >
-              Un PDF clair et synthétique — conçu pour vos échanges B2B, prêt à partager
-              (email, meeting, WhatsApp).
+              PDF clair et synthétique — prêt à partager (email, meeting, WhatsApp).
             </motion.p>
 
             <motion.div
@@ -133,22 +62,8 @@ export default function PageDownload() {
               <MiniCard label="Usage" value="Email, meeting, pitch" />
               <MiniCard label="Délai" value="Instantané" />
             </motion.div>
-
-            <div className="mt-10 hidden md:block">
-              <div
-                className="h-px w-full"
-                style={{
-                  backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
-                }}
-              />
-              <div className="mt-6 text-[11px] tracking-[0.22em] text-black/55">
-                CONTACT DIRECT —{" "}
-                <span className="text-black/75">contact@prolabafrik.com</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right form */}
           <div className="md:col-span-5">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -156,7 +71,6 @@ export default function PageDownload() {
               transition={{ delay: 0.12, duration: 0.7, ease: "easeOut" }}
               className="relative overflow-hidden rounded-3xl border border-black/10 bg-white/70 p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.02)_inset] md:p-7"
             >
-              {/* glow */}
               <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
                 <div
                   className="absolute -left-24 -top-24 h-64 w-64 rounded-full blur-3xl"
@@ -170,101 +84,27 @@ export default function PageDownload() {
                   <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
                     TÉLÉCHARGEMENT
                   </div>
-                  <span className="text-[10px] tracking-[0.26em] text-black/35">Formulaire</span>
+                  <span className="text-[10px] tracking-[0.26em] text-black/35">Accès libre</span>
                 </div>
 
-                <form onSubmit={onSubmit} className="mt-6 grid gap-3">
-                  <Input
-                    placeholder="Nom"
-                    value={form.name}
-                    onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
-                    accent={ACCENT}
-                  />
-                  <Input
-                    placeholder="Société"
-                    value={form.company}
-                    onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
-                    accent={ACCENT}
-                  />
-                  <Input
-                    placeholder="Email professionnel"
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
-                    accent={ACCENT}
-                    state={form.email.length === 0 ? "idle" : emailOk ? "ok" : "bad"}
-                  />
+                <motion.button
+                  type="button"
+                  whileTap={{ scale: 0.99 }}
+                  whileHover={{ y: -1 }}
+                  onClick={downloadPdf}
+                  className="mt-6 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-[11px] tracking-[0.26em] text-white transition"
+                  style={{
+                    borderColor: `${ACCENT}55`,
+                    backgroundColor: ACCENT,
+                    boxShadow: `0 10px 30px ${ACCENT}26`,
+                  }}
+                >
+                  <span>TÉLÉCHARGER LE DOSSIER</span>
+                  <span className="text-white/90">→</span>
+                </motion.button>
 
-                  <motion.button
-                    type="submit"
-                    whileTap={{ scale: 0.99 }}
-                    whileHover={canSubmit ? { y: -1 } : undefined}
-                    disabled={!canSubmit}
-                    className={[
-                      "mt-2 inline-flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-[11px] tracking-[0.26em] transition",
-                      canSubmit ? "text-white" : "cursor-not-allowed text-black/55",
-                    ].join(" ")}
-                    style={{
-                      borderColor: canSubmit ? `${ACCENT}55` : "rgba(0,0,0,0.10)",
-                      backgroundColor: canSubmit ? ACCENT : "rgba(0,0,0,0.06)",
-                      boxShadow: canSubmit ? `0 10px 30px ${ACCENT}26` : "none",
-                    }}
-                  >
-                    <span>
-                      {status === "loading"
-                        ? "ENVOI..."
-                        : status === "success"
-                        ? "TÉLÉCHARGEMENT LANCÉ"
-                        : "RECEVOIR LE DOSSIER"}
-                    </span>
-                    <span className={canSubmit ? "text-white/90" : "text-black/40"}>
-                      {status === "loading" ? "…" : "→"}
-                    </span>
-                  </motion.button>
+                
 
-                  <AnimatePresence mode="popLayout">
-                    {status === "success" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        className="rounded-2xl border p-4 text-[12px] text-black/70"
-                        style={{
-                          borderColor: `${ACCENT}33`,
-                          backgroundColor: `${ACCENT}0D`,
-                        }}
-                      >
-                        ✅ Téléchargement lancé. Si rien ne se passe,{" "}
-                        <button
-                          type="button"
-                          onClick={downloadPdf}
-                          className="underline underline-offset-4"
-                          style={{ color: ACCENT }}
-                        >
-                          cliquez ici
-                        </button>
-                        .
-                      </motion.div>
-                    )}
-                    {status === "error" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        className="rounded-2xl border border-black/10 bg-black/[0.03] p-4 text-[12px] text-black/70"
-                      >
-                        Oups — réessayez ou contactez-nous directement par email.
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  <div className="flex items-center justify-between text-[11px] text-black/50">
-                    <span>Vos informations restent confidentielles.</span>
-                    <span className="hidden md:block">RGPD</span>
-                  </div>
-                </form>
-
-                {/* Contact block */}
                 <div className="mt-7 rounded-3xl border border-black/10 bg-white/60 p-5">
                   <div className="flex items-center justify-between">
                     <div className="text-[11px] tracking-[0.26em]" style={{ color: ACCENT }}>
@@ -286,25 +126,9 @@ export default function PageDownload() {
                       </span>
                     </div>
                   </div>
-
-                  <div
-                    className="mt-5 h-px w-full"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
-                    }}
-                  />
-                  <div className="mt-4 flex items-center justify-between text-[10px] tracking-[0.26em] text-black/45">
-                    <span>RÉPONSE</span>
-                    <span className="text-black/65">Rapide</span>
-                  </div>
                 </div>
               </div>
             </motion.div>
-
-            {/* mobile contact */}
-            <div className="mt-6 md:hidden text-[11px] tracking-[0.22em] text-black/55">
-              CONTACT — <span className="text-black/75">contact@prolabafrik.com</span>
-            </div>
           </div>
         </div>
       </div>
@@ -318,7 +142,7 @@ export default function PageDownload() {
   );
 }
 
-/* ----------------- atoms ----------------- */
+/* ---- atoms + paper (inchangés) ---- */
 
 function MiniCard({ label, value }: { label: string; value: string }) {
   return (
@@ -328,56 +152,6 @@ function MiniCard({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-
-function Input({
-  accent,
-  state = "idle",
-  className = "",
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  accent: string;
-  state?: "idle" | "ok" | "bad";
-  className?: string;
-}) {
-  const border =
-    state === "ok"
-      ? `${accent}55`
-      : state === "bad"
-      ? "rgba(0,0,0,0.18)"
-      : "rgba(0,0,0,0.14)";
-
-  const ring =
-    state === "ok"
-      ? `${accent}1A`
-      : state === "bad"
-      ? "rgba(0,0,0,0.10)"
-      : `${accent}14`;
-
-  return (
-    <div className="relative">
-      <input
-        {...props}
-        className={[
-          "w-full rounded-2xl border bg-white/70 px-4 py-3 text-black placeholder:text-black/40 outline-none transition",
-          className,
-        ].join(" ")}
-        style={{
-          borderColor: border,
-          boxShadow: `0 0 0 6px ${ring}`,
-        }}
-      />
-
-      {state !== "idle" && (
-        <span
-          className="pointer-events-none absolute right-4 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
-          style={{ backgroundColor: state === "ok" ? `${accent}CC` : "rgba(0,0,0,0.35)" }}
-        />
-      )}
-    </div>
-  );
-}
-
-/* ----------------- paper treatment ----------------- */
 
 function PaperNoise() {
   return (

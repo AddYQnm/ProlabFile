@@ -63,7 +63,7 @@ export default function PageServices() {
               className="font-semibold tracking-[-0.01em]"
               style={{ fontSize: "clamp(20px, 3.6vw, 40px)", lineHeight: 1.08 }}
             >
-              LES DÉFIS DE LA TRANSFORMATION PUBLIQUE
+              LES DÉFIS DE LA TRANSFORMATION DIGITALE
             </h1>
 
             <div className="mt-3 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />

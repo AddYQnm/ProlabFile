@@ -71,7 +71,7 @@ export default function PageAbout() {
                   className="md:col-span-3"
                 >
                   <div className="space-y-6 md:space-y-8">
-                    <Note accent={ACCENT} title="NOTRE CONVICTION STRATÉGIQUE">
+                    <Note accent={ACCENT} title="NOTRE CONVICTION">
                       <p>
                         La transformation digitale en Afrique ne peut être une simple transposition des modèles
                         européens.
@@ -143,6 +143,24 @@ export default function PageAbout() {
                       <span className="text-[10px] tracking-[0.26em] text-black/35">SECTION</span>
                     </div>
 
+                     <div
+                      className="mt-7 h-px md:mt-8"
+                      style={{
+                        backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}55, transparent)`,
+                      }}
+                    />
+
+                    <div className="mt-6">
+                      <p
+                        className="pl-4 text-[14px] leading-relaxed text-black/75 md:text-[15px]"
+                        style={{ borderLeft: `2px solid ${ACCENT}` }}
+                      >
+                        “La transformation digitale n’est pas un projet informatique.
+                        <br />
+                        C’est un projet de gouvernance.”
+                      </p>
+                    </div>
+
                     <div className="mt-5 text-[12px] leading-[1.8] text-black/70 md:mt-6 md:text-[13px]">
                       <p className="font-medium text-black/80">NOTRE ENGAGEMENT AUPRÈS DES DÉCIDEURS</p>
 
@@ -189,23 +207,7 @@ export default function PageAbout() {
                       </ul>
                     </div>
 
-                    <div
-                      className="mt-7 h-px md:mt-8"
-                      style={{
-                        backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}55, transparent)`,
-                      }}
-                    />
-
-                    <div className="mt-6">
-                      <p
-                        className="pl-4 text-[14px] leading-relaxed text-black/75 md:text-[15px]"
-                        style={{ borderLeft: `2px solid ${ACCENT}` }}
-                      >
-                        “La transformation digitale n’est pas un projet informatique.
-                        <br />
-                        C’est un projet de gouvernance.”
-                      </p>
-                    </div>
+                   
 
                     <div className="mt-7 h-px bg-black/10 md:mt-8" />
 

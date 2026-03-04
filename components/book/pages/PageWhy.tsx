@@ -259,8 +259,8 @@ function SpreadHero() {
           <br className="hidden md:block" />
           c’est{" "}
           <span className="italic text-[#CF2B5B] ">structurer</span>{" "}
-         les systèmes
-avant de développer les solutions
+         les systèmes.
+
         </motion.h2>
 
         <motion.div

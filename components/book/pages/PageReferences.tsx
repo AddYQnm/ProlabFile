@@ -20,50 +20,53 @@ type RefItem = {
 };
 
 /** ✅ PAGE 05 — NOTRE DOUBLE ADN */
+/** ✅ PAGE 05 — NOTRE DOUBLE ADN */
 const EUROPE: RefItem[] = [
   {
-    id: "e-standards",
-    name: "Standards élevés",
-    detail: "Exigence de qualité, documentation, tests et livrables maîtrisés.",
+    id: "e-bpce",
+    name: "Groupe BPCE",
+    detail: "Direction IT Monétique : modernisation des flux bancaires.",
     tag: "Europe",
   },
   {
-    id: "e-gouvernance",
-    name: "Gouvernance IT mature",
-    detail: "Pilotage, rôles, processus de décision et gestion des risques structurés.",
+    id: "e-engie",
+    name: "ENGIE",
+    detail: "Digitalisation & infrastructures critiques.",
     tag: "Europe",
   },
   {
-    id: "e-securite",
-    name: "Sécurité & conformité",
-    detail: "Approche sécurité-by-design, conformité et traçabilité des opérations.",
+    id: "e-total",
+    name: "TOTAL",
+    detail: "Transformation digitale & infrastructures énergétiques.",
+    tag: "Europe",
+  },
+  {
+    id: "e-volkswagen",
+    name: "VOLKSWAGEN",
+    detail: "Modernisation des infrastructures IT industrielles.",
     tag: "Europe",
   },
 ];
 
 const AFRIQUE: RefItem[] = [
   {
-    id: "a-adaptabilite",
-    name: "Adaptabilité",
-    detail: "Solutions conçues pour des contraintes terrain et des contextes hétérogènes.",
+    id: "a-hpservices",
+    name: "HP Services",
+    detail:
+      "Digitalisation des processus de Contrôle Conformité des transporteurs de produits pétroliers.",
     tag: "Afrique",
   },
   {
-    id: "a-budget",
-    name: "Optimisation budgétaire",
-    detail: "Priorisation, périmètre utile, ROI, et trajectoires réalistes.",
+    id: "a-aslogistics",
+    name: "AS-LOGISTICS",
+    detail:
+      "Digitalisation des activités de transport de marchandises à l'international.",
     tag: "Afrique",
   },
   {
-    id: "a-progressif",
-    name: "Solutions progressives",
-    detail: "Déploiement par étapes : MVP, itérations, montée en charge contrôlée.",
-    tag: "Afrique",
-  },
-  {
-    id: "a-terrain",
-    name: "Approche terrain",
-    detail: "Comprendre les usages réels, accompagner l’adoption et ajuster au besoin.",
+    id: "a-bajin",
+    name: "BAJIN CONSULTING",
+    detail: "Conseil en transformation IT & infrastructures.",
     tag: "Afrique",
   },
 ];
@@ -165,9 +168,9 @@ export default function PageReferences() {
                   transition={{ duration: 0.55, ease: "easeOut" }}
                   className="text-[28px] font-semibold leading-tight tracking-tight md:text-[40px]"
                 >
-                  Notre expertise{" "}
+                  Nos{" "}
                   <span className="italic" style={{ color: ACCENT }}>
-                     & références
+                    références
                   </span>
                   .
                 </motion.h1>
@@ -217,23 +220,6 @@ export default function PageReferences() {
             <aside className="md:col-span-4">
               <div className="border-t border-black/10 pt-6">
                 <div className="text-[11px] tracking-[0.24em] text-black/55">
-                  LECTURE RAPIDE
-                </div>
-                <p className="mt-4 text-[12px] leading-relaxed text-black/65">
-                  Parcourez les deux “ADN” puis la synthèse. Cliquez sur une carte
-                  pour afficher le détail.
-                </p>
-
-                <div
-                  className="mt-6 h-px w-full"
-                  style={{
-                    backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
-                  }}
-                />
-              </div>
-
-              <div className="mt-8 border-t border-black/10 pt-6">
-                <div className="text-[11px] tracking-[0.24em] text-black/55">
                   SYNTHÈSE
                 </div>
                 <p className="mt-4 text-[12px] leading-relaxed text-black/65">
@@ -247,6 +233,13 @@ export default function PageReferences() {
                   <Chip>Sécurité</Chip>
                   <Chip>Terrain</Chip>
                 </div>
+
+                <div
+                  className="mt-6 h-px w-full"
+                  style={{
+                    backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
+                  }}
+                />
               </div>
 
               <div className="mt-10 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/45">

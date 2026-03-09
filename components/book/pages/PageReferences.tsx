@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -19,13 +19,23 @@ type RefItem = {
   tag?: string;
 };
 
-/** ✅ PAGE 05 — NOTRE DOUBLE ADN */
-/** ✅ PAGE 05 — NOTRE DOUBLE ADN */
 const EUROPE: RefItem[] = [
   {
     id: "e-bpce",
     name: "Groupe BPCE",
     detail: "Direction IT Monétique : modernisation des flux bancaires.",
+    tag: "Europe",
+  },
+  {
+    id: "e-socotec",
+    name: "SOCOTEC",
+    detail: "Intégration IT post-acquisition internationale.",
+    tag: "Europe",
+  },
+  {
+    id: "e-bdf",
+    name: "Banque de France",
+    detail: "Interconnexion bancaire nationale & sécurisation des flux.",
     tag: "Europe",
   },
   {
@@ -36,14 +46,20 @@ const EUROPE: RefItem[] = [
   },
   {
     id: "e-total",
-    name: "TOTAL",
+    name: "TotalEnergies",
     detail: "Transformation digitale & infrastructures énergétiques.",
     tag: "Europe",
   },
   {
     id: "e-volkswagen",
-    name: "VOLKSWAGEN",
+    name: "Volkswagen",
     detail: "Modernisation des infrastructures IT industrielles.",
+    tag: "Europe",
+  },
+  {
+    id: "e-bajin",
+    name: "BAJIN Consulting",
+    detail: "Conseil en transformation IT & infrastructures.",
     tag: "Europe",
   },
 ];
@@ -71,44 +87,9 @@ const AFRIQUE: RefItem[] = [
   },
 ];
 
-const PARTENAIRES: RefItem[] = [
-  {
-    id: "f-synthese",
-    name: "Rigueur européenne. Réalité africaine.",
-    detail:
-      "C’est cette combinaison qui fait notre force : des standards élevés et une exécution adaptée au terrain.",
-    tag: "Force",
-  },
-  {
-    id: "f-methode",
-    name: "Une exécution qui tient",
-    detail:
-      "On structure : cadrage, gouvernance, sécurité, puis livraison progressive et mesurable.",
-    tag: "Force",
-  },
-  {
-    id: "f-impact",
-    name: "Des solutions adoptées",
-    detail:
-      "Le succès n’est pas la mise en ligne : c’est l’usage, la fiabilité et la valeur produite.",
-    tag: "Force",
-  },
-  {
-    id: "f-durable",
-    name: "Durabilité & maîtrise",
-    detail:
-      "Des systèmes maintenables, avec une trajectoire claire (évolutions, support, montée en charge).",
-    tag: "Force",
-  },
-];
-
-type TabKey = "europe" | "afrique" | "partenaires";
-
 export default function PageReferences() {
-  const [tab, setTab] = useState<TabKey>("europe");
   const [active, setActive] = useState<RefItem | null>(null);
 
-  // progress bar (utile surtout mobile si scroll interne)
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({ container: scrollRef });
   const progress = useSpring(scrollYProgress, {
@@ -117,32 +98,24 @@ export default function PageReferences() {
     mass: 0.2,
   });
 
-  const data = useMemo(() => {
-    if (tab === "europe") return EUROPE;
-    if (tab === "afrique") return AFRIQUE;
-    return PARTENAIRES;
-  }, [tab]);
-
   return (
-    <section className="relative h-full w-full bg-[#f5f5f3] text-[#111]">
+    <section className="relative h-dvh w-full overflow-hidden bg-[#f5f5f3] text-[#111]">
       <PaperNoise />
       <Vignette />
 
-      {/* Progress bar (ACCENT) */}
       <motion.div
         style={{ scaleX: progress }}
         className="origin-left absolute left-0 top-0 z-20 h-[2px] w-full"
       >
-        <div className="h-full w-full" style={{ backgroundColor: `${ACCENT}B3` }} />
+        <div
+          className="h-full w-full"
+          style={{ backgroundColor: `${ACCENT}B3` }}
+        />
       </motion.div>
 
-      {/* Mobile can scroll if needed */}
-      <div
-        ref={scrollRef}
-        className="mx-auto h-full max-w-7xl overflow-y-auto md:overflow-hidden"
-      >
-        <div className="flex h-full flex-col px-6 py-6 md:px-12 md:py-8">
-          {/* Running header */}
+      <div className="mx-auto grid h-dvh w-full max-w-7xl grid-rows-[auto_1fr_auto] px-6 py-6 md:px-12 md:py-8">
+        {/* Header */}
+        <div>
           <div className="flex items-center justify-between text-[10px] tracking-[0.24em] text-black/55 md:text-[11px]">
             <div className="truncate">PROLABAFRIK — DOSSIER</div>
             <div className="hidden sm:block">
@@ -154,12 +127,7 @@ export default function PageReferences() {
 
           <div className="mt-3 h-px bg-black/10" />
 
-          {/* Title */}
           <header className="mt-6">
-            <div className="text-[11px] tracking-[0.28em] text-black/55">
-              NOTRE DOUBLE ADN
-            </div>
-
             <div className="mt-2 grid gap-6 md:grid-cols-12 md:items-end">
               <div className="md:col-span-8">
                 <motion.h1
@@ -176,113 +144,137 @@ export default function PageReferences() {
                 </motion.h1>
 
                 <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-black/65">
-                  Deux cultures complémentaires : standards élevés et gouvernance d’un côté,
-                  adaptabilité et approche terrain de l’autre. C’est cette combinaison
-                  qui fait notre force.
+                  Deux ancrages, une même exigence d’exécution. Nos références
+                  se lisent ici en miroir : l’Europe d’un côté, l’Afrique de
+                  l’autre, sur une seule et même page.
                 </p>
-
-                <div className="mt-6 h-[2px] w-12" style={{ backgroundColor: ACCENT }} />
-              </div>
-
-              <div className="md:col-span-4">
-                <DNACounter />
-              </div>
-            </div>
-          </header>
-
-          {/* Tabs */}
-          <div className="mt-10 border-t border-black/10 pt-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="text-[11px] tracking-[0.24em] text-black/55">
-                NAVIGATION
-              </div>
-
-              <div className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-2 py-2">
-                <TabButton active={tab === "europe"} onClick={() => setTab("europe")}>
-                  En Europe
-                </TabButton>
-                <TabButton active={tab === "afrique"} onClick={() => setTab("afrique")}>
-                  En Afrique
-                </TabButton>
-                <TabButton
-                  active={tab === "partenaires"}
-                  onClick={() => setTab("partenaires")}
-                >
-                  Notre force
-                </TabButton>
-              </div>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="mt-8 grid flex-1 gap-10 md:grid-cols-12">
-            {/* Left editorial column */}
-            <aside className="md:col-span-4">
-              <div className="border-t border-black/10 pt-6">
-                <div className="text-[11px] tracking-[0.24em] text-black/55">
-                  SYNTHÈSE
-                </div>
-                <p className="mt-4 text-[12px] leading-relaxed text-black/65">
-                  Rigueur, gouvernance et conformité — avec pragmatisme terrain,
-                  budgets réalistes et déploiement progressif.
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Chip>Standards</Chip>
-                  <Chip>Gouvernance</Chip>
-                  <Chip>Sécurité</Chip>
-                  <Chip>Terrain</Chip>
-                </div>
 
                 <div
-                  className="mt-6 h-px w-full"
-                  style={{
-                    backgroundImage: `linear-gradient(to right, transparent, ${ACCENT}3D, transparent)`,
-                  }}
+                  className="mt-6 h-[2px] w-12"
+                  style={{ backgroundColor: ACCENT }}
                 />
               </div>
 
-              <div className="mt-10 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/45">
-                <span>SECTION</span>
-                <span style={{ color: ACCENT }}>05</span>
-              </div>
-            </aside>
-
-            {/* Grid */}
-            <div className="md:col-span-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={tab}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="grid gap-6 sm:grid-cols-2"
-                >
-                  {data.map((item, idx) => (
-                    <RefCard
-                      key={item.id}
-                      item={item}
-                      index={idx}
-                      onOpen={() => setActive(item)}
-                    />
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-10 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/55">
-                <span className="truncate">SECTION SUIVANTE : RÉFÉRENCES</span>
-                <span style={{ color: ACCENT }}>→</span>
+              <div className="md:col-span-4">
+                <ReferencesCounter />
               </div>
             </div>
-          </div>
+          </header>
+        </div>
 
-          {/* Footer */}
+        {/* Scrollable content */}
+        <div className="min-h-0">
+          <div className="relative mt-8 h-full">
+            <div
+              ref={scrollRef}
+              className="h-full overflow-y-auto no-scrollbar"
+            >
+              <div className="grid gap-10 md:grid-cols-2 md:gap-12">
+                {/* EUROPE */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="flex flex-col"
+                >
+                  <div className="flex items-center justify-between border-t border-black/10 pt-5">
+                    <div>
+                      <div className="text-[11px] tracking-[0.24em] text-black/55">
+                        EUROPE
+                      </div>
+                      <h2 className="mt-2 text-[20px] font-semibold text-black/85">
+                        Références européennes
+                      </h2>
+                    </div>
+
+                    <div
+                      className="rounded-full border px-3 py-1 text-[11px] tracking-[0.18em]"
+                      style={{
+                        borderColor: `${ACCENT}33`,
+                        backgroundColor: `${ACCENT}0D`,
+                        color: "rgba(0,0,0,0.70)",
+                      }}
+                    >
+                      {EUROPE.length} PROJETS
+                    </div>
+                  </div>
+
+                  <p className="mt-4 max-w-md text-[12px] leading-relaxed text-black/60">
+                    Standards élevés, gouvernance, modernisation des systèmes et
+                    transformation des infrastructures critiques.
+                  </p>
+
+                  <div className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                    {EUROPE.map((item, idx) => (
+                      <RefCard
+                        key={item.id}
+                        item={item}
+                        index={idx}
+                        onOpen={() => setActive(item)}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* AFRIQUE */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
+                  className="flex flex-col"
+                >
+                  <div className="flex items-center justify-between border-t border-black/10 pt-5">
+                    <div>
+                      <div className="text-[11px] tracking-[0.24em] text-black/55">
+                        AFRIQUE
+                      </div>
+                      <h2 className="mt-2 text-[20px] font-semibold text-black/85">
+                        Références africaines
+                      </h2>
+                    </div>
+
+                    <div
+                      className="rounded-full border px-3 py-1 text-[11px] tracking-[0.18em]"
+                      style={{
+                        borderColor: `${ACCENT}33`,
+                        backgroundColor: `${ACCENT}0D`,
+                        color: "rgba(0,0,0,0.70)",
+                      }}
+                    >
+                      {AFRIQUE.length} PROJETS
+                    </div>
+                  </div>
+
+                  <p className="mt-4 max-w-md text-[12px] leading-relaxed text-black/60">
+                    Réalité terrain, déploiement opérationnel, digitalisation
+                    des flux métier et adaptation aux usages locaux.
+                  </p>
+
+                  <div className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                    {AFRIQUE.map((item, idx) => (
+                      <RefCard
+                        key={item.id}
+                        item={item}
+                        index={idx}
+                        onOpen={() => setActive(item)}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            <ScrollArrows accent={ACCENT} targetRef={scrollRef} />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div>
           <div className="mt-6 h-px bg-black/10" />
           <footer className="mt-3 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/55">
-            <span className="truncate">PROLABAFRIK · DOUBLE ADN</span>
+            <span className="truncate">PROLABAFRIK · EUROPE / AFRIQUE</span>
             <span>
-              (06) RÉFÉRENCES <span style={{ color: ACCENT }}>→</span>
+              RÉFÉRENCES <span style={{ color: ACCENT }}>→</span>
             </span>
           </footer>
         </div>
@@ -352,7 +344,88 @@ export default function PageReferences() {
   );
 }
 
-/* ---------------- components ---------------- */
+function ScrollArrows({
+  targetRef,
+  accent,
+}: {
+  targetRef: React.RefObject<HTMLDivElement | null>;
+  accent: string;
+}) {
+  const [canUp, setCanUp] = useState(false);
+  const [canDown, setCanDown] = useState(false);
+
+  const update = () => {
+    const el = targetRef.current;
+    if (!el) return;
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    setCanUp(scrollTop > 2);
+    setCanDown(scrollTop + clientHeight < scrollHeight - 2);
+  };
+
+  useEffect(() => {
+    update();
+    const el = targetRef.current;
+    if (!el) return;
+
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [targetRef]);
+
+  const scrollByAmount = (dir: "up" | "down") => {
+    const el = targetRef.current;
+    if (!el) return;
+    const amount = Math.max(220, Math.floor(el.clientHeight * 0.35));
+    el.scrollBy({
+      top: dir === "down" ? amount : -amount,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center">
+      <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-2 py-2 shadow-sm backdrop-blur">
+        <button
+          type="button"
+          aria-label="Scroll up"
+          disabled={!canUp}
+          onClick={() => scrollByAmount("up")}
+          className={[
+            "grid h-9 w-9 place-items-center rounded-full border text-xs transition",
+            canUp
+              ? "border-black/15 text-black/70 hover:bg-black/5 active:scale-[0.98]"
+              : "cursor-not-allowed border-black/10 text-black/25",
+          ].join(" ")}
+          style={canUp ? { borderColor: `${accent}55` } : undefined}
+        >
+          ↑
+        </button>
+
+        <div className="h-6 w-px bg-black/10" />
+
+        <button
+          type="button"
+          aria-label="Scroll down"
+          disabled={!canDown}
+          onClick={() => scrollByAmount("down")}
+          className={[
+            "grid h-9 w-9 place-items-center rounded-full border text-xs transition",
+            canDown
+              ? "border-black/15 text-black/70 hover:bg-black/5 active:scale-[0.98]"
+              : "cursor-not-allowed border-black/10 text-black/25",
+          ].join(" ")}
+          style={canDown ? { borderColor: `${accent}55` } : undefined}
+        >
+          ↓
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function RefCard({
   item,
@@ -388,17 +461,27 @@ function RefCard({
           />
 
           <div className="flex items-center gap-2">
-            <div className="text-[13px] font-semibold text-black/85">{item.name}</div>
+            <div className="text-[13px] font-semibold text-black/85">
+              {item.name}
+            </div>
             <span style={{ color: ACCENT }} className="text-[13px]">
               •
             </span>
+            {item.tag && (
+              <span className="text-[10px] uppercase tracking-[0.18em] text-black/45">
+                {item.tag}
+              </span>
+            )}
           </div>
 
           <div className="mt-2 text-[12px] leading-relaxed text-black/60 line-clamp-3">
             {item.detail}
           </div>
 
-          <div className="mt-4 h-px w-12" style={{ backgroundColor: `${ACCENT}55` }} />
+          <div
+            className="mt-4 h-px w-12"
+            style={{ backgroundColor: `${ACCENT}55` }}
+          />
 
           <div className="mt-4 flex items-center justify-between text-[11px] tracking-[0.22em] text-black/45">
             <span>DÉTAIL</span>
@@ -412,51 +495,6 @@ function RefCard({
         </div>
       </div>
     </motion.button>
-  );
-}
-
-function TabButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={[
-        "relative rounded-full px-4 py-2 text-[11px] tracking-[0.22em] transition",
-        active ? "text-black" : "text-black/55 hover:text-black/75",
-      ].join(" ")}
-      style={active ? { backgroundColor: `${ACCENT}14` } : undefined}
-    >
-      {children}
-      {active && (
-        <motion.span
-          layoutId="tab-underline"
-          className="absolute inset-x-3 -bottom-[1px] h-[2px]"
-          style={{ backgroundColor: `${ACCENT}CC` }}
-        />
-      )}
-    </button>
-  );
-}
-
-function Chip({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="rounded-full border bg-white px-3 py-1 text-[11px] tracking-[0.18em]"
-      style={{
-        borderColor: `${ACCENT}33`,
-        backgroundColor: `${ACCENT}0D`,
-        color: "rgba(0,0,0,0.70)",
-      }}
-    >
-      {children}
-    </span>
   );
 }
 
@@ -490,7 +528,7 @@ function Modal({
   );
 }
 
-function DNACounter() {
+function ReferencesCounter() {
   const ref = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-25% 0px" });
 
@@ -502,30 +540,33 @@ function DNACounter() {
 
       <div className="mt-3 flex items-baseline justify-between gap-4">
         <div className="text-[12px] leading-relaxed text-black/65">
-          Deux cultures, une seule exécution
+          Deux zones de référence sur une seule page
         </div>
 
-        <div className="text-right">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-            className="text-[40px] font-semibold leading-none tracking-tight text-black/25"
-          >
-            2
-          </motion.div>
-          <div className="mt-1 text-[11px] tracking-[0.22em] text-black/55">
-            ADN
-          </div>
-        </div>
+       <div className="text-right">
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.4 }}
+    transition={{ duration: 0.45, ease: "easeOut" }}
+    className="text-[40px] font-semibold leading-none tracking-tight text-black/25"
+  >
+    {EUROPE.length + AFRIQUE.length}
+  </motion.div>
+
+  <div className="mt-1 text-[11px] tracking-[0.22em] text-black/55">
+    RÉFÉRENCES
+  </div>
+</div>
       </div>
 
-      <div className="mt-5 h-[2px] w-12" style={{ backgroundColor: `${ACCENT}B3` }} />
+      <div
+        className="mt-5 h-[2px] w-12"
+        style={{ backgroundColor: `${ACCENT}B3` }}
+      />
     </div>
   );
 }
-
-/* ---------------- visuals ---------------- */
 
 function Vignette() {
   return (

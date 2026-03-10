@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
-  useInView,
   useScroll,
   useSpring,
 } from "framer-motion";
@@ -53,13 +52,7 @@ const EUROPE: RefItem[] = [
   {
     id: "e-volkswagen",
     name: "Volkswagen",
-    detail: "Modernisation des infrastructures IT industrielles.",
-    tag: "Europe",
-  },
-  {
-    id: "e-bajin",
-    name: "BAJIN Consulting",
-    detail: "Conseil en transformation IT & infrastructures.",
+    detail: "Migration des infrastructures IT industrielles.",
     tag: "Europe",
   },
 ];
@@ -83,6 +76,18 @@ const AFRIQUE: RefItem[] = [
     id: "a-bajin",
     name: "BAJIN CONSULTING",
     detail: "Conseil en transformation IT & infrastructures.",
+    tag: "Afrique",
+  },
+  {
+    id: "a-ministere-finances",
+    name: "MINISTÈRE DES FINANCES",
+    detail: "Gestion des marchés publics.",
+    tag: "Afrique",
+  },
+  {
+    id: "a-gendarmerie",
+    name: "SÉCURITÉ PUBLIQUE",
+    detail: "Étude, cahier des charges.",
     tag: "Afrique",
   },
 ];
@@ -143,7 +148,7 @@ export default function PageReferences() {
                   .
                 </motion.h1>
 
-                <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-black/65">
+                <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-black/65">
                   Deux ancrages, une même exigence d’exécution. Nos références
                   se lisent ici en miroir : l’Europe d’un côté, l’Afrique de
                   l’autre, sur une seule et même page.
@@ -155,9 +160,7 @@ export default function PageReferences() {
                 />
               </div>
 
-              <div className="md:col-span-4">
-                <ReferencesCounter />
-              </div>
+              <div className="md:col-span-4" />
             </div>
           </header>
         </div>
@@ -179,9 +182,6 @@ export default function PageReferences() {
                 >
                   <div className="flex items-center justify-between border-t border-black/10 pt-5">
                     <div>
-                      <div className="text-[11px] tracking-[0.24em] text-black/55">
-                        EUROPE
-                      </div>
                       <h2 className="mt-2 text-[20px] font-semibold text-black/85">
                         Références européennes
                       </h2>
@@ -195,7 +195,7 @@ export default function PageReferences() {
                         color: "rgba(0,0,0,0.70)",
                       }}
                     >
-                      {EUROPE.length} PROJETS
+                      PROJETS PHARES
                     </div>
                   </div>
 
@@ -225,9 +225,6 @@ export default function PageReferences() {
                 >
                   <div className="flex items-center justify-between border-t border-black/10 pt-5">
                     <div>
-                      <div className="text-[11px] tracking-[0.24em] text-black/55">
-                        AFRIQUE
-                      </div>
                       <h2 className="mt-2 text-[20px] font-semibold text-black/85">
                         Références africaines
                       </h2>
@@ -241,7 +238,7 @@ export default function PageReferences() {
                         color: "rgba(0,0,0,0.70)",
                       }}
                     >
-                      {AFRIQUE.length} PROJETS
+                      PROJETS PHARES
                     </div>
                   </div>
 
@@ -525,46 +522,6 @@ function Modal({
         {children}
       </motion.div>
     </motion.div>
-  );
-}
-
-function ReferencesCounter() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-25% 0px" });
-
-  return (
-    <div ref={ref} className="border-t border-black/10 pt-6">
-      <div className="text-[11px] tracking-[0.24em] text-black/55">
-        INDICATEUR
-      </div>
-
-      <div className="mt-3 flex items-baseline justify-between gap-4">
-        <div className="text-[12px] leading-relaxed text-black/65">
-          Deux zones de référence sur une seule page
-        </div>
-
-       <div className="text-right">
-  <motion.div
-    initial={{ opacity: 0, y: 8 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.4 }}
-    transition={{ duration: 0.45, ease: "easeOut" }}
-    className="text-[40px] font-semibold leading-none tracking-tight text-black/25"
-  >
-    {EUROPE.length + AFRIQUE.length}
-  </motion.div>
-
-  <div className="mt-1 text-[11px] tracking-[0.22em] text-black/55">
-    RÉFÉRENCES
-  </div>
-</div>
-      </div>
-
-      <div
-        className="mt-5 h-[2px] w-12"
-        style={{ backgroundColor: `${ACCENT}B3` }}
-      />
-    </div>
   );
 }
 
